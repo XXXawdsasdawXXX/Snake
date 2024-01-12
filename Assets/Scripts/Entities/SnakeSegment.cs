@@ -20,6 +20,8 @@ namespace DefaultNamespace
 
         public void StopMove()
         {
+            Target = Vector2Int.zero;
+            LastTarget = Vector2Int.zero;
             _moveTween?.Kill();
         }
     }

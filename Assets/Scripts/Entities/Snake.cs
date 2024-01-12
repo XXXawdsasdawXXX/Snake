@@ -59,6 +59,12 @@ public class Snake : MonoBehaviour
     public void ResetState()
     {
         Debug.Log("Reset");
+        _headSnakeSegment.StopMove();
+        _headSnakeSegment.transform.position = Vector3.zero;
+        
+        _direction = Vector2Int.right;
+        _currentBonusSpeed = 0;
+        
         for (int i = 1; i < _segments.Count; i++)
         {
             _segments[i].StopMove();
@@ -68,9 +74,7 @@ public class Snake : MonoBehaviour
         _segments.Clear();
         _segments.Add(_headSnakeSegment);
 
-        _headSnakeSegment.transform.position = Vector3.zero;
-        _direction = Vector2Int.right;
-        _currentBonusSpeed = 0;
+ 
 
         for (int i = 0; i < _data.InitialSize - 1; i++)
         {
