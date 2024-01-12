@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4333383e8c48119d0ca110839e111e, type: 3}
   m_Name: SnakeConfig
   m_EditorClassIdentifier: 
-  SegmentPrefab: {fileID: 2263743685893928738, guid: 531ab8b335279e440898b43bb6a70082, type: 3}
+  SegmentPrefab: {fileID: 6017641730287937085, guid: 531ab8b335279e440898b43bb6a70082, type: 3}
   StaticData:
     Speed: 3
     BonusSpeedStep: 0.5
-    InitialSize: 4
+    InitialSize: 1
     MoveThroughWalls: 0
