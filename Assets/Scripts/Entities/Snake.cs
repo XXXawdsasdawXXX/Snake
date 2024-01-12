@@ -1,21 +1,28 @@
+using System;
 using System.Collections.Generic;
+using Configs;
 using DefaultNamespace;
 using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
-    [Header("Services")] 
     [SerializeField] private InputService _input;
-    [Header("Snake components")]
-    [SerializeField] private Transform _segmentPrefab;
-    [SerializeField] private Vector2Int _direction = Vector2Int.right;
-    [SerializeField] private float _speed = 20f;
-    [SerializeField] private float _speedMultiplier = 1f;
-    [SerializeField] private int _initialSize = 4;
-    [SerializeField] private bool _moveThroughWalls;
+    [SerializeField] private SnakeConfig _snakeConfig;
 
+    private Transform _segmentPrefab;
+    private SnakeStaticData _data;
+    
+    private float _currentBonusSpeed = 0;
+    private Vector2Int _direction;
     private readonly List<Transform> _segments = new();
     private float _nextUpdate;
+
+    private void Awake()
+    {
+        _data = _snakeConfig.StaticData;
+        _segmentPrefab = _snakeConfig.SegmentPrefab;
+        _direction = _input.GetForward();
+    }
 
     private void Start()
     {
@@ -43,14 +50,15 @@ public class Snake : MonoBehaviour
         int y = Mathf.RoundToInt(transform.position.y) + _direction.y;
         transform.position = new Vector2(x, y);
 
-        _nextUpdate = Time.time + (1f / (_speed * _speedMultiplier));
+        _nextUpdate = Time.time + (1f / (_data.Speed + _currentBonusSpeed));
     }
 
     public void ResetState()
     {
         _direction = Vector2Int.right;
         transform.position = Vector3.zero;
-
+        _currentBonusSpeed = 0;
+        
         for (int i = 1; i < _segments.Count; i++)
         {
             Destroy(_segments[i].gameObject);
@@ -59,17 +67,10 @@ public class Snake : MonoBehaviour
         _segments.Clear();
         _segments.Add(transform);
 
-        for (int i = 0; i < _initialSize - 1; i++)
+        for (int i = 0; i < _data.InitialSize - 1; i++)
         {
             Grow();
         }
-    }
-
-    private void Grow()
-    {
-        Transform segment = Instantiate(_segmentPrefab);
-        segment.position = _segments[^1].position;
-        _segments.Add(segment);
     }
 
     public bool Occupies(int x, int y)
@@ -86,11 +87,23 @@ public class Snake : MonoBehaviour
         return false;
     }
 
+    private void Grow()
+    {
+        Transform segment = Instantiate(_segmentPrefab);
+        segment.position = _segments[^1].position;
+        _segments.Add(segment);
+    }
+
+    private void AddSpeedMultiplier()
+    {
+        _currentBonusSpeed += _data.BonusSpeedStep;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Food"))
         {
             Grow();
+            AddSpeedMultiplier();
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
@@ -98,7 +111,7 @@ public class Snake : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Wall"))
         {
-            if (_moveThroughWalls)
+            if (_data.MoveThroughWalls)
             {
                 Traverse(other.transform);
             }

@@ -837,12 +837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 1403511721}
-  _segmentPrefab: {fileID: 2263743685893928738, guid: 531ab8b335279e440898b43bb6a70082, type: 3}
-  _direction: {x: 1, y: 0}
-  _speed: 10
-  _speedMultiplier: 1
-  _initialSize: 4
-  _moveThroughWalls: 0
+  _snakeConfig: {fileID: 11400000, guid: f2e0df60239f2044a8dcee902828172b, type: 2}
 --- !u!212 &2096506310
 SpriteRenderer:
   m_ObjectHideFlags: 0
