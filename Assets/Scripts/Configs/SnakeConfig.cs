@@ -1,4 +1,5 @@
 ﻿using System;
+using DefaultNamespace;
 using UnityEngine;
 
 namespace Configs
@@ -6,7 +7,7 @@ namespace Configs
     [CreateAssetMenu(fileName = "SnakeConfig", menuName = "Configs")]
     public class SnakeConfig : ScriptableObject
     {
-        public Transform SegmentPrefab;
+        public SnakeSegment SegmentPrefab;
         public SnakeStaticData StaticData;
     }
 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Configs;
 using DefaultNamespace;
@@ -8,14 +7,16 @@ public class Snake : MonoBehaviour
 {
     [SerializeField] private InputService _input;
     [SerializeField] private SnakeConfig _snakeConfig;
+    [SerializeField] private SnakeSegment _headSnakeSegment;
 
-    private Transform _segmentPrefab;
+    private SnakeSegment _segmentPrefab;
     private SnakeStaticData _data;
-    
-    private float _currentBonusSpeed = 0;
+
+    private float _currentBonusSpeed;
     private Vector2Int _direction;
-    private readonly List<Transform> _segments = new();
+    private readonly List<SnakeSegment> _segments = new();
     private float _nextUpdate;
+
 
     private void Awake()
     {
@@ -28,7 +29,7 @@ public class Snake : MonoBehaviour
     {
         ResetState();
     }
-    
+
     private void FixedUpdate()
     {
         if (Time.time < _nextUpdate)
@@ -36,36 +37,40 @@ public class Snake : MonoBehaviour
             return;
         }
 
-        if (_input.GetForward() != Vector2Int.zero)
+        if (_input.GetForward() != Vector2Int.zero && _input.GetForward() != _direction)
         {
             _direction = _input.GetForward();
         }
 
-        for (int i = _segments.Count - 1; i > 0; i--)
-        {
-            _segments[i].position = _segments[i - 1].position;
-        }
-        
-        int x = Mathf.RoundToInt(transform.position.x) + _direction.x;
-        int y = Mathf.RoundToInt(transform.position.y) + _direction.y;
-        transform.position = new Vector2(x, y);
+        var period = 1f / (_data.Speed + _currentBonusSpeed);
 
-        _nextUpdate = Time.time + (1f / (_data.Speed + _currentBonusSpeed));
+        int x = _headSnakeSegment.Target.x + _direction.x;
+        int y = _headSnakeSegment.Target.y + _direction.y;
+
+        _headSnakeSegment.StartMove(new Vector2Int(x, y), period);
+        for (int i = 1; i < _segments.Count; i++)
+        {
+            _segments[i].StartMove(_segments[i - 1].LastTarget, period);
+        }
+
+        _nextUpdate = Time.time + period;
     }
 
     public void ResetState()
     {
-        _direction = Vector2Int.right;
-        transform.position = Vector3.zero;
-        _currentBonusSpeed = 0;
-        
+        Debug.Log("Reset");
         for (int i = 1; i < _segments.Count; i++)
         {
+            _segments[i].StopMove();
             Destroy(_segments[i].gameObject);
         }
 
         _segments.Clear();
-        _segments.Add(transform);
+        _segments.Add(_headSnakeSegment);
+
+        _headSnakeSegment.transform.position = Vector3.zero;
+        _direction = Vector2Int.right;
+        _currentBonusSpeed = 0;
 
         for (int i = 0; i < _data.InitialSize - 1; i++)
         {
@@ -75,10 +80,10 @@ public class Snake : MonoBehaviour
 
     public bool Occupies(int x, int y)
     {
-        foreach (Transform segment in _segments)
+        foreach (SnakeSegment segment in _segments)
         {
-            if (Mathf.RoundToInt(segment.position.x) == x &&
-                Mathf.RoundToInt(segment.position.y) == y)
+            if (Mathf.RoundToInt(segment.transform.position.x) == x &&
+                Mathf.RoundToInt(segment.transform.position.y) == y)
             {
                 return true;
             }
@@ -89,8 +94,10 @@ public class Snake : MonoBehaviour
 
     private void Grow()
     {
-        Transform segment = Instantiate(_segmentPrefab);
-        segment.position = _segments[^1].position;
+        Debug.Log("Grow");
+
+        SnakeSegment segment = Instantiate(_segmentPrefab);
+        segment.transform.position = new Vector3(_segments[^1].LastTarget.x, _segments[^1].LastTarget.y, 0);
         _segments.Add(segment);
     }
 
@@ -98,6 +105,7 @@ public class Snake : MonoBehaviour
     {
         _currentBonusSpeed += _data.BonusSpeedStep;
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Food"))
