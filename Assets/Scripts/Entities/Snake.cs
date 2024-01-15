@@ -14,7 +14,7 @@ public class Snake : MonoBehaviour
 
     private float _currentBonusSpeed;
     private Vector2Int _direction;
-    private readonly List<SnakeSegment> _segments = new();
+    public  List<SnakeSegment> Segments { get; private set; } = new();
     private float _nextUpdate;
 
 
@@ -30,7 +30,7 @@ public class Snake : MonoBehaviour
         ResetState();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Time.time < _nextUpdate)
         {
@@ -44,13 +44,13 @@ public class Snake : MonoBehaviour
 
         var period = 1f / (_data.Speed + _currentBonusSpeed);
 
-        int x = _headSnakeSegment.Target.x + _direction.x;
-        int y = _headSnakeSegment.Target.y + _direction.y;
+        var x = _headSnakeSegment.Target.x + _direction.x;
+        var y = _headSnakeSegment.Target.y + _direction.y;
 
         _headSnakeSegment.StartMove(new Vector2Int(x, y), period);
-        for (int i = 1; i < _segments.Count; i++)
+        for (int i = 1; i < Segments.Count; i++)
         {
-            _segments[i].StartMove(_segments[i - 1].LastTarget, period);
+            Segments[i].StartMove(Segments[i - 1].LastTarget, period);
         }
 
         _nextUpdate = Time.time + period;
@@ -65,14 +65,14 @@ public class Snake : MonoBehaviour
         _direction = Vector2Int.right;
         _currentBonusSpeed = 0;
         
-        for (int i = 1; i < _segments.Count; i++)
+        for (int i = 1; i < Segments.Count; i++)
         {
-            _segments[i].StopMove();
-            Destroy(_segments[i].gameObject);
+            Segments[i].StopMove();
+            Destroy(Segments[i].gameObject);
         }
 
-        _segments.Clear();
-        _segments.Add(_headSnakeSegment);
+        Segments.Clear();
+        Segments.Add(_headSnakeSegment);
 
  
 
@@ -84,7 +84,7 @@ public class Snake : MonoBehaviour
 
     public bool Occupies(int x, int y)
     {
-        foreach (SnakeSegment segment in _segments)
+        foreach (SnakeSegment segment in Segments)
         {
             if (Mathf.RoundToInt(segment.transform.position.x) == x &&
                 Mathf.RoundToInt(segment.transform.position.y) == y)
@@ -99,10 +99,12 @@ public class Snake : MonoBehaviour
     private void Grow()
     {
         Debug.Log("Grow");
-
-        SnakeSegment segment = Instantiate(_segmentPrefab);
-        segment.transform.position = new Vector3(_segments[^1].LastTarget.x, _segments[^1].LastTarget.y, 0);
-        _segments.Add(segment);
+        for (int i = 0; i < 2; i++)
+        {
+            SnakeSegment segment = Instantiate(_segmentPrefab);
+            segment.transform.position = new Vector3(Segments[^1].LastTarget.x, Segments[^1].LastTarget.y, 0);
+            Segments.Add(segment);
+        }
     }
 
     private void AddSpeedMultiplier()
