@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6944873010582303686}
   - component: {fileID: 3095462503393242856}
   - component: {fileID: 6017641730287937085}
+  - component: {fileID: 2240974621705581735}
   m_Layer: 0
   m_Name: SnakeSegment
   m_TagString: Obstacle
@@ -94,7 +95,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7453022821908869669}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -111,7 +112,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &6017641730287937085
 MonoBehaviour:
@@ -125,8 +126,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8b8d2076e04e1a9d4294dda6374fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LastTarget: {x: 0, y: 0}
-  Target: {x: 0, y: 0}
+  LastTarget: {x: 0, y: 0, z: 0}
+  Target: {x: 0, y: 0, z: 0}
+--- !u!114 &2240974621705581735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453022821908869669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c6e28a89037449291dea8315c871bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider2D: {fileID: 3095462503393242856}
 --- !u!1 &7552749238892429541
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +180,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7552749238892429541}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

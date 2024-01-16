@@ -23,7 +23,7 @@ namespace DefaultNamespace
             }
         }
 
-        public Vector2Int GetForward()
+        public Vector2Int GetDirection()
         {
             return _forward;
         }

@@ -16,5 +16,5 @@ MonoBehaviour:
   StaticData:
     Speed: 3
     BonusSpeedStep: 0.5
-    InitialSize: 1
+    InitialSize: 2
     MoveThroughWalls: 0
