@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Entities;
 using UnityEngine;
+using Utils;
 
-namespace DefaultNamespace
+namespace Logic
 {
     public class LineDrawer : MonoBehaviour
     {

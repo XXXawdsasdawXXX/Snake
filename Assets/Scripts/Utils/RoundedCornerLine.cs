@@ -1,8 +1,9 @@
-﻿namespace DefaultNamespace
-{
-   using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+namespace Utils
+{
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

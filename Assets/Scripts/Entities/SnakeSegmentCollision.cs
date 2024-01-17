@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Entities
 {
     public class SnakeSegmentCollision : MonoBehaviour
     {

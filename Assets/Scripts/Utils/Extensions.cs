@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Utils
 {
     public static class Extensions
     {

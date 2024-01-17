@@ -1,7 +1,8 @@
 ﻿using Configs;
 using UnityEngine;
+using Utils;
 
-namespace DefaultNamespace
+namespace Entities
 {
     public class SnakeCollision : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace Entities
 {
     public class Food : MonoBehaviour
     {

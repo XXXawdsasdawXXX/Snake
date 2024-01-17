@@ -1,8 +1,9 @@
 ﻿using System;
 using DG.Tweening;
 using UnityEngine;
+using Utils;
 
-namespace DefaultNamespace
+namespace Entities
 {
     public class SnakeSegment : MonoBehaviour
     {
