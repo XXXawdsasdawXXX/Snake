@@ -37,7 +37,7 @@ namespace Utils
             {
                 if (debugParam.Active)
                 {
-                    ColorLog(message, debugParam.Color);
+                    ColorLog($"{type.ToString().ToUpper()}: {message}", debugParam.Color);
                 }
             }
             else

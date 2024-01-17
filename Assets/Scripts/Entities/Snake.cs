@@ -50,7 +50,7 @@ namespace Entities
 
         public void ResetState()
         {
-            Debug.Log("Reset");
+            Debugging.Instance.Log("Reset",Debugging.Type.Snake);
             _headSnakeSegment.StopMove();
             _headSnakeSegment.transform.position = Vector3.zero;
         
@@ -88,7 +88,7 @@ namespace Entities
 
         public void Grow()
         {
-            Debug.Log("Grow");
+            Debugging.Instance.Log("Grow",Debugging.Type.Snake);
             for (int i = 0; i < Constants.SEGMENT_COUNT; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab);
