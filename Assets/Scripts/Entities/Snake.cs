@@ -15,12 +15,10 @@ namespace Entities
 
         private SnakeSegment _segmentPrefab;
         private SnakeStaticData _data;
-
-        private float _currentBonusSpeed;
-        private Vector2Int _moveDirection;
         public  List<SnakeSegment> Segments { get; } = new();
+        private Vector2Int _moveDirection;
+        private float _currentBonusSpeed;
         private float _nextUpdate;
-
         public event Action<Vector2Int> SetNewMoveDirectionEvent; 
 
         private void Awake()
@@ -28,13 +26,9 @@ namespace Entities
             _data = _snakeConfig.StaticData;
             _segmentPrefab = _snakeConfig.SegmentPrefab;
             _moveDirection = _input.GetDirection();
-        }
-
-        private void Start()
-        {
             ResetState();
         }
-
+        
         private void Update()
         {
             if (Time.time < _nextUpdate)
