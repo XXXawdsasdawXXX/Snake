@@ -4,9 +4,17 @@ using Utils;
 
 namespace Services
 {
-    public class StandaloneDirectionListener: IInputDirectionListener
+    public class KeyDirectionListener: IInputDirectionListener
     {
         private Vector2Int _direction = Vector2Int.right;
+        public void SetDirection(Vector2Int direction)
+        {
+            if (direction != Vector2Int.zero)
+            {
+                _direction = direction;
+            }
+        }
+
         public Vector2Int GetDirection()
         {
             return _direction;
