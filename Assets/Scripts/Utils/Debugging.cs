@@ -12,7 +12,8 @@ namespace Utils
         {
             None,
             Camera,
-            Snake
+            Snake,
+            Input
         }
 
         [Serializable]
