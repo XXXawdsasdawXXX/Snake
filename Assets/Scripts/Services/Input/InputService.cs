@@ -18,12 +18,12 @@ namespace Services
         
         private void Update()
         {
-            if (Input.anyKeyDown)
+            if (Input.anyKeyDown && _isMouse)
             {
                 _isMouse = false;
                 _keyDirectionListener.SetDirection(_mouseDirectionListener.GetDirection());
             }
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !_isMouse)
             {
                 _isMouse = true;
                 _mouseDirectionListener.SetDirection(_keyDirectionListener.GetDirection());
@@ -41,7 +41,7 @@ namespace Services
         
         public Vector2Int GetDirection()
         {
-            return _mouseDirectionListener.GetDirection();
+            return _isMouse ? _mouseDirectionListener.GetDirection() : _keyDirectionListener.GetDirection();
         }
     }
 

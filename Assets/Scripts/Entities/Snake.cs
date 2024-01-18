@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Configs;
 using Services;
@@ -16,15 +17,17 @@ namespace Entities
         private SnakeStaticData _data;
 
         private float _currentBonusSpeed;
-        private Vector2Int _direction;
+        private Vector2Int _moveDirection;
         public  List<SnakeSegment> Segments { get; } = new();
         private float _nextUpdate;
+
+        public event Action<Vector2Int> SetNewMoveDirectionEvent; 
 
         private void Awake()
         {
             _data = _snakeConfig.StaticData;
             _segmentPrefab = _snakeConfig.SegmentPrefab;
-            _direction = _input.GetDirection();
+            _moveDirection = _input.GetDirection();
         }
 
         private void Start()
@@ -39,7 +42,7 @@ namespace Entities
                 return;
             }
 
-            TrySetInputDirection();
+            TrySetMoveDirection();
 
             var period = 1f / (_data.Speed + _currentBonusSpeed) * GetMultiplier();
 
@@ -54,7 +57,7 @@ namespace Entities
             _headSnakeSegment.StopMove();
             _headSnakeSegment.transform.position = Vector3.zero;
         
-            _direction = Vector2Int.right;
+            _moveDirection = Constants.DEFAULT_DIRECTION;
             _currentBonusSpeed = 0;
         
             for (int i = 1; i < Segments.Count; i++)
@@ -106,13 +109,13 @@ namespace Entities
         {
             Vector3 position = transform.position;
 
-            if (_direction.x != 0f)
+            if (_moveDirection.x != 0f)
             {
-                position.x = Mathf.RoundToInt(-wall.position.x + _direction.x);
+                position.x = Mathf.RoundToInt(-wall.position.x + _moveDirection.x);
             }
-            else if (_direction.y != 0f)
+            else if (_moveDirection.y != 0f)
             {
-                position.y = Mathf.RoundToInt(-wall.position.y + _direction.y);
+                position.y = Mathf.RoundToInt(-wall.position.y + _moveDirection.y);
             }
 
             transform.position = position;
@@ -120,8 +123,8 @@ namespace Entities
     
         private void Move(float period)
         {
-            var x = _headSnakeSegment.Target.x + (_direction.x * GetMultiplier());
-            var y = _headSnakeSegment.Target.y + (_direction.y * GetMultiplier());
+            var x = _headSnakeSegment.Target.x + (_moveDirection.x * GetMultiplier());
+            var y = _headSnakeSegment.Target.y + (_moveDirection.y * GetMultiplier());
 
             _headSnakeSegment.StartMove(new Vector3(x, y, 0), period);
             for (int i = 1; i < Segments.Count; i++)
@@ -130,17 +133,18 @@ namespace Entities
             }
         }
 
-        private void TrySetInputDirection()
+        private void TrySetMoveDirection()
         {
             var inputDirection = _input.GetDirection();
             if (IsCanSetDirection(inputDirection))
             {
-                _direction = inputDirection;
+                _moveDirection = inputDirection;
+                SetNewMoveDirectionEvent?.Invoke(_moveDirection);
             }
         }
         private bool IsCanSetDirection(Vector2Int inputDirection)
         {
-            return inputDirection != _direction && 
+            return inputDirection != _moveDirection && 
                    (_headSnakeSegment.Target.x % 1 == 0 && _headSnakeSegment.Target.y % 1 == 0) && 
                    _headSnakeSegment.MoveDirection != inputDirection * -1;
         }

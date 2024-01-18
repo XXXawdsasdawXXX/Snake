@@ -1,19 +1,14 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils;
 
 namespace Logic
 {
     public class CameraScaler : MonoBehaviour
     {
-        private Camera _camera;
-
-        [SerializeField] private LayerMask _layerMask;
-        [SerializeField] private float _distance = 10;
-
-        private bool _isSetCorrectSize;
-        private Coroutine _coroutine;
-
+        [SerializeField] private Vector2 _referenceResolution = new(1080, 2640);
+        [SerializeField] private float _referenceSize = 25.5f;
+        [SerializeField] private Camera _camera;
+    
         private void Awake()
         {
             if (Screen.width > Screen.height)
@@ -22,49 +17,10 @@ namespace Logic
                 return;
             }
 
-            _camera = Camera.main;
-            _coroutine = StartCoroutine(SetCameraSize());
-        }
+            float referenceAspect = _referenceResolution.x / _referenceResolution.y;
+            float currentAspect = (float)Screen.width / (float)Screen.height;
 
-        void OnDestroy()
-        {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-            }
-        }
-
-        private IEnumerator SetCameraSize()
-        {
-            Debugging.Instance?.Log($"Start set camera size: old size = {_camera.orthographicSize}",
-                Debugging.Type.Camera);
-            while (!_isSetCorrectSize)
-            {
-                Check2D();
-                yield return null;
-            }
-
-            Debugging.Instance?.Log($"End set camera size: new size = {_camera.orthographicSize}",
-                Debugging.Type.Camera);
-        }
-
-        private void Check2D()
-        {
-            float width = _camera.pixelWidth;
-            float height = _camera.pixelHeight;
-            Vector2 topRight = _camera.ScreenToWorldPoint(new Vector2(width, height));
-            var point = new Vector3(topRight.x, 0, -10);
-
-            var hit = Physics2D.Raycast(point, Vector3.zero, _distance, _layerMask);
-
-            if (!hit || (hit && !hit.transform.gameObject.CompareTag(Constants.Tag.Wall.ToString())))
-            {
-                _camera.orthographicSize -= 0.05f;
-            }
-            else if (hit && hit.transform.gameObject.CompareTag(Constants.Tag.Wall.ToString()))
-            {
-                _isSetCorrectSize = true;
-            }
+           _camera.orthographicSize = _referenceSize * referenceAspect / currentAspect;
         }
     }
 }

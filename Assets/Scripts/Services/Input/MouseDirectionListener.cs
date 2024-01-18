@@ -5,9 +5,9 @@ namespace Services
 {
     public class MouseDirectionListener : IInputDirectionListener
     {
-        private const float SWIPE_DISTANCE = 60;
+        private const float SWIPE_DISTANCE = 50;
 
-        private Vector2Int _direction = Vector2Int.right;
+        private Vector2Int _direction = Constants.DEFAULT_DIRECTION;
         private Vector2 _tapPosition;
         private Vector2 _swipeDelta;
 

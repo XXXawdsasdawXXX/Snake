@@ -6,7 +6,7 @@ namespace Services
 {
     public class KeyDirectionListener: IInputDirectionListener
     {
-        private Vector2Int _direction = Vector2Int.right;
+        private Vector2Int _direction = Constants.DEFAULT_DIRECTION;
         public void SetDirection(Vector2Int direction)
         {
             if (direction != Vector2Int.zero)
@@ -14,7 +14,6 @@ namespace Services
                 _direction = direction;
             }
         }
-
         public Vector2Int GetDirection()
         {
             return _direction;
