@@ -16,6 +16,7 @@ namespace Configs
     {
         public float Speed = 20f;
         public float BonusSpeedStep = 1f;
+        public float MaxSpeed = 12f;
         public int InitialSize = 4;
         public bool MoveThroughWalls;
     }

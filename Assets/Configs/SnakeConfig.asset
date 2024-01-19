@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SegmentPrefab: {fileID: 6017641730287937085, guid: 531ab8b335279e440898b43bb6a70082, type: 3}
   StaticData:
-    Speed: 3
-    BonusSpeedStep: 0.5
-    InitialSize: 2
+    Speed: 5
+    BonusSpeedStep: 0.25
+    InitialSize: 4
     MoveThroughWalls: 0

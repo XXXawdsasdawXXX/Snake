@@ -15,28 +15,48 @@ namespace Entities
 
         private SnakeSegment _segmentPrefab;
         private SnakeStaticData _data;
-        public  List<SnakeSegment> Segments { get; } = new();
-        private Vector2Int _moveDirection;
+        public List<SnakeSegment> Segments { get; } = new();
         private float _currentBonusSpeed;
         private float _nextUpdate;
-        public event Action<Vector2Int> SetNewMoveDirectionEvent; 
+        public event Action<Vector2Int> SetNewMoveDirectionEvent;
+
+        private Queue<Vector2Int> _inputDirections = new Queue<Vector2Int>();
+        private Vector2Int _moveDirection;
 
         private void Awake()
         {
             _data = _snakeConfig.StaticData;
             _segmentPrefab = _snakeConfig.SegmentPrefab;
             _moveDirection = _input.GetDirection();
+            SetNewMoveDirectionEvent?.Invoke(_moveDirection);
             ResetState();
         }
-        
+
         private void Update()
         {
+            AddInputDirection();
+
             if (Time.time < _nextUpdate)
             {
                 return;
             }
 
-            TrySetMoveDirection();
+            Debugging.Instance.Log($"{_headSnakeSegment.Target.x % 1} {_headSnakeSegment.Target.y % 1}");
+            if (_headSnakeSegment.Target.x % 1 == 0 && _headSnakeSegment.Target.y % 1 == 0)
+            {
+                Debugging.Instance.Log($"))");
+
+                for (int i = 0; i < _inputDirections.Count; i++)
+                {
+                    var inputDirection = _inputDirections.Dequeue();
+                    if (IsCanSetDirection(inputDirection))
+                    {
+                        _moveDirection = inputDirection;
+                        SetNewMoveDirectionEvent?.Invoke(_moveDirection);
+                        break;
+                    }
+                }
+            }
 
             var period = 1f / (_data.Speed + _currentBonusSpeed) * GetMultiplier();
 
@@ -47,13 +67,13 @@ namespace Entities
 
         public void ResetState()
         {
-            Debugging.Instance.Log("Reset",Debugging.Type.Snake);
+            Debugging.Instance.Log("Reset", Debugging.Type.Snake);
             _headSnakeSegment.StopMove();
             _headSnakeSegment.transform.position = Vector3.zero;
-        
+
             _moveDirection = Constants.DEFAULT_DIRECTION;
             _currentBonusSpeed = 0;
-        
+
             for (int i = 1; i < Segments.Count; i++)
             {
                 Segments[i].StopMove();
@@ -62,7 +82,7 @@ namespace Entities
 
             Segments.Clear();
             Segments.Add(_headSnakeSegment);
-        
+
             for (int i = 0; i < _data.InitialSize - 1; i++)
             {
                 Grow();
@@ -85,7 +105,7 @@ namespace Entities
 
         public void Grow()
         {
-            Debugging.Instance.Log("Grow",Debugging.Type.Snake);
+            Debugging.Instance.Log("Grow", Debugging.Type.Snake);
             for (int i = 0; i < Constants.SEGMENT_COUNT; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab);
@@ -96,9 +116,12 @@ namespace Entities
 
         public void AddSpeedMultiplier()
         {
-            _currentBonusSpeed += _data.BonusSpeedStep;
+            if (_data.Speed + _currentBonusSpeed < _data.MaxSpeed)
+            {
+                _currentBonusSpeed += _data.BonusSpeedStep;
+            }
         }
-    
+
         public void Traverse(Transform wall)
         {
             Vector3 position = transform.position;
@@ -114,7 +137,7 @@ namespace Entities
 
             transform.position = position;
         }
-    
+
         private void Move(float period)
         {
             var x = _headSnakeSegment.Target.x + (_moveDirection.x * GetMultiplier());
@@ -127,20 +150,21 @@ namespace Entities
             }
         }
 
-        private void TrySetMoveDirection()
+        private void AddInputDirection()
         {
-            var inputDirection = _input.GetDirection();
-            if (IsCanSetDirection(inputDirection))
+            // var inputDirection = ;
+            if (_inputDirections.Count < 3)
             {
-                _moveDirection = inputDirection;
-                SetNewMoveDirectionEvent?.Invoke(_moveDirection);
+                _inputDirections.Enqueue(_input.GetDirection());
             }
+            /*if (IsCanSetDirection(inputDirection))
+            {
+            }*/
         }
+
         private bool IsCanSetDirection(Vector2Int inputDirection)
         {
-            return inputDirection != _moveDirection && 
-                   (_headSnakeSegment.Target.x % 1 == 0 && _headSnakeSegment.Target.y % 1 == 0) && 
-                   _headSnakeSegment.MoveDirection != inputDirection * -1;
+            return inputDirection != _moveDirection && _moveDirection != inputDirection * -1;
         }
 
         private float GetMultiplier()
