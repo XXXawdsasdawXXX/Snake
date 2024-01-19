@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Utils;
 
 namespace Services
@@ -12,6 +13,8 @@ namespace Services
         private Vector2 _swipeDelta;
 
         private bool _isSwiping;
+
+        public event Action<Vector2Int> SetNewDirectionEvent;
 
         public void SetDirection(Vector2Int direction)
         {
@@ -63,11 +66,13 @@ namespace Services
                 {
                     _direction = _swipeDelta.x > 0 ? Vector2Int.right : Vector2Int.left;
                     Debugging.Instance.Log($"Set mobile horizontal\n direction {_direction}", Debugging.Type.Input);
+                    SetNewDirectionEvent?.Invoke(_direction);
                 }
                 else
                 {
                     _direction = _swipeDelta.y > 0 ? Vector2Int.up : Vector2Int.down;
                     Debugging.Instance.Log($"Set mobile vertical\n direction {_direction}", Debugging.Type.Input);
+                    SetNewDirectionEvent?.Invoke(_direction);
                 }
 
                 ResetSwipe();

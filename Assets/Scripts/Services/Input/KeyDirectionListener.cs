@@ -7,6 +7,8 @@ namespace Services
     public class KeyDirectionListener: IInputDirectionListener
     {
         private Vector2Int _direction = Constants.DEFAULT_DIRECTION;
+        public event Action<Vector2Int> SetNewDirectionEvent;
+
         public void SetDirection(Vector2Int direction)
         {
             if (direction != Vector2Int.zero)
@@ -24,16 +26,17 @@ namespace Services
             var x = Input.GetAxisRaw("Horizontal");
             var y = Input.GetAxisRaw("Vertical");
 
-            if (x != 0 && _direction * -1 != new Vector2Int(Convert.ToInt32(x), 0))
+            if (x != 0)
             {
                 _direction = new Vector2Int(Convert.ToInt32(x), 0);
                 Debugging.Instance.Log($"Set pc horizontal direction {_direction}", Debugging.Type.Input);
+                SetNewDirectionEvent?.Invoke(_direction);
             }
-
-            if (y != 0 && _direction * -1 != new Vector2Int(0, Convert.ToInt32(y)))
+            else if (y != 0)
             {
                 _direction = new Vector2Int(0, Convert.ToInt32(y));
                 Debugging.Instance.Log($"Set pc vertical direction {_direction}", Debugging.Type.Input);
+                SetNewDirectionEvent?.Invoke(_direction);
             }
         }
     }

@@ -20,7 +20,7 @@ namespace Entities
         private float _nextUpdate;
         public event Action<Vector2Int> SetNewMoveDirectionEvent;
 
-        private Queue<Vector2Int> _inputDirections = new Queue<Vector2Int>();
+        private readonly Queue<Vector2Int> _inputDirections = new();
         private Vector2Int _moveDirection;
 
         private void Awake()
@@ -32,9 +32,20 @@ namespace Entities
             ResetState();
         }
 
+        private void OnEnable()
+        {
+            _input.SetNewDirectionEvent += AddInputDirection;
+        }
+
+        private void OnDisable()
+        {
+            
+            _input.SetNewDirectionEvent -= AddInputDirection;
+        }
+
         private void Update()
         {
-            AddInputDirection();
+   
 
             if (Time.time < _nextUpdate)
             {
@@ -150,16 +161,12 @@ namespace Entities
             }
         }
 
-        private void AddInputDirection()
+        private void AddInputDirection(Vector2Int direction)
         {
-            // var inputDirection = ;
-            if (_inputDirections.Count < 3)
+            if (_inputDirections.Count < 5 )
             {
                 _inputDirections.Enqueue(_input.GetDirection());
             }
-            /*if (IsCanSetDirection(inputDirection))
-            {
-            }*/
         }
 
         private bool IsCanSetDirection(Vector2Int inputDirection)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Services
 {
@@ -8,7 +9,9 @@ namespace Services
         private IInputDirectionListener _keyDirectionListener;
         
         private bool _isMouse;
-        
+
+        private Vector2Int _direction;
+        public event Action<Vector2Int> SetNewDirectionEvent; 
         private void Awake()
         {
             _isMouse = Screen.width < Screen.height;
@@ -36,6 +39,13 @@ namespace Services
             else
             {
                 _keyDirectionListener.SetDirection();
+            }
+
+            var dir = GetDirection();
+            if (_direction != dir)
+            {
+                _direction = dir;
+                SetNewDirectionEvent?.Invoke(_direction);
             }
         }
         
