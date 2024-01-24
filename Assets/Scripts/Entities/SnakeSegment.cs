@@ -7,13 +7,16 @@ namespace Entities
 {
     public class SnakeSegment : MonoBehaviour
     {
+        [SerializeField] private SnakeSegmentCollision _segmentCollision;
+        public SnakeSegmentCollision Collision => _segmentCollision;
+        public bool IsSetTarget => LastTarget != Vector3.zero && Target != Vector3.zero;
         public Vector3 LastTarget { get; private set; }
         public Vector3 Target { get; private set; }
         public Vector2Int MoveDirection { get;  private set; }
+      
         private Tween _moveTween;
 
-        public bool IsSetTarget => LastTarget != Vector3.zero && Target != Vector3.zero;
-
+        
         public void StartMove(Vector3 target, float duration)
         {
             LastTarget = Target;
@@ -29,6 +32,10 @@ namespace Entities
                 .SetLink(gameObject, LinkBehaviour.KillOnDestroy);
         }
 
+        public void SetTarget(Vector3 target)
+        {
+            Target = target;
+        }
 
         public void StopMove()
         {

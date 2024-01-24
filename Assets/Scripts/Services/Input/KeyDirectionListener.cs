@@ -7,6 +7,7 @@ namespace Services
     public class KeyDirectionListener: IInputDirectionListener
     {
         private Vector2Int _direction = Constants.DEFAULT_DIRECTION;
+        private IInputDirectionListener _inputDirectionListenerImplementation;
         public event Action<Vector2Int> SetNewDirectionEvent;
 
         public void SetDirection(Vector2Int direction)
@@ -38,6 +39,11 @@ namespace Services
                 Debugging.Instance.Log($"Set pc vertical direction {_direction}", Debugging.Type.Input);
                 SetNewDirectionEvent?.Invoke(_direction);
             }
+        }
+
+        public void Reset()
+        {
+            _direction = Vector2Int.zero;
         }
     }
 }

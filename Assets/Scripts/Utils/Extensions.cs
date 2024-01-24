@@ -20,5 +20,25 @@ namespace Utils
             var listVector2 = vectors.Select(vector => vector.AsVector2()).ToList();
             return listVector2;
         }
+        
+        public static void ShuffleList<T>(List<T> list)
+        {
+            int n = list.Count;
+            for (int i = n - 1; i > 0; i--)
+            {
+                int j = Random.Range(0, i + 1);
+                (list[i], list[j]) = (list[j], list[i]);
+            }
+        }
+        
+        public static void ShuffleArray<T>(T[] array)
+        {
+            int n = array.Length;
+            for (int i = n - 1; i > 0; i--)
+            {
+                int j = Random.Range(0, i + 1);
+                (array[i], array[j]) = (array[j], array[i]);
+            }
+        }
     }
 }

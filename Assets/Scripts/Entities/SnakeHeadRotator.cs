@@ -15,6 +15,7 @@ namespace Entities
         {
             {new Vector2Int(0,1),0},
             {new Vector2Int(1,0),-90},
+            {new Vector2Int(0,0),-90},
             {new Vector2Int(0,-1),-180},
             {new Vector2Int(-1,0), 90},
         };

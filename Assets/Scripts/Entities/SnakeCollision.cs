@@ -8,7 +8,7 @@ namespace Entities
     {
         [SerializeField] private Snake _snake;
         [SerializeField] private SnakeConfig _snakeConfig;
-        
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.CompareTag(Constants.Tag.Food.ToString()))
@@ -18,7 +18,8 @@ namespace Entities
             }
             else if (other.gameObject.CompareTag(Constants.Tag.Obstacle.ToString()))
             {
-                _snake.ResetState();
+                _snake.InvokeCollisionEvent();
+                _snake.StopMove();
             }
             else if (other.gameObject.CompareTag(Constants.Tag.Wall.ToString()))
             {
@@ -28,7 +29,8 @@ namespace Entities
                 }
                 else
                 {
-                    _snake.ResetState();
+                    _snake.InvokeCollisionEvent();
+                    _snake.StopMove();
                 }
             }
         }

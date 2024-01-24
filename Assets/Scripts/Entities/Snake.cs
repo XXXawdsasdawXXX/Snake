@@ -9,27 +9,35 @@ namespace Entities
 {
     public class Snake : MonoBehaviour
     {
+        public List<SnakeSegment> Segments { get; } = new();
+        public bool IsActive { get; private set; }
+
         [SerializeField] private InputService _input;
         [SerializeField] private SnakeConfig _snakeConfig;
         [SerializeField] private SnakeSegment _headSnakeSegment;
 
         private SnakeSegment _segmentPrefab;
         private SnakeStaticData _data;
-        public List<SnakeSegment> Segments { get; } = new();
-        private float _currentBonusSpeed;
-        private float _nextUpdate;
-        public event Action<Vector2Int> SetNewMoveDirectionEvent;
 
         private readonly Queue<Vector2Int> _inputDirections = new();
         private Vector2Int _moveDirection;
+
+        private float _currentBonusSpeed;
+        private float _nextUpdate;
+
+        public event Action<Vector2Int> SetNewMoveDirectionEvent;
+        public event Action ObstacleCollisionEvent;
+        public event Action GrowEvent;
+        public event Action ResetEvent;
+
 
         private void Awake()
         {
             _data = _snakeConfig.StaticData;
             _segmentPrefab = _snakeConfig.SegmentPrefab;
+            //ResetState();
             _moveDirection = _input.GetDirection();
             SetNewMoveDirectionEvent?.Invoke(_moveDirection);
-            ResetState();
         }
 
         private void OnEnable()
@@ -37,37 +45,19 @@ namespace Entities
             _input.SetNewDirectionEvent += AddInputDirection;
         }
 
-        private void OnDisable()
-        {
-            
-            _input.SetNewDirectionEvent -= AddInputDirection;
-        }
-
         private void Update()
         {
-   
+            if (!IsActive)
+            {
+                return;
+            }
 
             if (Time.time < _nextUpdate)
             {
                 return;
             }
 
-            Debugging.Instance.Log($"{_headSnakeSegment.Target.x % 1} {_headSnakeSegment.Target.y % 1}");
-            if (_headSnakeSegment.Target.x % 1 == 0 && _headSnakeSegment.Target.y % 1 == 0)
-            {
-                Debugging.Instance.Log($"))");
-
-                for (int i = 0; i < _inputDirections.Count; i++)
-                {
-                    var inputDirection = _inputDirections.Dequeue();
-                    if (IsCanSetDirection(inputDirection))
-                    {
-                        _moveDirection = inputDirection;
-                        SetNewMoveDirectionEvent?.Invoke(_moveDirection);
-                        break;
-                    }
-                }
-            }
+            TrySetDirection();
 
             var period = 1f / (_data.Speed + _currentBonusSpeed) * GetMultiplier();
 
@@ -76,14 +66,49 @@ namespace Entities
             _nextUpdate = Time.time + period;
         }
 
+        private void OnDisable()
+        {
+            _input.SetNewDirectionEvent -= AddInputDirection;
+        }
+
+        public void StartMove()
+        {
+            IsActive = true;
+            foreach (var snakeSegment in Segments)
+            {
+                snakeSegment.Collision.EnableCollision();
+            }
+        }
+
+        public void StopMove()
+        {
+            IsActive = false;
+            foreach (var snakeSegment in Segments)
+            {
+                snakeSegment.Collision.DisableCollision();
+            }
+        }
+
+        public void InvokeCollisionEvent()
+        {
+            if (IsActive)
+            {
+                ObstacleCollisionEvent?.Invoke();
+            }
+        }
+
         public void ResetState()
         {
             Debugging.Instance.Log("Reset", Debugging.Type.Snake);
+
+            IsActive = false;
             _headSnakeSegment.StopMove();
             _headSnakeSegment.transform.position = Vector3.zero;
-
-            _moveDirection = Constants.DEFAULT_DIRECTION;
             _currentBonusSpeed = 0;
+
+            _inputDirections.Clear();
+            _moveDirection = Constants.DEFAULT_DIRECTION;
+            SetNewMoveDirectionEvent?.Invoke(_moveDirection);
 
             for (int i = 1; i < Segments.Count; i++)
             {
@@ -93,10 +118,50 @@ namespace Entities
 
             Segments.Clear();
             Segments.Add(_headSnakeSegment);
+            
+             InitGrow();
+         
+             ResetEvent?.Invoke();
+        }
 
-            for (int i = 0; i < _data.InitialSize - 1; i++)
+        public void Grow()
+        {
+            Debugging.Instance.Log("Grow", Debugging.Type.Snake);
+
+            for (int i = 0; i < Constants.SEGMENT_COUNT; i++)
             {
-                Grow();
+                SnakeSegment segment = Instantiate(_segmentPrefab);
+                segment.transform.position = new Vector3(Segments[^1].LastTarget.x, Segments[^1].LastTarget.y, 0);
+                Segments.Add(segment);
+                segment.Collision.EnableCollision();
+            }
+
+            if (IsActive)
+            {
+                GrowEvent?.Invoke();
+            }
+        }
+
+        private void InitGrow()
+        {
+            Debugging.Instance.Log($"Init Grow {Constants.SEGMENT_COUNT} * {_data.InitialSize}", Debugging.Type.Snake);
+
+            for (int i = 0; i < Constants.SEGMENT_COUNT * _data.InitialSize; i++)
+            {
+                SnakeSegment segment = Instantiate(_segmentPrefab);
+                var positionX = i * GetMultiplier();
+                segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x - positionX,_headSnakeSegment.transform.position.y, 0);
+                segment.SetTarget (new Vector3(_headSnakeSegment.transform.position.x - positionX,_headSnakeSegment.transform.position.y, 0));
+                Segments.Add(segment);
+            }
+
+        }
+
+        public void AddSpeedMultiplier()
+        {
+            if (_data.Speed + _currentBonusSpeed < _data.MaxSpeed)
+            {
+                _currentBonusSpeed += _data.BonusSpeedStep;
             }
         }
 
@@ -112,25 +177,6 @@ namespace Entities
             }
 
             return false;
-        }
-
-        public void Grow()
-        {
-            Debugging.Instance.Log("Grow", Debugging.Type.Snake);
-            for (int i = 0; i < Constants.SEGMENT_COUNT; i++)
-            {
-                SnakeSegment segment = Instantiate(_segmentPrefab);
-                segment.transform.position = new Vector3(Segments[^1].LastTarget.x, Segments[^1].LastTarget.y, 0);
-                Segments.Add(segment);
-            }
-        }
-
-        public void AddSpeedMultiplier()
-        {
-            if (_data.Speed + _currentBonusSpeed < _data.MaxSpeed)
-            {
-                _currentBonusSpeed += _data.BonusSpeedStep;
-            }
         }
 
         public void Traverse(Transform wall)
@@ -161,9 +207,27 @@ namespace Entities
             }
         }
 
+        private void TrySetDirection()
+        {
+            if (_headSnakeSegment.Target.x % 1 == 0 && _headSnakeSegment.Target.y % 1 == 0)
+            {
+                for (int i = 0; i < _inputDirections.Count; i++)
+                {
+                    var inputDirection = _inputDirections.Dequeue();
+
+                    if (IsCanSetDirection(inputDirection))
+                    {
+                        _moveDirection = inputDirection;
+                        SetNewMoveDirectionEvent?.Invoke(_moveDirection);
+                        break;
+                    }
+                }
+            }
+        }
+
         private void AddInputDirection(Vector2Int direction)
         {
-            if (_inputDirections.Count < 5 )
+            if (_inputDirections.Count < 5)
             {
                 _inputDirections.Enqueue(_input.GetDirection());
             }

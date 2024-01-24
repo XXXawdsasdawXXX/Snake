@@ -13,7 +13,10 @@ namespace Utils
             None,
             Camera,
             Snake,
-            Input
+            Input,
+            UI,
+            JS,
+            GameController
         }
 
         [Serializable]

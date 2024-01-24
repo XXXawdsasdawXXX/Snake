@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Entities
@@ -8,9 +9,10 @@ namespace Entities
         [SerializeField] private Collider2D _collider2D;
         [SerializeField] private float _enableDelay = 1.5f;
         private Coroutine _coroutine;
-        private void Start()
+
+        private void Awake()
         {
-            _coroutine = StartCoroutine(EnableCollision());
+            DisableCollision();
         }
 
         private void OnDestroy()
@@ -21,10 +23,21 @@ namespace Entities
             }
         }
 
-        private IEnumerator EnableCollision()
+        
+        private IEnumerator EnableCollisionWithDelay()
         {
             yield return new WaitForSeconds(_enableDelay);
             _collider2D.enabled = true;
+        }
+
+
+        public  void EnableCollision()
+        {
+            _coroutine = StartCoroutine(EnableCollisionWithDelay());
+        }
+        public void DisableCollision()
+        {
+            _collider2D.enabled = false;
         }
     }
 }

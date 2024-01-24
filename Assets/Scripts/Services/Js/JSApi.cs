@@ -4,7 +4,7 @@ namespace Services
 {
     public class JSApi
     {
-        //Метод, который го
+ 
         public static void Log(string msg)
         {
             Application.ExternalEval($"console.log(\'{msg}\')");
@@ -15,9 +15,9 @@ namespace Services
             Application.ExternalCall("OnPlayerSelectedChest",str);
         }
 
-        public static void SessionEnd()
+        public static void SessionEnd(int wonBonus)
         {
-            Application.ExternalCall("OnSessionEnd");
+            Application.ExternalCall("OnSessionEnd", wonBonus);
         } 
     }
 }

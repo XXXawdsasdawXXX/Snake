@@ -44,9 +44,10 @@ namespace Services
 
             if (Input.GetMouseButtonUp(0))
             {
-                ResetSwipe();
+                Reset();
             }
         }
+
 
         private void CheckSwipe()
         {
@@ -75,12 +76,12 @@ namespace Services
                     SetNewDirectionEvent?.Invoke(_direction);
                 }
 
-                ResetSwipe();
+                Reset();
                 _tapPosition = Input.mousePosition;
             }
         }
 
-        private void ResetSwipe()
+        public void Reset()
         {
             Debugging.Instance.Log($"Mobile reset swipe {_direction}", Debugging.Type.Input);
             _isSwiping = false;

@@ -73,9 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8b8d2076e04e1a9d4294dda6374fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LastTarget: {x: 0, y: 0, z: 0}
-  Target: {x: 0, y: 0, z: 0}
-  MoveDirection: {x: 0, y: 0}
+  _segmentCollision: {fileID: 2240974621705581735}
 --- !u!114 &2240974621705581735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider2D: {fileID: 3095462503393242856}
+  _enableDelay: 1.5
 --- !u!1 &7552749238892429541
 GameObject:
   m_ObjectHideFlags: 0

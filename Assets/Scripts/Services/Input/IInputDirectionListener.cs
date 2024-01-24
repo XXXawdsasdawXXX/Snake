@@ -9,5 +9,6 @@ namespace Services
         void SetDirection(Vector2Int direction);
         Vector2Int GetDirection();
         void SetDirection();
+        void Reset();
     }
 }
