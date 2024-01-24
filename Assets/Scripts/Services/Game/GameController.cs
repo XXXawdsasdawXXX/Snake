@@ -74,17 +74,16 @@ namespace Services
         {
             _jsService.InitSessionEvent -= OnInitSession;
             Debugging.Instance.Log($"On init", Debugging.Type.GameController);
-            _gameState = GameState.AwaitInput;
+            //_gameState = GameState.AwaitInput;
             InvokeInitSession(sessionData);
             SubscribeToEvents(true);
         }
 
-        private void TryStartGame(Vector2Int obj)
+        private void TryStartGame(Vector2Int direction)
         {
-            if (_gameState == GameState.AwaitInput && !_isPlaying)
+            if (_gameState == GameState.AwaitInput && !_isPlaying && direction != Vector2Int.zero && direction != Vector2Int.left)
             {
                 _isPlaying = true;
-               
                 StartCoroutine(StartGame());
             }
         }
@@ -100,11 +99,11 @@ namespace Services
 
         private void ResetGame()
         {
+            Debugging.Instance.Log($"Reset game", Debugging.Type.GameController);
             _isPlaying = false;
             _gameState = GameState.AwaitInput;
             _snake.ResetState();
             InvokeResetGameEvent();
-            Debugging.Instance.Log($"Reset game", Debugging.Type.GameController);
         }
 
         private void WonGame()

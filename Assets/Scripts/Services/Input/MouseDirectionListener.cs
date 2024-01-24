@@ -8,7 +8,7 @@ namespace Services
     {
         private const float SWIPE_DISTANCE = 50;
 
-        private Vector2Int _direction = Constants.DEFAULT_DIRECTION;
+        private Vector2Int _direction ;
         private Vector2 _tapPosition;
         private Vector2 _swipeDelta;
 
@@ -83,10 +83,11 @@ namespace Services
 
         public void Reset()
         {
-            Debugging.Instance.Log($"Mobile reset swipe {_direction}", Debugging.Type.Input);
             _isSwiping = false;
             _tapPosition = Vector2.zero;
             _swipeDelta = Vector2.zero;
+            _direction = Vector2Int.zero;
+            Debugging.Instance.Log($"Mobile reset swipe {_direction}", Debugging.Type.Input);
         }
     }
 }

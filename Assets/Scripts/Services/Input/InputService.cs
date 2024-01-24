@@ -52,11 +52,8 @@ namespace Services
                 _currentDirectionListener?.SetDirection();
 
                 var dir = GetDirection();
-                if (_direction != dir)
+                if (_direction != dir && _isPlaying)
                 {
-
-                    Debugging.Instance.Log($"Switch is playing {_isPlaying} ", Debugging.Type.Input);
-
                     Debugging.Instance.Log($"Set new direction {dir} ", Debugging.Type.Input);
                     _direction = dir;
                     SetNewDirectionEvent?.Invoke(_direction);
@@ -80,14 +77,22 @@ namespace Services
         {
             if (flag)
             {
-                _gameController.EndGameEvent += OnEndGame;
+               //_gameController.EndGameEvent += OnEndGame;
                 _gameController.PauseEvent += OnPauseGame;
+                _gameController.ResetGameEvent += OnResetGame;
             }
             else
             {
-                _gameController.EndGameEvent -= OnEndGame;
+                //_gameController.EndGameEvent -= OnEndGame;
                 _gameController.PauseEvent -= OnPauseGame;
+                _gameController.ResetGameEvent -= OnResetGame;
             }
+        }
+
+        private void OnResetGame()
+        {
+            _currentDirectionListener.Reset();
+            _isPlaying = false;
         }
 
         private void OnPauseGame(bool isPause)

@@ -59,11 +59,14 @@ namespace Entities
 
             TrySetDirection();
 
-            var period = 1f / (_data.Speed + _currentBonusSpeed) * GetMultiplier();
+            if (_moveDirection != Vector2Int.zero)
+            {
+                var period = 1f / (_data.Speed + _currentBonusSpeed) * GetMultiplier();
 
-            Move(period);
+                Move(period);
 
-            _nextUpdate = Time.time + period;
+                _nextUpdate = Time.time + period;
+            }
         }
 
         private void OnDisable()
@@ -118,10 +121,10 @@ namespace Entities
 
             Segments.Clear();
             Segments.Add(_headSnakeSegment);
-            
-             InitGrow();
-         
-             ResetEvent?.Invoke();
+
+            InitGrow();
+
+            ResetEvent?.Invoke();
         }
 
         public void Grow()
@@ -149,12 +152,13 @@ namespace Entities
             for (int i = 0; i < Constants.SEGMENT_COUNT * _data.InitialSize; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab);
+                segment.Collision.DisableCollision();
                 var positionX = i * GetMultiplier();
-                segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x - positionX,_headSnakeSegment.transform.position.y, 0);
-                segment.SetTarget (new Vector3(_headSnakeSegment.transform.position.x - positionX,_headSnakeSegment.transform.position.y, 0));
+                segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x - positionX,
+                    _headSnakeSegment.transform.position.y, 0);
+                segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x - positionX, _headSnakeSegment.transform.position.y, 0));
                 Segments.Add(segment);
             }
-
         }
 
         public void AddSpeedMultiplier()
