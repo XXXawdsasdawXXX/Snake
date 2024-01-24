@@ -156,7 +156,8 @@ namespace Entities
                 var positionX = i * GetMultiplier();
                 segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x - positionX,
                     _headSnakeSegment.transform.position.y, 0);
-                segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x - positionX, _headSnakeSegment.transform.position.y, 0));
+                segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x - positionX,
+                    _headSnakeSegment.transform.position.y, 0));
                 Segments.Add(segment);
             }
         }
@@ -201,6 +202,11 @@ namespace Entities
 
         private void Move(float period)
         {
+            if (_moveDirection == Vector2Int.zero)
+            {
+                return;
+            }
+
             var x = _headSnakeSegment.Target.x + (_moveDirection.x * GetMultiplier());
             var y = _headSnakeSegment.Target.y + (_moveDirection.y * GetMultiplier());
 
@@ -233,13 +239,18 @@ namespace Entities
         {
             if (_inputDirections.Count < 5)
             {
-                _inputDirections.Enqueue(_input.GetDirection());
+                var dir = _input.GetDirection();
+                if (dir != Vector2Int.zero)
+                {
+                    _inputDirections.Enqueue(dir);
+                }
             }
         }
 
         private bool IsCanSetDirection(Vector2Int inputDirection)
         {
-            return inputDirection != _moveDirection && _moveDirection != inputDirection * -1;
+            return inputDirection != _moveDirection && _moveDirection != inputDirection * -1 &&
+                   _moveDirection != Vector2Int.zero;
         }
 
         private float GetMultiplier()

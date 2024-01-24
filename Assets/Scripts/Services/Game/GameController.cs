@@ -81,10 +81,22 @@ namespace Services
 
         private void TryStartGame(Vector2Int direction)
         {
+            if (direction == Vector2Int.zero)
+            {
+                return;
+            }
+            
             if (_gameState == GameState.AwaitInput && !_isPlaying && direction != Vector2Int.zero && direction != Vector2Int.left)
             {
                 _isPlaying = true;
                 StartCoroutine(StartGame());
+            }
+
+            if (_gameState == GameState.AwaitInput && _isPlaying)
+            {
+                _gameState = GameState.Play;
+                _snake.StartMove();
+                InvokePauseGame(false);
             }
         }
 
@@ -129,13 +141,15 @@ namespace Services
             if (isPause)
             {
                 _gameState = GameState.Pause;
+                _snake.StopMove();
+                InvokePauseGame(true);
             }
             else
             {
                 _gameState = GameState.AwaitInput;
             }
 
-            InvokePauseGame(isPause);
+           
         }
 
         private void CloseGame()

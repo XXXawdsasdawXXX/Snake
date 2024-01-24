@@ -91,7 +91,7 @@ namespace Services
 
         private void OnResetGame()
         {
-            _currentDirectionListener.Reset();
+            _currentDirectionListener?.Reset();
             _isPlaying = false;
         }
 
