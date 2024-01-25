@@ -1,4 +1,5 @@
 ﻿using System;
+using Services.Audio;
 using UnityEngine;
 using Utils;
 
@@ -28,6 +29,7 @@ namespace Services
 
         private void Update()
         {
+         
             if (Input.anyKeyDown && _isMouse)
             {
                 _isMouse = false;
@@ -42,6 +44,7 @@ namespace Services
                 _currentDirectionListener = _mouseDirectionListener;
             }
 
+    
             if (_gameController.GameState is GameState.Play or GameState.AwaitInput)
             {
                 if (!_isPlaying)
@@ -57,6 +60,7 @@ namespace Services
                     Debugging.Instance.Log($"Set new direction {dir} ", Debugging.Type.Input);
                     _direction = dir;
                     SetNewDirectionEvent?.Invoke(_direction);
+                    AudioManager.Instance.PlayAudioEvent(_direction);
                 }
             }
         }

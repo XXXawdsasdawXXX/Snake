@@ -14,7 +14,6 @@ namespace Entities
             if (other.gameObject.CompareTag(Constants.Tag.Food.ToString()))
             {
                 _snake.Grow();
-                _snake.AddSpeedMultiplier();
             }
             else if (other.gameObject.CompareTag(Constants.Tag.Obstacle.ToString()))
             {

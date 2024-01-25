@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Configs;
 using Services;
+using Services.Audio;
 using UnityEngine;
 using Utils;
 
@@ -137,12 +138,10 @@ namespace Entities
                 segment.Collision.EnableCollision();
             }
 
+            AudioManager.Instance.PlayAudioEvent(AudioEventType.Grow);
             Debugging.Instance.Log($"Grow {Segments.Count}", Debugging.Type.Snake);
-
-            if (IsActive)
-            {
-                GrowEvent?.Invoke();
-            }
+            
+            GrowEvent?.Invoke();
         }
 
         private void InitGrow()
@@ -250,7 +249,7 @@ namespace Entities
         private bool IsCanSetDirection(Vector2Int inputDirection)
         {
             return inputDirection != _moveDirection && _moveDirection != inputDirection * -1 &&
-                   _moveDirection != Vector2Int.zero;
+                   inputDirection != Vector2Int.zero;
         }
 
         private float GetMultiplier()

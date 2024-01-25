@@ -2,6 +2,7 @@
 using Services;
 using UI.Components.Screens;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -10,6 +11,7 @@ namespace UI
         [SerializeField] private GameController _gameController;
         [SerializeField] private ProgressBar _progressBar;
         [SerializeField] private Score _score;
+        [SerializeField] private Button _pauseButton;
 
         private void Awake()
         {
@@ -27,14 +29,21 @@ namespace UI
             {
                 _gameController.InitSessionEvent += OnInitSession;
                 _gameController.ResetGameEvent += OnResetGame;
+                _gameController.PauseEvent += OnPauseGame;
                 _score.ChangeEvent += OnScoreChange;
             }
             else
             {
                 _gameController.InitSessionEvent -= OnInitSession;
                 _gameController.ResetGameEvent -= OnResetGame;
+                _gameController.PauseEvent -= OnPauseGame;
                 _score.ChangeEvent -= OnScoreChange;
             }
+        }
+
+        private void OnPauseGame(bool isPause)
+        {
+           //     _pauseButton.interactable = !isPause;
         }
 
         private void OnResetGame()

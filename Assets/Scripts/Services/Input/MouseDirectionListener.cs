@@ -44,7 +44,7 @@ namespace Services
 
             if (Input.GetMouseButtonUp(0))
             {
-                Reset();
+                ResetSwipe();
             }
         }
 
@@ -58,8 +58,7 @@ namespace Services
 
             _swipeDelta = (Vector2)Input.mousePosition - _tapPosition;
 
-            Debugging.Instance.Log($"Mobile swipe {_swipeDelta}\nmagnitude {_swipeDelta.magnitude} ",
-                Debugging.Type.Input);
+       
 
             if (_swipeDelta.magnitude > SWIPE_DISTANCE)
             {
@@ -76,16 +75,21 @@ namespace Services
                     SetNewDirectionEvent?.Invoke(_direction);
                 }
 
-                Reset();
+                ResetSwipe();
                 _tapPosition = Input.mousePosition;
             }
         }
 
-        public void Reset()
+        private void ResetSwipe()
         {
             _isSwiping = false;
             _tapPosition = Vector2.zero;
             _swipeDelta = Vector2.zero;
+        }
+
+        public void Reset()
+        {
+      ResetSwipe();
             _direction = Vector2Int.zero;
             Debugging.Instance.Log($"Mobile reset swipe {_direction}", Debugging.Type.Input);
         }

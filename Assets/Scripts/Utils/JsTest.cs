@@ -1,5 +1,4 @@
-﻿using System;
-using Services;
+﻿using Services;
 using UnityEngine;
 
 namespace Utils
@@ -8,15 +7,18 @@ namespace Utils
     {
         [SerializeField] private JSService _jsService;
         [SerializeField] private SessionData _testSessionData;
+        [SerializeField] private bool _isInitSessionOnStart = true;
 
         private void Start()
         {
-            StartTestSession();
+            if (_isInitSessionOnStart)
+            {
+                StartTestSession();
+            }
         }
 
         public void StartTestSession()
         {
-            //var jsonData = JsonUtility.ToJson(_testSessionData);
             _jsService.TestSessionData(_testSessionData);
         }
     }

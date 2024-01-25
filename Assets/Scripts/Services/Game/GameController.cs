@@ -16,6 +16,7 @@ namespace Services
 
         [SerializeField] private GameState _gameState;
         public GameState GameState => _gameState;
+        public bool IsPause => _isPause;
 
         private bool _isPlaying;
         private bool _isPause;
@@ -81,27 +82,23 @@ namespace Services
 
         private void TryStartGame(Vector2Int direction)
         {
-            if (direction == Vector2Int.zero)
+     
+            if (_gameState == GameState.AwaitInput && !_isPlaying && direction != Vector2Int.zero && direction != Constants.DEFAULT_DIRECTION * -1)
             {
+                StartCoroutine(StartGame());
                 return;
             }
-            
-            if (_gameState == GameState.AwaitInput && !_isPlaying && direction != Vector2Int.zero && direction != Vector2Int.left)
-            {
-                _isPlaying = true;
-                StartCoroutine(StartGame());
-            }
 
-            if (_gameState == GameState.AwaitInput && _isPlaying)
+            if (_gameState == GameState.AwaitInput && _isPlaying && direction != Vector2Int.zero)
             {
                 _gameState = GameState.Play;
                 _snake.StartMove();
-                InvokePauseGame(false);
             }
         }
 
         private IEnumerator StartGame()
         {
+            _isPlaying = true;
             yield return new WaitForSeconds(0.25f);
             _gameState = GameState.Play;
             _snake.StartMove();
@@ -136,7 +133,12 @@ namespace Services
 
         private void PauseGame(bool isPause)
         {
-            Debugging.Instance.Log($"Puse game {isPause}", Debugging.Type.GameController);
+            if (_isPause == isPause || _gameState is GameState.EndGame)
+            {
+                return;
+            }
+            Debugging.Instance.Log($"Pause game {isPause}", Debugging.Type.GameController);
+            
             _isPause = isPause;
             if (isPause)
             {
@@ -147,9 +149,8 @@ namespace Services
             else
             {
                 _gameState = GameState.AwaitInput;
+                InvokePauseGame(false);
             }
-
-           
         }
 
         private void CloseGame()
