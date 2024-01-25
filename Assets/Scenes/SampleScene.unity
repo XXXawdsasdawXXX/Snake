@@ -2341,7 +2341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1367033139}
-  _weight: 800
+  _weight: 750
   _fillBar: {fileID: 594112163}
   _scorePoints:
   - {fileID: 1430957875}
