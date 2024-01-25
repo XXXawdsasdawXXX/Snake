@@ -7,6 +7,8 @@ namespace Services
     public class JSService : MonoBehaviour
     {
         public event Action<SessionData> InitSessionEvent;
+ 
+        
         //Этот метод будет вызван из js
         public void SessionData(string jsonData)
         {
@@ -17,11 +19,11 @@ namespace Services
             Debugging.Instance.Log($"Session set!", Debugging.Type.JS);
         }
         
-        public void SessionData(SessionData sessionData)
+        public void TestSessionData(SessionData sessionData)
         {
             InitSessionEvent?.Invoke(sessionData);
   
-            Debugging.Instance.Log($"Session set!", Debugging.Type.JS);
+            Debugging.Instance.Log($"Test session set!", Debugging.Type.JS);
         }
         
     }

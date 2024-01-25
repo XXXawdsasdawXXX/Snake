@@ -3931,9 +3931,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameController: {fileID: 554716644}
-  _chanceToActivate: 50
+  _chanceToActivate: 60
   _minCooldown: 3
-  _maxCooldown: 15
+  _maxCooldown: 5
   _allObstacles:
   - {fileID: 245982098}
   - {fileID: 2039648636}

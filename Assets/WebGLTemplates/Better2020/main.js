@@ -1,104 +1,36 @@
 const NewSessionButton = document.getElementById("NewSessionButton");
-const RestoreSessionButton = document.getElementById("RestoreSessionButton");
-const SuccessStepButton = document.getElementById("SuccessStepButton");
-const FailStepButton = document.getElementById("FailStepButton");
-
+const SessionEndButton = document.getElementById("SessionEndButton");
 
 NewSessionButton.addEventListener("click", NewSession);
-RestoreSessionButton.addEventListener("click",RestoreSession);
-SuccessStepButton.addEventListener("click",SuccessStep);
-FailStepButton.addEventListener("click",FailStep);
+SessionEndButton.addEventListener("click",OnSessionEnd);
 
-
-SuccessStepButton.disabled = true;
-FailStepButton.disabled = true;
-
-var currentStepID = 1;
+SessionEndButton.disabled = true;
 
 function NewSession()
 {
+    var saveScorePoint = [5,15,35]
     var jsonData = 
     {
-        "StepID"    : 1,
-        "prize"     : 10,
-        "lastPrize" : 0
+        "saveScorePoints" : saveScorePoint 
     }
 
     NewSessionButton.disabled = true;
-    RestoreSessionButton.disabled = true;
+    SessionEndButton.disabled = false;
 
     API.SendMessage('Api','SessionData',JSON.stringify(jsonData));
 }
 
-function RestoreSession()
+
+
+function OnSessionEnd(wonBonuses)
 {
-    var jsonData = 
+    var jsonData =
     {
-        "StepID"    : 4,  //Три сундука открыто
-        "prize"     : 40, //Текущий возможный выигрыш в случае успеха
-        "lastPrize" : 30  //Последний выигрыш, который игрок может забрать
-    }
-
-    NewSessionButton.disabled = true;
-    RestoreSessionButton.disabled = true;
-
-
-    API.SendMessage('Api','SessionData',JSON.stringify(jsonData));
-}
-
-function SuccessStep()
-{
-   
-    var jsonData = 
-    {
-        "StepID"    : currentStepID,
-        "prize"     : currentStepID*10,
-        "lastPrize" : (currentStepID-1)*10  
-    }
-
-    SuccessStepButton.disabled = true;
-    FailStepButton.disabled = true;
-
-    API.SendMessage('Api','SessionData',JSON.stringify(jsonData));
-}
-
-function FailStep()
-{   
-    var jsonData = 
-    {
-        "StepID"    : currentStepID,
-        "prize"     : 0,
-        "lastPrize" : 0  
+        "wonBonuses" : wonBonuses
     }
 
     NewSessionButton.disabled = false;
+    SessionEndButton.disabled = true;
 
-    SuccessStepButton.disabled = true;
-    FailStepButton.disabled = true;
-
-    API.SendMessage('Api','SessionData',JSON.stringify(jsonData));
-}
-
-function OnPlayerSelectedChest(jsonString)
-{
-    var jsonData = JSON.parse(jsonString);
-
-    if(jsonData?.StepID)
-    {
-        currentStepID = jsonData.StepID;
-        console.log(`Player Selected Chest! StepID:${jsonData.StepID}`);
-    }
-
-    SuccessStepButton.disabled = false;
-    FailStepButton.disabled = false;
-}
-
-function OnSessionEnd()
-{
-    console.log("Session ended!");
- 
-    SuccessStepButton.disabled = true;
-    FailStepButton.disabled = true;
-
-    NewSessionButton.disabled = false;
+    API.SendMessage('Api','SessionResult',JSON.stringify(jsonData));
 }

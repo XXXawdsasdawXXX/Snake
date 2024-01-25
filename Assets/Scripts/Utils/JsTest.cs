@@ -17,7 +17,7 @@ namespace Utils
         public void StartTestSession()
         {
             //var jsonData = JsonUtility.ToJson(_testSessionData);
-            _jsService.SessionData(_testSessionData);
+            _jsService.TestSessionData(_testSessionData);
         }
     }
 }
