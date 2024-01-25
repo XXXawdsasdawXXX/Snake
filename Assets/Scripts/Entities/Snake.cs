@@ -129,8 +129,6 @@ namespace Entities
 
         public void Grow()
         {
-            Debugging.Instance.Log("Grow", Debugging.Type.Snake);
-
             for (int i = 0; i < Constants.SEGMENT_COUNT; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab);
@@ -138,6 +136,8 @@ namespace Entities
                 Segments.Add(segment);
                 segment.Collision.EnableCollision();
             }
+
+            Debugging.Instance.Log($"Grow {Segments.Count}", Debugging.Type.Snake);
 
             if (IsActive)
             {
@@ -147,8 +147,6 @@ namespace Entities
 
         private void InitGrow()
         {
-            Debugging.Instance.Log($"Init Grow {Constants.SEGMENT_COUNT} * {_data.InitialSize}", Debugging.Type.Snake);
-
             for (int i = 0; i < Constants.SEGMENT_COUNT * _data.InitialSize; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab);
@@ -160,6 +158,8 @@ namespace Entities
                     _headSnakeSegment.transform.position.y, 0));
                 Segments.Add(segment);
             }
+
+            Debugging.Instance.Log($"Init Grow {Constants.SEGMENT_COUNT} * {_data.InitialSize}", Debugging.Type.Snake);
         }
 
         public void AddSpeedMultiplier()

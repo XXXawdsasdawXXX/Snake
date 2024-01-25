@@ -8,6 +8,7 @@ namespace Logic
     public class Score : MonoBehaviour
     {
         public int CurrentScore => _currentScore;
+
         private int _currentScore;
         private int[] _saveScorePoints;
         private int _nextScorePointNumber;
@@ -15,6 +16,7 @@ namespace Logic
         public event Action SetEvenFiveEvent;
         public event Action UpdateSavePointEvent;
         public event Action SetMaxScoreEvent;
+        public event Action<int> ChangeEvent;
 
         public void Init(int[] saveScorePoints)
         {
@@ -24,7 +26,7 @@ namespace Logic
         public void Add()
         {
             _currentScore++;
-
+            ChangeEvent?.Invoke(_currentScore);
             if (_currentScore % 5 == 0)
             {
                 SetEvenFiveEvent?.Invoke();
@@ -42,6 +44,8 @@ namespace Logic
                     }
                 }
             }
+            
+            
         }
 
         public void Reset()

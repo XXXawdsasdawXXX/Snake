@@ -5,7 +5,8 @@ namespace UI.Components
 {
     public class ScorePoint : MonoBehaviour
     {
-        [SerializeField] private Text _scoreText;
+        [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private EditableText _scoreEditableText;
         [SerializeField] private Image _backgroundImage;
         [Space]
         [SerializeField] private Color32 _defaultColor;
@@ -13,7 +14,7 @@ namespace UI.Components
         
         public void Init(int scoreCount)
         {
-            _scoreText.SetText(scoreCount.ToString());
+            _scoreEditableText.SetText(scoreCount.ToString());
             Reset();
         }
 
@@ -25,6 +26,11 @@ namespace UI.Components
         public void SetAsPassed()
         {
             _backgroundImage.color = _passedColor;
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            _rectTransform.anchoredPosition = position;
         }
     }
 }
