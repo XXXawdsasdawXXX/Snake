@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using DG.Tweening;
 using Entities;
 using Logic;
 using UI.Components;
@@ -16,14 +17,13 @@ namespace Services
 
         [SerializeField] private GameState _gameState;
         public GameState GameState => _gameState;
-        public bool IsPause => _isPause;
 
         private bool _isPlaying;
         private bool _isPause;
 
         private void Awake()
         {
-            //DOTween.SetTweensCapacity(500);
+            DOTween.SetTweensCapacity(500, 50);
             _jsService.InitSessionEvent += OnInitSession;
         }
 
@@ -83,6 +83,7 @@ namespace Services
 
         private void TryStartGame(Vector2Int direction)
         {
+            
             if (_gameState == GameState.AwaitInput && direction != Vector2Int.zero)
             {
                 if (_isPlaying)
@@ -99,9 +100,13 @@ namespace Services
 
         private IEnumerator StartGame()
         {
-            _isPlaying = true;
 
             yield return new WaitForSeconds(0.25f);
+            if (GameState == GameState.Pause)
+            {
+                yield break;
+            }
+            _isPlaying = true;
             Debugging.Instance.Log($"Start game", Debugging.Type.GameController);
 
             _gameState = GameState.Play;

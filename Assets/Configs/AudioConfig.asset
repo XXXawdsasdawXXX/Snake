@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioEvents:
   - Type: 1
-    Clip: {fileID: 8300000, guid: 52bfdd507a1238843b275fbadb058174, type: 3}
+    Clip: {fileID: 8300000, guid: 0befabd960c60e344804a8580dda35dc, type: 3}
   - Type: 2
-    Clip: {fileID: 8300000, guid: 13b1d38475c7466448a5ded3a65bdb47, type: 3}
+    Clip: {fileID: 8300000, guid: 780aed8dfc879c64aa77b3abc5df2d0e, type: 3}
   - Type: 4
-    Clip: {fileID: 8300000, guid: bed296a83e96cce45a40c6aa5c716e28, type: 3}
+    Clip: {fileID: 8300000, guid: 1cf548b35811e68418b1ff80d926ca57, type: 3}
   - Type: 3
-    Clip: {fileID: 8300000, guid: b35dea15a0229bb40bf17d61bdb18461, type: 3}
+    Clip: {fileID: 8300000, guid: be6e7c9b0a1a6344e84e1444778a1d8e, type: 3}
   - Type: 7
-    Clip: {fileID: 8300000, guid: 1b0a4f3871acb95429bb3cbf3f0b5f56, type: 3}
+    Clip: {fileID: 8300000, guid: c32062b6516a4f64d90fc85aab8e22b2, type: 3}
   - Type: 6
-    Clip: {fileID: 8300000, guid: 1fbe5971eaeab7f45839814ae3034c1b, type: 3}
+    Clip: {fileID: 8300000, guid: 32845d1169259f74c82043eeb05594b7, type: 3}
+  - Type: 8
+    Clip: {fileID: 8300000, guid: 538e5c776d4ef61408a0cfbd1f56602b, type: 3}

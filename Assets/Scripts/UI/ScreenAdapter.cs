@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Services;
+using UI.Components;
 using UnityEngine;
 using Screen = UI.Components.Screen;
 
@@ -10,13 +11,12 @@ namespace UI
     {
         [SerializeField] private GameController _gameController;
         [SerializeField] private float _delayBeforeShow = 1;
-        [Header("Screens")] 
-        [SerializeField] private Screen _screenWin;
+        [Header("Screens")] [SerializeField] private Screen _screenWin;
         [SerializeField] private Screen _screenLose;
         [SerializeField] private Screen _screenPause;
-        [Space] 
-        [SerializeField] private Screen _openedScreen;
-        
+        [SerializeField] private Screen _tutorialScreen;
+        [Space] [SerializeField] private Screen _openedScreen;
+
         private Coroutine _coroutine;
 
         private void Awake()
@@ -34,23 +34,30 @@ namespace UI
             if (flag)
             {
                 _gameController.EndGameEvent += OnEndGame;
-                _gameController.PauseEvent += PauseEvent;
-                _gameController.StartGameEvent += StartGameEvent;
+                _gameController.ResetGameEvent += OnResetGame;
+                _gameController.PauseEvent += OnPauseGame;
+                _gameController.StartGameEvent += HideTutorial;
             }
             else
             {
                 _gameController.EndGameEvent -= OnEndGame;
-                _gameController.PauseEvent -= PauseEvent;
-                _gameController.StartGameEvent -= StartGameEvent;
+                _gameController.PauseEvent -= OnPauseGame;
+                _gameController.ResetGameEvent -= OnResetGame;
             }
         }
 
-        private void StartGameEvent()
+        private void HideTutorial()
+        {
+            _tutorialScreen.Hide();
+            _gameController.StartGameEvent -= HideTutorial;
+        }
+
+        private void OnResetGame()
         {
             _openedScreen?.Hide();
         }
 
-        private void PauseEvent(bool isPause)
+        private void OnPauseGame(bool isPause)
         {
             TryStopCoroutine();
             if (isPause)
@@ -77,7 +84,7 @@ namespace UI
                 _coroutine = StartCoroutine(ShowScreenWithDelay(_screenLose));
             }
         }
-        
+
         private IEnumerator ShowScreenWithDelay(Screen screen)
         {
             yield return new WaitForSeconds(_delayBeforeShow);

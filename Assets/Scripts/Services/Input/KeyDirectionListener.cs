@@ -6,7 +6,7 @@ namespace Services
 {
     public class KeyDirectionListener: IInputDirectionListener
     {
-        private Vector2Int _direction = Constants.DEFAULT_DIRECTION;
+        private Vector2Int _direction ;
         private IInputDirectionListener _inputDirectionListenerImplementation;
         public event Action<Vector2Int> SetNewDirectionEvent;
 

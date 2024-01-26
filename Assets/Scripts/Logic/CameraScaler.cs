@@ -16,7 +16,7 @@ namespace Logic
     
         private void Awake()
         {
-            if (Screen.width > Screen.height)
+            if (!Constants.IsMobileDevice())
             {
                 Debugging.Instance?.Log($"Camera can't set other size", Debugging.Type.Camera);
                 return;

@@ -29,7 +29,6 @@ namespace Services
 
         private void Update()
         {
-         
             if (Input.anyKeyDown && _isMouse)
             {
                 _isMouse = false;
@@ -44,18 +43,17 @@ namespace Services
                 _currentDirectionListener = _mouseDirectionListener;
             }
 
-    
             if (_gameController.GameState is GameState.Play or GameState.AwaitInput)
             {
                 if (!_isPlaying)
                 {
                     _isPlaying = true;
                 }
-                
+
                 _currentDirectionListener?.SetDirection();
 
                 var dir = GetDirection();
-                if (_direction != dir && _isPlaying)
+                if (dir != Vector2Int.zero && _direction != dir && _isPlaying)
                 {
                     Debugging.Instance.Log($"Set new direction {dir} ", Debugging.Type.Input);
                     _direction = dir;
@@ -79,13 +77,11 @@ namespace Services
         {
             if (flag)
             {
-               //_gameController.EndGameEvent += OnEndGame;
                 _gameController.PauseEvent += OnPauseGame;
                 _gameController.ResetGameEvent += OnResetGame;
             }
             else
             {
-                //_gameController.EndGameEvent -= OnEndGame;
                 _gameController.PauseEvent -= OnPauseGame;
                 _gameController.ResetGameEvent -= OnResetGame;
             }
@@ -99,19 +95,13 @@ namespace Services
 
         private void OnPauseGame(bool isPause)
         {
-            _isPlaying = !isPause;
             if (isPause)
             {
                 _direction = Vector2Int.zero;
                 _currentDirectionListener.Reset();
             }
-            Debugging.Instance.Log($"On pause -> is playing {_isPlaying} ", Debugging.Type.Input);
-        }
 
-        private void OnEndGame(bool isWon)
-        {
-            _isPlaying = false;
-            Debugging.Instance.Log($"On end game -> is playing {_isPlaying} ", Debugging.Type.Input);
+            Debugging.Instance.Log($"On pause -> is playing {_isPlaying} ", Debugging.Type.Input);
         }
     }
 }

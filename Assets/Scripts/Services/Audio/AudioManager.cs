@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography;
 using Configs;
 using UnityEngine;
 
@@ -76,6 +75,7 @@ namespace Services.Audio
         PressRight,
         ClickButton,
         Death,
-        Grow
+        Grow,
+        ScorePointUp
     }
 }

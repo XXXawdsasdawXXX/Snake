@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Configs;
+using Logic;
 using Services;
 using Services.Audio;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace Entities
         public bool IsActive { get; private set; }
 
         [SerializeField] private InputService _input;
+        [SerializeField] private Score _score;
+        [Space]
         [SerializeField] private SnakeConfig _snakeConfig;
         [SerializeField] private SnakeSegment _headSnakeSegment;
 
@@ -43,8 +46,9 @@ namespace Entities
         private void OnEnable()
         {
             _input.SetNewDirectionEvent += AddInputDirection;
+            _score.SetEvenFiveEvent += AddBonusSpeed;
         }
-
+        
         private void Update()
         {
             if (!IsActive)
@@ -72,6 +76,7 @@ namespace Entities
         private void OnDisable()
         {
             _input.SetNewDirectionEvent -= AddInputDirection;
+            _score.SetEvenFiveEvent -= AddBonusSpeed;
         }
 
         public void StartMove()
@@ -144,31 +149,6 @@ namespace Entities
             GrowEvent?.Invoke();
         }
 
-        private void InitGrow()
-        {
-            for (int i = 0; i < Constants.SEGMENT_COUNT * _data.InitialSize; i++)
-            {
-                SnakeSegment segment = Instantiate(_segmentPrefab);
-                segment.Collision.DisableCollision();
-                var positionX = i * GetMultiplier();
-                segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x - positionX,
-                    _headSnakeSegment.transform.position.y, 0);
-                segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x - positionX,
-                    _headSnakeSegment.transform.position.y, 0));
-                Segments.Add(segment);
-            }
-
-            Debugging.Instance.Log($"Init Grow {Constants.SEGMENT_COUNT} * {_data.InitialSize}", Debugging.Type.Snake);
-        }
-
-        public void AddSpeedMultiplier()
-        {
-            if (_data.Speed + _currentBonusSpeed < _data.MaxSpeed)
-            {
-                _currentBonusSpeed += _data.BonusSpeedStep;
-            }
-        }
-
         public bool Occupies(int x, int y)
         {
             foreach (SnakeSegment segment in Segments)
@@ -199,6 +179,23 @@ namespace Entities
             transform.position = position;
         }
 
+        private void InitGrow()
+        {
+            for (int i = 0; i < Constants.SEGMENT_COUNT * _data.InitialSize; i++)
+            {
+                SnakeSegment segment = Instantiate(_segmentPrefab);
+                segment.Collision.DisableCollision();
+                var positionX = i * GetMultiplier();
+                segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x - positionX,
+                    _headSnakeSegment.transform.position.y, 0);
+                segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x - positionX,
+                    _headSnakeSegment.transform.position.y, 0));
+                Segments.Add(segment);
+            }
+
+            Debugging.Instance.Log($"Init Grow {Constants.SEGMENT_COUNT} * {_data.InitialSize}", Debugging.Type.Snake);
+        }
+
         private void Move(float period)
         {
             if (_moveDirection == Vector2Int.zero)
@@ -213,6 +210,14 @@ namespace Entities
             for (int i = 1; i < Segments.Count; i++)
             {
                 Segments[i].StartMove(Segments[i - 1].LastTarget, period);
+            }
+        }
+
+        private void AddBonusSpeed()
+        {
+            if (_data.Speed + _currentBonusSpeed < _data.MaxSpeed)
+            {
+                _currentBonusSpeed += _data.BonusSpeedStep;
             }
         }
 

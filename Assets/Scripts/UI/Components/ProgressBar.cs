@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Services.Audio;
+using UnityEngine;
 using Utils;
 
 namespace UI.Components.Screens
@@ -10,15 +11,17 @@ namespace UI.Components.Screens
         [SerializeField] private ScorePoint[] _scorePoints;
 
         private int[] _savePoints;
+        private int _pointIndex;
 
         public void Init(int[] savePoints)
         {
-            Debugging.Instance.Log($"Init progress bar {savePoints[0]} {savePoints[1]} {savePoints[2]}",Debugging.Type.UI);
+            Debugging.Instance.Log($"Init progress bar {savePoints[0]} {savePoints[1]} {savePoints[2]}",
+                Debugging.Type.UI);
             _savePoints = new int[savePoints.Length + 1];
             for (int i = 1; i < _scorePoints.Length; i++)
             {
-                _savePoints[i ] = savePoints[i - 1];
-                _scorePoints[i].Init(_savePoints[i ]);
+                _savePoints[i] = savePoints[i - 1];
+                _scorePoints[i].Init(_savePoints[i]);
                 _scorePoints[i].Reset();
             }
 
@@ -30,7 +33,7 @@ namespace UI.Components.Screens
             for (int i = 0; i < _savePoints.Length; i++)
             {
                 float percent = _savePoints[i] == 0 ? 0 : (float)_savePoints[i] / (float)_savePoints[^1];
-                var x =  _weight / 100 * (percent * 100) - _weight / 2;
+                var x = _weight / 100 * (percent * 100) - _weight / 2;
                 var position = new Vector3(x, 0, 0);
                 _scorePoints[i].SetPosition(position);
             }
@@ -39,6 +42,18 @@ namespace UI.Components.Screens
         public void SetScoreValue(int current)
         {
             _fillBar.UpdateValue(current, _savePoints[^1]);
+            if (current >= _savePoints[_pointIndex] && _pointIndex != _savePoints.Length - 1)
+            {
+                if (_pointIndex < _savePoints.Length - 1)
+                {
+                    if (_savePoints[_pointIndex] > 0)
+                    {
+                        AudioManager.Instance.PlayAudioEvent(AudioEventType.ScorePointUp);
+                    }
+                    _scorePoints[_pointIndex].SetAsPassed();
+                    _pointIndex++;
+                }
+            }
         }
 
         public void Reset()
@@ -49,6 +64,7 @@ namespace UI.Components.Screens
             }
 
             _fillBar.UpdateValue(0, _savePoints[^1]);
+            _pointIndex = 0;
         }
     }
 }

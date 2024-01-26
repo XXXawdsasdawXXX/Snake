@@ -6,7 +6,7 @@ namespace Services
 {
     public class MouseDirectionListener : IInputDirectionListener
     {
-        private const float SWIPE_DISTANCE = 50;
+        private const float SWIPE_DISTANCE = 65;
 
         private Vector2Int _direction ;
         private Vector2 _tapPosition;
@@ -87,7 +87,7 @@ namespace Services
 
         public void Reset()
         {
-      ResetSwipe();
+            ResetSwipe();
             _direction = Vector2Int.zero;
             Debugging.Instance.Log($"Mobile reset swipe {_direction}", Debugging.Type.Input);
         }

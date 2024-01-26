@@ -13,5 +13,10 @@ namespace Utils
             Obstacle,
             Wall
         }
+
+        public static bool IsMobileDevice()
+        {
+            return Screen.width < Screen.height;
+        }
     }
 }
