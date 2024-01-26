@@ -43,7 +43,7 @@ namespace UI
 
         private void OnPauseGame(bool isPause)
         {
-           //     _pauseButton.interactable = !isPause;
+                 _pauseButton.interactable = !isPause;
         }
 
         private void OnResetGame()

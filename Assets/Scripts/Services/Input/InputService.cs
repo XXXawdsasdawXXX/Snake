@@ -72,9 +72,7 @@ namespace Services
 
         public Vector2Int GetDirection()
         {
-            return _currentDirectionListener != null && _isPlaying
-                ? _currentDirectionListener.GetDirection()
-                : Vector2Int.zero;
+            return _currentDirectionListener?.GetDirection() ?? Vector2Int.zero;
         }
 
         private void SubscribeToEvents(bool flag)
@@ -102,6 +100,11 @@ namespace Services
         private void OnPauseGame(bool isPause)
         {
             _isPlaying = !isPause;
+            if (isPause)
+            {
+                _direction = Vector2Int.zero;
+                _currentDirectionListener.Reset();
+            }
             Debugging.Instance.Log($"On pause -> is playing {_isPlaying} ", Debugging.Type.Input);
         }
 

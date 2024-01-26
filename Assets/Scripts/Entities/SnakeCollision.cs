@@ -1,4 +1,5 @@
 ﻿using Configs;
+using Services.Audio;
 using UnityEngine;
 using Utils;
 
@@ -14,11 +15,13 @@ namespace Entities
             if (other.gameObject.CompareTag(Constants.Tag.Food.ToString()))
             {
                 _snake.Grow();
+                AudioManager.Instance.PlayAudioEvent(AudioEventType.Grow);
             }
             else if (other.gameObject.CompareTag(Constants.Tag.Obstacle.ToString()))
             {
                 _snake.InvokeCollisionEvent();
                 _snake.StopMove();
+                AudioManager.Instance.PlayAudioEvent(AudioEventType.Death);
             }
             else if (other.gameObject.CompareTag(Constants.Tag.Wall.ToString()))
             {
@@ -30,6 +33,7 @@ namespace Entities
                 {
                     _snake.InvokeCollisionEvent();
                     _snake.StopMove();
+                    AudioManager.Instance.PlayAudioEvent(AudioEventType.Death);
                 }
             }
         }

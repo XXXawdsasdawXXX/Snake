@@ -57,9 +57,7 @@ namespace Services
             }
 
             _swipeDelta = (Vector2)Input.mousePosition - _tapPosition;
-
-       
-
+            
             if (_swipeDelta.magnitude > SWIPE_DISTANCE)
             {
                 if (Mathf.Abs(_swipeDelta.x) > Mathf.Abs(_swipeDelta.y))

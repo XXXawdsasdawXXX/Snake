@@ -75,35 +75,38 @@ namespace Services
         {
             _jsService.InitSessionEvent -= OnInitSession;
             Debugging.Instance.Log($"On init", Debugging.Type.GameController);
-            //_gameState = GameState.AwaitInput;
             InvokeInitSession(sessionData);
+            ResetGame();
+
             SubscribeToEvents(true);
         }
 
         private void TryStartGame(Vector2Int direction)
         {
-     
-            if (_gameState == GameState.AwaitInput && !_isPlaying && direction != Vector2Int.zero && direction != Constants.DEFAULT_DIRECTION * -1)
+            if (_gameState == GameState.AwaitInput && direction != Vector2Int.zero)
             {
-                StartCoroutine(StartGame());
-                return;
-            }
-
-            if (_gameState == GameState.AwaitInput && _isPlaying && direction != Vector2Int.zero)
-            {
-                _gameState = GameState.Play;
-                _snake.StartMove();
+                if (_isPlaying)
+                {
+                    _gameState = GameState.Play;
+                    _snake.StartMove();
+                }
+                else
+                {
+                    StartCoroutine(StartGame());
+                }
             }
         }
 
         private IEnumerator StartGame()
         {
             _isPlaying = true;
+
             yield return new WaitForSeconds(0.25f);
+            Debugging.Instance.Log($"Start game", Debugging.Type.GameController);
+
             _gameState = GameState.Play;
             _snake.StartMove();
             InvokeStartGameEvent();
-            Debugging.Instance.Log($"Start game", Debugging.Type.GameController);
         }
 
         private void ResetGame()
@@ -137,8 +140,9 @@ namespace Services
             {
                 return;
             }
+
             Debugging.Instance.Log($"Pause game {isPause}", Debugging.Type.GameController);
-            
+
             _isPause = isPause;
             if (isPause)
             {

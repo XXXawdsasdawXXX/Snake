@@ -31,13 +31,12 @@ namespace Entities
         public event Action GrowEvent;
         public event Action ResetEvent;
 
-
         private void Awake()
         {
             _data = _snakeConfig.StaticData;
             _segmentPrefab = _snakeConfig.SegmentPrefab;
-            //ResetState();
             _moveDirection = _input.GetDirection();
+
             SetNewMoveDirectionEvent?.Invoke(_moveDirection);
         }
 
@@ -82,6 +81,7 @@ namespace Entities
             {
                 snakeSegment.Collision.EnableCollision();
             }
+            Debugging.Instance.Log($"Start move -> direction = {_moveDirection}", Debugging.Type.Snake);
         }
 
         public void StopMove()
@@ -138,7 +138,7 @@ namespace Entities
                 segment.Collision.EnableCollision();
             }
 
-            AudioManager.Instance.PlayAudioEvent(AudioEventType.Grow);
+         
             Debugging.Instance.Log($"Grow {Segments.Count}", Debugging.Type.Snake);
             
             GrowEvent?.Invoke();

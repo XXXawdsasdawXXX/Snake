@@ -31,10 +31,10 @@ namespace Logic
             
             ResetObstacles();
         }
-
+        
         private void Update()
         {
-            if (_isActive)
+            if (_isActive && _gameController.GameState == GameState.Play)
             {
                 _currentCooldown += Time.deltaTime;
                 
