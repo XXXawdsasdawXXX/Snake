@@ -127,6 +127,7 @@ namespace Services
         {
             Debugging.Instance.Log($"Won game", Debugging.Type.GameController);
             _gameState = GameState.EndGame;
+            _snake.StopMove();
             InvokeEndGameEvent(isWon: true);
             _isPlaying = false;
         }
@@ -157,7 +158,8 @@ namespace Services
             }
             else
             {
-                _gameState = GameState.AwaitInput;
+                _gameState = GameState.Play;
+                _snake.StartMove();
                 InvokePauseGame(false);
             }
         }

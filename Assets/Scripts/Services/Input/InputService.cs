@@ -7,7 +7,7 @@ namespace Services
 {
     public class InputService : MonoBehaviour
     {
-        [SerializeField] private GameController _gameController;
+         [SerializeField] private GameController _gameController;
 
         private IInputDirectionListener _mouseDirectionListener;
         private IInputDirectionListener _keyDirectionListener;
@@ -55,16 +55,13 @@ namespace Services
                 var dir = GetDirection();
                 if (_direction != dir)
                 {
-
-                    Debugging.Instance.Log($"Switch is playing {_isPlaying} ", Debugging.Type.Input);
-
                     Debugging.Instance.Log($"Set new direction {dir} ", Debugging.Type.Input);
                     _direction = dir;
+              
                     SetNewDirectionEvent?.Invoke(_direction);
                 }
             }
         }
-
 
         private void OnDestroy()
         {
@@ -73,38 +70,43 @@ namespace Services
 
         public Vector2Int GetDirection()
         {
-            return _currentDirectionListener?.GetDirection() ?? Vector2Int.zero;
+            return _currentDirectionListener != null && _isPlaying
+                ? _currentDirectionListener.GetDirection()
+                : Vector2Int.zero;
         }
 
         private void SubscribeToEvents(bool flag)
         {
             if (flag)
             {
+                _gameController.EndGameEvent += OnEndGame;
                 _gameController.PauseEvent += OnPauseGame;
-                _gameController.ResetGameEvent += OnResetGame;
+                _gameController.ResetGameEvent += ResetGameEvent;
             }
             else
             {
+                _gameController.EndGameEvent -= OnEndGame;
                 _gameController.PauseEvent -= OnPauseGame;
-                _gameController.ResetGameEvent -= OnResetGame;
+                _gameController.ResetGameEvent -= ResetGameEvent;
             }
         }
 
-        private void OnResetGame()
+        private void ResetGameEvent()
         {
             _currentDirectionListener?.Reset();
-            _isPlaying = false;
         }
 
         private void OnPauseGame(bool isPause)
         {
-            if (isPause)
-            {
-                _direction = Vector2Int.zero;
-                _currentDirectionListener.Reset();
-            }
-
+          //  _currentDirectionListener?.Reset();
+            _isPlaying = !isPause;
             Debugging.Instance.Log($"On pause -> is playing {_isPlaying} ", Debugging.Type.Input);
+        }
+
+        private void OnEndGame(bool isWon)
+        {
+            _isPlaying = false;
+            Debugging.Instance.Log($"On end game -> is playing {_isPlaying} ", Debugging.Type.Input);
         }
     }
 }

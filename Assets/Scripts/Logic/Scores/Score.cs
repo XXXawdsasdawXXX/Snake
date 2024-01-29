@@ -1,5 +1,6 @@
 ﻿using System;
 using Services;
+using Services.Audio;
 using UI.Components;
 using UnityEngine;
 
@@ -32,12 +33,13 @@ namespace Logic
                 SetEvenFiveEvent?.Invoke();
             }
 
-            if (_nextScorePointNumber < _saveScorePoints.Length - 1)
+            if (_nextScorePointNumber + 1 < _saveScorePoints.Length )
             {
                 if (_currentScore == _saveScorePoints[_nextScorePointNumber + 1])
                 {
                     _nextScorePointNumber++;
                     UpdateSavePointEvent?.Invoke();
+                    AudioManager.Instance.PlayAudioEvent(AudioEventType.ScorePointUp);
                     if (_nextScorePointNumber == _saveScorePoints.Length - 1)
                     {
                         SetMaxScoreEvent?.Invoke();

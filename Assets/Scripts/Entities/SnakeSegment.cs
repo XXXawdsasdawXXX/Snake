@@ -10,13 +10,17 @@ namespace Entities
         [SerializeField] private SnakeSegmentCollision _segmentCollision;
         public SnakeSegmentCollision Collision => _segmentCollision;
         public bool IsSetTarget => LastTarget != Vector3.zero && Target != Vector3.zero;
+        public bool IsMainSegment{ get; private set; }
         public Vector3 LastTarget { get; private set; }
         public Vector3 Target { get; private set; }
         public Vector2Int MoveDirection { get;  private set; }
       
         private Tween _moveTween;
 
-        
+        public void Init(bool isMainSegment)
+        {
+            IsMainSegment = isMainSegment;
+        }
         public void StartMove(Vector3 target, float duration)
         {
             LastTarget = Target;

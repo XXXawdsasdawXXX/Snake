@@ -11,14 +11,13 @@ namespace Entities
 {
     public class Snake : MonoBehaviour
     {
-        public List<SnakeSegment> Segments { get; } = new();
+        public List<SnakeSegment> Segments /*{ get; }*/ = new();
         public bool IsActive { get; private set; }
 
         [SerializeField] private InputService _input;
-        [SerializeField] private Score _score;
-        [Space]
         [SerializeField] private SnakeConfig _snakeConfig;
         [SerializeField] private SnakeSegment _headSnakeSegment;
+        [SerializeField] private Score _score;
 
         private SnakeSegment _segmentPrefab;
         private SnakeStaticData _data;
@@ -34,21 +33,22 @@ namespace Entities
         public event Action GrowEvent;
         public event Action ResetEvent;
 
+
         private void Awake()
         {
             _data = _snakeConfig.StaticData;
             _segmentPrefab = _snakeConfig.SegmentPrefab;
+            //ResetState();
             _moveDirection = _input.GetDirection();
-
             SetNewMoveDirectionEvent?.Invoke(_moveDirection);
         }
 
         private void OnEnable()
         {
             _input.SetNewDirectionEvent += AddInputDirection;
-            _score.SetEvenFiveEvent += AddBonusSpeed;
+            _score.SetEvenFiveEvent += AddSpeedMultiplier;
         }
-        
+
         private void Update()
         {
             if (!IsActive)
@@ -63,20 +63,17 @@ namespace Entities
 
             TrySetDirection();
 
-            if (_moveDirection != Vector2Int.zero)
-            {
-                var period = 1f / (_data.Speed + _currentBonusSpeed) * GetMultiplier();
+            var period = 1f / (_data.Speed + _currentBonusSpeed) * GetMultiplier();
 
-                Move(period);
+            Move(period);
 
-                _nextUpdate = Time.time + period;
-            }
+            _nextUpdate = Time.time + period;
         }
 
         private void OnDisable()
         {
             _input.SetNewDirectionEvent -= AddInputDirection;
-            _score.SetEvenFiveEvent -= AddBonusSpeed;
+            _score.SetEvenFiveEvent -= AddSpeedMultiplier;
         }
 
         public void StartMove()
@@ -86,7 +83,6 @@ namespace Entities
             {
                 snakeSegment.Collision.EnableCollision();
             }
-            Debugging.Instance.Log($"Start move -> direction = {_moveDirection}", Debugging.Type.Snake);
         }
 
         public void StopMove()
@@ -135,6 +131,8 @@ namespace Entities
 
         public void Grow()
         {
+            Debugging.Instance.Log("Grow", Debugging.Type.Snake);
+
             for (int i = 0; i < Constants.SEGMENT_COUNT; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab);
@@ -143,18 +141,42 @@ namespace Entities
                 segment.Collision.EnableCollision();
             }
 
-         
-            Debugging.Instance.Log($"Grow {Segments.Count}", Debugging.Type.Snake);
-            
-            GrowEvent?.Invoke();
+            if (IsActive)
+            {
+                GrowEvent?.Invoke();
+            }
+        }
+
+        private void InitGrow()
+        {
+            Debugging.Instance.Log($"Init Grow {Constants.SEGMENT_COUNT} * {_data.InitialSize}", Debugging.Type.Snake);
+
+            for (int i = 0; i < Constants.SEGMENT_COUNT * _data.InitialSize; i++)
+            {
+                SnakeSegment segment = Instantiate(_segmentPrefab);
+                var positionX = i * GetMultiplier();
+                segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x - positionX,
+                    _headSnakeSegment.transform.position.y, 0);
+                segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x - positionX,
+                    _headSnakeSegment.transform.position.y, 0));
+                Segments.Add(segment);
+            }
+        }
+
+        public void AddSpeedMultiplier()
+        {
+            if (_data.Speed + _currentBonusSpeed < _data.MaxSpeed)
+            {
+                _currentBonusSpeed += _data.BonusSpeedStep;
+            }
         }
 
         public bool Occupies(int x, int y)
         {
-            foreach (SnakeSegment segment in Segments)
+            foreach (var segment in Segments)
             {
-                if (Mathf.RoundToInt(segment.transform.position.x) == x &&
-                    Mathf.RoundToInt(segment.transform.position.y) == y)
+                var distance = Vector3.Distance(segment.transform.position, new Vector3(x, y, 0));
+                if (distance < 1)
                 {
                     return true;
                 }
@@ -179,30 +201,8 @@ namespace Entities
             transform.position = position;
         }
 
-        private void InitGrow()
-        {
-            for (int i = 0; i < Constants.SEGMENT_COUNT * _data.InitialSize; i++)
-            {
-                SnakeSegment segment = Instantiate(_segmentPrefab);
-                segment.Collision.DisableCollision();
-                var positionX = i * GetMultiplier();
-                segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x - positionX,
-                    _headSnakeSegment.transform.position.y, 0);
-                segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x - positionX,
-                    _headSnakeSegment.transform.position.y, 0));
-                Segments.Add(segment);
-            }
-
-            Debugging.Instance.Log($"Init Grow {Constants.SEGMENT_COUNT} * {_data.InitialSize}", Debugging.Type.Snake);
-        }
-
         private void Move(float period)
         {
-            if (_moveDirection == Vector2Int.zero)
-            {
-                return;
-            }
-
             var x = _headSnakeSegment.Target.x + (_moveDirection.x * GetMultiplier());
             var y = _headSnakeSegment.Target.y + (_moveDirection.y * GetMultiplier());
 
@@ -210,14 +210,6 @@ namespace Entities
             for (int i = 1; i < Segments.Count; i++)
             {
                 Segments[i].StartMove(Segments[i - 1].LastTarget, period);
-            }
-        }
-
-        private void AddBonusSpeed()
-        {
-            if (_data.Speed + _currentBonusSpeed < _data.MaxSpeed)
-            {
-                _currentBonusSpeed += _data.BonusSpeedStep;
             }
         }
 
@@ -242,20 +234,15 @@ namespace Entities
 
         private void AddInputDirection(Vector2Int direction)
         {
-            if (_inputDirections.Count < 2)
+            if (_inputDirections.Count < 5)
             {
-                var dir = _input.GetDirection();
-                /*if (dir != Vector2Int.zero)
-                {*/
-                    _inputDirections.Enqueue(dir);
-               // }
+                _inputDirections.Enqueue(_input.GetDirection());
             }
         }
 
         private bool IsCanSetDirection(Vector2Int inputDirection)
         {
-            return inputDirection != _moveDirection && _moveDirection != inputDirection * -1 &&
-                   inputDirection != Vector2Int.zero;
+            return inputDirection != _moveDirection && _moveDirection != inputDirection * -1;
         }
 
         private float GetMultiplier()
