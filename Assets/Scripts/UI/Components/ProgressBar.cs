@@ -42,15 +42,16 @@ namespace UI.Components.Screens
         public void SetScoreValue(int current)
         {
             _fillBar.UpdateValue(current, _savePoints[^1]);
-            if (current >= _savePoints[_pointIndex] && _pointIndex != _savePoints.Length - 1)
+            if (current >= _savePoints[_pointIndex])
             {
+                _scorePoints[_pointIndex].SetAsPassed();
+                if (_pointIndex > 1)
+                {
+                    AudioManager.Instance.PlayAudioEvent(AudioEventType.ScorePointUp);
+                }
+                
                 if (_pointIndex < _savePoints.Length - 1)
                 {
-                    if (_savePoints[_pointIndex] > 0)
-                    {
-                        AudioManager.Instance.PlayAudioEvent(AudioEventType.ScorePointUp);
-                    }
-                    _scorePoints[_pointIndex].SetAsPassed();
                     _pointIndex++;
                 }
             }

@@ -2530,7 +2530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jsService: {fileID: 332501481}
   _testSessionData:
-    ScorePoints: 050000000a0000000d000000
+    ScorePoints: 0a0000000f00000019000000
   _isInitSessionOnStart: 1
 --- !u!1 &792332932
 GameObject:
@@ -5679,22 +5679,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debugParams:
   - Type: 1
-    Active: 1
+    Active: 0
     Color: {r: 0.78431374, g: 0.52156866, b: 0.72708184, a: 1}
   - Type: 2
-    Active: 1
+    Active: 0
     Color: {r: 0.43289468, g: 0.37486652, b: 0.9811321, a: 1}
   - Type: 3
-    Active: 1
+    Active: 0
     Color: {r: 0.37647066, g: 0.98039216, b: 0.7957634, a: 1}
   - Type: 4
-    Active: 1
+    Active: 0
     Color: {r: 0.98039216, g: 0.8232109, b: 0.37647066, a: 1}
   - Type: 5
-    Active: 1
+    Active: 0
     Color: {r: 0.98039216, g: 0.37647066, b: 0.9135581, a: 1}
   - Type: 6
-    Active: 1
+    Active: 0
     Color: {r: 0.41104466, g: 0.98039216, b: 0.37647066, a: 1}
 --- !u!1 &1614950081
 GameObject:
