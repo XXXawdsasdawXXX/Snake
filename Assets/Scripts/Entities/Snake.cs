@@ -232,6 +232,7 @@ namespace Entities
                     if (IsCanSetDirection(inputDirection))
                     {
                         _moveDirection = inputDirection;
+                        AudioManager.Instance.PlayAudioEvent(_moveDirection);
                         SetNewMoveDirectionEvent?.Invoke(_moveDirection);
                         break;
                     }
@@ -241,13 +242,13 @@ namespace Entities
 
         private void AddInputDirection(Vector2Int direction)
         {
-            if (_inputDirections.Count < 5)
+            if (_inputDirections.Count < 2)
             {
                 var dir = _input.GetDirection();
-                if (dir != Vector2Int.zero)
-                {
+                /*if (dir != Vector2Int.zero)
+                {*/
                     _inputDirections.Enqueue(dir);
-                }
+               // }
             }
         }
 

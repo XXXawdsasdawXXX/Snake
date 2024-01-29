@@ -49,19 +49,22 @@ namespace Services
                 {
                     _isPlaying = true;
                 }
-
+                
                 _currentDirectionListener?.SetDirection();
 
                 var dir = GetDirection();
-                if (dir != Vector2Int.zero && _direction != dir && _isPlaying)
+                if (_direction != dir)
                 {
+
+                    Debugging.Instance.Log($"Switch is playing {_isPlaying} ", Debugging.Type.Input);
+
                     Debugging.Instance.Log($"Set new direction {dir} ", Debugging.Type.Input);
                     _direction = dir;
                     SetNewDirectionEvent?.Invoke(_direction);
-                    AudioManager.Instance.PlayAudioEvent(_direction);
                 }
             }
         }
+
 
         private void OnDestroy()
         {

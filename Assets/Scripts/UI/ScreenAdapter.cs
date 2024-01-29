@@ -1,6 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Services;
-using UI.Components;
+using Services.Audio;
 using UnityEngine;
 using Screen = UI.Components.Screen;
 
@@ -11,11 +12,13 @@ namespace UI
     {
         [SerializeField] private GameController _gameController;
         [SerializeField] private float _delayBeforeShow = 1;
-        [Header("Screens")] [SerializeField] private Screen _screenWin;
+        [Header("Screens")] 
+        [SerializeField] private Screen _screenWin;
         [SerializeField] private Screen _screenLose;
         [SerializeField] private Screen _screenPause;
         [SerializeField] private Screen _tutorialScreen;
-        [Space] [SerializeField] private Screen _openedScreen;
+        [Space] 
+        [SerializeField] private Screen _openedScreen;
 
         private Coroutine _coroutine;
 
@@ -77,19 +80,22 @@ namespace UI
             TryStopCoroutine();
             if (isWin)
             {
-                _coroutine = StartCoroutine(ShowScreenWithDelay(_screenWin));
+                _coroutine = StartCoroutine(ShowScreenWithDelay(_screenWin, 
+                    onShow: () => AudioManager.Instance.PlayAudioEvent(AudioEventType.Win)));
             }
             else
             {
-                _coroutine = StartCoroutine(ShowScreenWithDelay(_screenLose));
+                _coroutine = StartCoroutine(ShowScreenWithDelay(_screenLose,
+                    onShow: () => AudioManager.Instance.PlayAudioEvent(AudioEventType.Lose)));
             }
         }
 
-        private IEnumerator ShowScreenWithDelay(Screen screen)
+        private IEnumerator ShowScreenWithDelay(Screen screen, Action onShow = null)
         {
             yield return new WaitForSeconds(_delayBeforeShow);
             _openedScreen = screen;
             _openedScreen.Show();
+            onShow?.Invoke();
         }
 
         private void TryStopCoroutine()

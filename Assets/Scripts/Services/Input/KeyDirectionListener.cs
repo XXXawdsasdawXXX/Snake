@@ -27,13 +27,13 @@ namespace Services
             var x = Input.GetAxisRaw("Horizontal");
             var y = Input.GetAxisRaw("Vertical");
 
-            if (x != 0)
+            if (x != 0 && _direction.x != x)
             {
                 _direction = new Vector2Int(Convert.ToInt32(x), 0);
                 Debugging.Instance.Log($"Set pc horizontal direction {_direction}", Debugging.Type.Input);
                 SetNewDirectionEvent?.Invoke(_direction);
             }
-            else if (y != 0)
+            else if (y != 0 && _direction.y != y)
             {
                 _direction = new Vector2Int(0, Convert.ToInt32(y));
                 Debugging.Instance.Log($"Set pc vertical direction {_direction}", Debugging.Type.Input);

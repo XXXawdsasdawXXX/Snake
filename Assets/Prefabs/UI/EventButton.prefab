@@ -148,6 +148,22 @@ PrefabInstance:
       propertyPath: _field
       value: "\u0418\u0433\u0440\u0430\u0442\u044C"
       objectReference: {fileID: 0}
+    - target: {fileID: 6662828189228173442, guid: 64420d6a79ceead42922477cba5a656f, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662828189228173442, guid: 64420d6a79ceead42922477cba5a656f, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.38799337
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662828189228173442, guid: 64420d6a79ceead42922477cba5a656f, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662828189228173442, guid: 64420d6a79ceead42922477cba5a656f, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4286604128
+      objectReference: {fileID: 0}
     - target: {fileID: 6867025443287904992, guid: 64420d6a79ceead42922477cba5a656f, type: 3}
       propertyPath: m_Name
       value: Text

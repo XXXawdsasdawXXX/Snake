@@ -76,6 +76,8 @@ namespace Services.Audio
         ClickButton,
         Death,
         Grow,
-        ScorePointUp
+        ScorePointUp,
+        Win,
+        Lose
     }
 }
