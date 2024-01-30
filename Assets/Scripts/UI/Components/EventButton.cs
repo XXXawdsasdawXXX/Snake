@@ -1,4 +1,5 @@
 ﻿using Services;
+using Services.Audio;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
@@ -12,7 +13,14 @@ namespace UI.Components
 
         private void Awake()
         {
-            _button.onClick.AddListener(() => { UIEvents.ClickButtonEvent?.Invoke(_buttonType); });
+            _button.onClick.AddListener(() =>
+            {
+                UIEvents.ClickButtonEvent?.Invoke(_buttonType);
+                if (_buttonType != EventButtonType.None)
+                {
+                    AudioManager.Instance.PlayAudioEvent(AudioEventType.ClickButton);
+                }
+            });
         }
     }
 
