@@ -9,20 +9,21 @@ namespace Entities
     {
         [SerializeField] private SnakeSegmentCollision _segmentCollision;
         public SnakeSegmentCollision Collision => _segmentCollision;
-        public bool IsSetTarget => LastTarget != Vector3.zero && Target != Vector3.zero;
         public bool IsMoving  { get; private set; }
         public Vector3 LastTarget { get; private set; }
         public Vector3 Target { get; private set; }
-        public Vector2Int MoveDirection { get;  private set; }
+        
+        private Vector2Int _moveDirection { get; set; }
+        private bool _isSetTargets => LastTarget != Vector3.zero && Target != Vector3.zero;
       
+        
         private Tween _moveTween;
-
-   
+        
         public void StartMove(Vector3 target, float duration)
         {
             LastTarget = Target;
             Target = target;
-            if (LastTarget != Vector3.zero && Target != Vector3.zero && !IsMoving)
+            if (_isSetTargets && !IsMoving)
             {
                 IsMoving = true;
             }
@@ -31,7 +32,7 @@ namespace Entities
             var x = Convert.ToInt32(MathF.Ceiling(dir.x * Constants.SEGMENT_COUNT));
             var y = Convert.ToInt32(MathF.Ceiling(dir.y * Constants.SEGMENT_COUNT));
 
-            MoveDirection = new Vector2Int(x, y);
+            _moveDirection = new Vector2Int(x, y);
 
             _moveTween = transform.DOMove(new Vector3(Target.x, Target.y, 0), duration).SetEase(Ease.Linear)
                 .SetLink(gameObject, LinkBehaviour.KillOnDestroy);

@@ -11,7 +11,7 @@ namespace Entities
 {
     public class Snake : MonoBehaviour
     {
-        public List<SnakeSegment> Segments /*{ get; }*/ = new();
+        public List<SnakeSegment> Segments { get; } = new();
         public bool IsActive { get; private set; }
 
         [SerializeField] private InputService _input;
@@ -38,7 +38,6 @@ namespace Entities
         {
             _data = _snakeConfig.StaticData;
             _segmentPrefab = _snakeConfig.SegmentPrefab;
-            //ResetState();
             _moveDirection = _input.GetDirection();
             SetNewMoveDirectionEvent?.Invoke(_moveDirection);
         }
