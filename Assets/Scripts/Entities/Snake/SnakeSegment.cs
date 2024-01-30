@@ -10,22 +10,23 @@ namespace Entities
         [SerializeField] private SnakeSegmentCollision _segmentCollision;
         public SnakeSegmentCollision Collision => _segmentCollision;
         public bool IsSetTarget => LastTarget != Vector3.zero && Target != Vector3.zero;
-        public bool IsMainSegment{ get; private set; }
+        public bool IsMoving  { get; private set; }
         public Vector3 LastTarget { get; private set; }
         public Vector3 Target { get; private set; }
         public Vector2Int MoveDirection { get;  private set; }
       
         private Tween _moveTween;
 
-        public void Init(bool isMainSegment)
-        {
-            IsMainSegment = isMainSegment;
-        }
+   
         public void StartMove(Vector3 target, float duration)
         {
             LastTarget = Target;
             Target = target;
-
+            if (LastTarget != Vector3.zero && Target != Vector3.zero && !IsMoving)
+            {
+                IsMoving = true;
+            }
+            
             var dir = Target - LastTarget;
             var x = Convert.ToInt32(MathF.Ceiling(dir.x * Constants.SEGMENT_COUNT));
             var y = Convert.ToInt32(MathF.Ceiling(dir.y * Constants.SEGMENT_COUNT));
@@ -39,6 +40,8 @@ namespace Entities
         public void SetTarget(Vector3 target)
         {
             Target = target;
+            LastTarget = target;
+            IsMoving = true;
         }
 
         public void StopMove()

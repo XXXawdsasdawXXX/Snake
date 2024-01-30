@@ -9,13 +9,14 @@ namespace Logic
 {
     public class SnakeLineDrawer : MonoBehaviour
     {
-        [SerializeField] private LineRenderer _line;
         [SerializeField] private RoundedCornerLine _roundedCorner;
         
         [SerializeField] private Snake _snake;
 
         [SerializeField] private int curveResolution = 2;
         [SerializeField] private List<Vector3> _linePoints;
+
+        private int _currentSize;
 
         private void Awake()
         {
@@ -27,8 +28,7 @@ namespace Logic
             if (_snake.IsActive)
             {
                 RefreshLinePoints();
-                _line.positionCount = _linePoints.Count;
-                _line.SetPositions(_linePoints.ToArray());
+
                 _roundedCorner.SetPoints(_linePoints.AsListVector2());
             }
         }
@@ -45,28 +45,25 @@ namespace Logic
 
         private void RefreshLinePoints()
         {
-             SetPointByTransform();
-        }
-
-        private void SetPointByTransform()
-        {
-            var snakeSegments = _snake.Segments.ToArray();
-            SetLine(snakeSegments);
+            var snakeSegments = _snake.Segments.Where(segment => segment.IsMoving).ToArray();
+            SetPoints(snakeSegments);
         }
         
         private void ResetLine()
         {
-            var snakeSegments = _snake.Segments.ToArray();
+            var snakeSegments = _snake.Segments.Where(segment => segment.IsMoving).ToArray();
             
-            SetLine(snakeSegments);
+            SetPoints(snakeSegments);
 
-            _line.positionCount = _linePoints.Count;
-            _line.SetPositions(_linePoints.ToArray());
             _roundedCorner.SetPoints(_linePoints.AsListVector2());
         }
 
-        private void SetLine(SnakeSegment[] snakeSegments)
+        private void SetPoints(SnakeSegment[] snakeSegments)
         {
+            if (snakeSegments.Length < _linePoints.Count)
+            {
+                return;
+            }
             _linePoints = new List<Vector3>();
 
             for (int i = 0; i < snakeSegments.Length - 1; i++)
@@ -85,6 +82,7 @@ namespace Logic
             {
                 _linePoints.Add(snakeSegments[^1].transform.position);
             }
+
         }
     }
 }
