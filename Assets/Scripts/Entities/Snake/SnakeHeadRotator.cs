@@ -12,7 +12,7 @@ namespace Entities
         [SerializeField] private Snake _snake;
         [SerializeField] private Transform _headRoot;
 
-        private Dictionary<Vector2Int, float> _rotateForwards = new Dictionary<Vector2Int, float>
+        private readonly Dictionary<Vector2Int, float> _rotateForwards = new()
         {
             {new Vector2Int(0,1),0},
             {new Vector2Int(1,0),-90},

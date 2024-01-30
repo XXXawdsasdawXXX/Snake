@@ -50,7 +50,7 @@ namespace Logic
 
         private void SetPointByTransform()
         {
-            var snakeSegments = _snake.Segments.Where(segment => segment.IsSetTarget).ToArray();
+            var snakeSegments = _snake.Segments.ToArray();
             SetLine(snakeSegments);
         }
         
