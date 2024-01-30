@@ -98,9 +98,11 @@ namespace Services
 
         private void OnPauseGame(bool isPause)
         {
-          //  _currentDirectionListener?.Reset();
             _isPlaying = !isPause;
-            Debugging.Instance.Log($"On pause -> is playing {_isPlaying} ", Debugging.Type.Input);
+          /*//
+           
+            _currentDirectionListener?.Reset();
+            Debugging.Instance.Log($"On pause -> is playing {_isPlaying} ", Debugging.Type.Input);*/
         }
 
         private void OnEndGame(bool isWon)

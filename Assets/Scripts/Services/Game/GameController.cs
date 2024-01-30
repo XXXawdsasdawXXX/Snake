@@ -101,11 +101,11 @@ namespace Services
         private IEnumerator StartGame()
         {
 
-            yield return new WaitForSeconds(0.25f);
-            if (GameState == GameState.Pause)
+            if (_isPause)
             {
                 yield break;
             }
+            yield return new WaitForSeconds(0.25f);
             _isPlaying = true;
             Debugging.Instance.Log($"Start game", Debugging.Type.GameController);
 
@@ -152,14 +152,16 @@ namespace Services
             _isPause = isPause;
             if (isPause)
             {
-                _gameState = GameState.Pause;
-                _snake.StopMove();
+                /*_gameState = GameState.Pause;
+                _snake.StopMove();*/
+                Time.timeScale = 0;
                 InvokePauseGame(true);
             }
             else
             {
-                _gameState = GameState.Play;
-                _snake.StartMove();
+                /*_gameState = GameState.Play;
+                _snake.StartMove();*/
+                Time.timeScale = 1;
                 InvokePauseGame(false);
             }
         }

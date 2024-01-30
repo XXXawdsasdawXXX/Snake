@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using UnityEngine;
 using Utils;
 
@@ -6,23 +7,24 @@ namespace Services
 {
     public class MouseDirectionListener : IInputDirectionListener
     {
-        private const float SWIPE_DISTANCE = 65;
+        private const float SWIPE_DISTANCE = 50;
 
-        private Vector2Int _direction ;
+        private Vector2Int _direction;
         private Vector2 _tapPosition;
         private Vector2 _swipeDelta;
 
         private bool _isSwiping;
-
         public event Action<Vector2Int> SetNewDirectionEvent;
 
         public void SetDirection(Vector2Int direction)
         {
+            Debugging.Instance.Log($"mobile set direction {direction}", Debugging.Type.Input);
             if (direction != Vector2Int.zero)
             {
                 _direction = direction;
             }
         }
+
         public Vector2Int GetDirection()
         {
             return _direction;
@@ -34,9 +36,9 @@ namespace Services
             {
                 if (!_isSwiping)
                 {
-                    _isSwiping = true;
-                    _tapPosition = Input.mousePosition;
-                    Debugging.Instance.Log($"Is swipe true", Debugging.Type.Input);
+                        _isSwiping = true;
+                        _tapPosition = Input.mousePosition;
+                        Debugging.Instance.Log($"Is swipe true ", Debugging.Type.Input);
                 }
 
                 CheckSwipe();
@@ -57,7 +59,7 @@ namespace Services
             }
 
             _swipeDelta = (Vector2)Input.mousePosition - _tapPosition;
-            
+
             if (_swipeDelta.magnitude > SWIPE_DISTANCE)
             {
                 if (Mathf.Abs(_swipeDelta.x) > Mathf.Abs(_swipeDelta.y))
