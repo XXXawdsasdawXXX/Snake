@@ -100,15 +100,16 @@ namespace Services
 
         private IEnumerator StartGame()
         {
-
-            if (_isPause)
+            if (_isPause || _isPlaying)
             {
                 yield break;
             }
+            
             yield return new WaitForSeconds(0.25f);
-            _isPlaying = true;
+            
             Debugging.Instance.Log($"Start game", Debugging.Type.GameController);
-
+            
+            _isPlaying = true;
             _gameState = GameState.Play;
             _snake.StartMove();
             InvokeStartGameEvent();
