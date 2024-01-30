@@ -8555,18 +8555,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 247318738}
     m_Modifications:
-    - target: {fileID: 2096506318, guid: 0cb3b310f59d18e42a672cf078c4bf48, type: 3}
-      propertyPath: _enableDelay
-      value: 0.15
-      objectReference: {fileID: 0}
     - target: {fileID: 1215591155599469217, guid: 0cb3b310f59d18e42a672cf078c4bf48, type: 3}
       propertyPath: _food
       value: 
       objectReference: {fileID: 114800233}
-    - target: {fileID: 1215591155599469217, guid: 0cb3b310f59d18e42a672cf078c4bf48, type: 3}
-      propertyPath: _lookDistance
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 5455316295330283624, guid: 0cb3b310f59d18e42a672cf078c4bf48, type: 3}
       propertyPath: m_RootOrder
       value: 2
