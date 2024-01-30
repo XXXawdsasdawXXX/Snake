@@ -431,10 +431,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231146d77f06c764f97fefbca3fba160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Segments: []
   _input: {fileID: 0}
-  _score: {fileID: 0}
   _snakeConfig: {fileID: 11400000, guid: f2e0df60239f2044a8dcee902828172b, type: 2}
   _headSnakeSegment: {fileID: 5455316295330283621}
+  _score: {fileID: 0}
 --- !u!114 &5455316295330283621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,9 +475,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452d48c6d8034e7a87857fffda29446d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _eyesMoveOffset: 0.1
+  _lookDistance: 5.5
+  _defaultPosition: {x: 0, y: -0.34}
   _food: {fileID: 0}
   _eyesRoot: {fileID: 8224664476075990269}
-  _eyesMoveOffset: 0.1
 --- !u!114 &2096506318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,4 +493,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider2D: {fileID: 2892182865944135355}
-  _enableDelay: 0.5
+  _enableDelay: 0.15
