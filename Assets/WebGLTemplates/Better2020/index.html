@@ -25,6 +25,12 @@
       const hideFullScreenButton = "{{{ HIDE_FULL_SCREEN_BUTTON }}}";
       const buildUrl = "Build";
       const loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
+    
+      const maxPixelRatioMobile = 2.0;
+      const maxPixelRatioDesktop = 1.5;
+      var maxDevicePixelRatio = isMobile? maxPixelRatioMobile: maxPixelRatioDesktop;
+      var pixelRatio = Math.min(window.devicePixelRatio, maxDevicePixelRatio);
+      
       const config = {
         dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
         frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
@@ -33,6 +39,7 @@
         companyName: "{{{ COMPANY_NAME }}}",
         productName: "{{{ PRODUCT_NAME }}}",
         productVersion: "{{{ PRODUCT_VERSION }}}",
+        devicePixelRatio: pixelRatio
       };
 
       const container = document.querySelector("#unity-container");
@@ -41,13 +48,8 @@
       const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
       const progressBarFull = document.querySelector("#unity-progress-bar-full");
       var API;
-
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) 
-      {
-        container.className = "unity-mobile";
-        config.devicePixelRatio = 1;
-      }
-
+    
+      container.className = "unity-mobile";
       loadingCover.style.display = "";
 
       const script = document.createElement("script");

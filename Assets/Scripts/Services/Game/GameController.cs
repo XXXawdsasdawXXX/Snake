@@ -100,13 +100,13 @@ namespace Services
 
         private IEnumerator StartGame()
         {
+            
+            yield return new WaitForSeconds(0.25f);
+            
             if (_isPause || _isPlaying)
             {
                 yield break;
             }
-            
-            yield return new WaitForSeconds(0.25f);
-            
             Debugging.Instance.Log($"Start game", Debugging.Type.GameController);
             
             _isPlaying = true;
