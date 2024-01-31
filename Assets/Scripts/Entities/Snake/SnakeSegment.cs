@@ -41,7 +41,7 @@ namespace Entities
         public void SetTarget(Vector3 target)
         {
             Target = target;
-            LastTarget = target;
+            //LastTarget = target;
             IsMoving = true;
         }
 
@@ -50,6 +50,13 @@ namespace Entities
             Target = Vector3.zero;
             LastTarget = Vector3.zero;
             _moveTween?.Kill();
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(Target,0.05f);
+            Gizmos.DrawSphere(LastTarget,0.03f);
         }
     }
 }

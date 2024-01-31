@@ -28,8 +28,8 @@ namespace Logic
             if (_snake.IsActive)
             {
                 RefreshLinePoints();
-                //_line.positionCount = _linePoints.Count;
-                // _line.SetPositions(_linePoints.ToArray());
+                /*_line.positionCount = _linePoints.Count;
+                 _line.SetPositions(_linePoints.ToArray());*/
                 _roundedCorner.SetPoints(_linePoints.AsListVector2());
             }
         }

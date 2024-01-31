@@ -51,7 +51,7 @@ public class RoundedCornerLine : MonoBehaviour
                 _lineRenderer = GetComponent<LineRenderer>();
             }
  
-            _lineRendererPoints.Clear();
+            //_lineRendererPoints.Clear();
             allLinePoints.Add(prevPoint);
         }
  
@@ -121,7 +121,6 @@ public class RoundedCornerLine : MonoBehaviour
         {
             allLinePoints.Add(_points[_points.Count - 1]);
             _lineRendererPoints = allLinePoints;
-            
             _lineRenderer.positionCount = _lineRendererPoints.Count;
             _lineRenderer.SetPositions(_lineRendererPoints.ToArray());
         }

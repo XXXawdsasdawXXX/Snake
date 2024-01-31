@@ -17,6 +17,7 @@ namespace Entities
         [SerializeField] private InputService _input;
         [SerializeField] private SnakeConfig _snakeConfig;
         [SerializeField] private SnakeSegment _headSnakeSegment;
+        [SerializeField] private Transform _trailSegmentsRoot;
         [SerializeField] private Score _score;
 
         private SnakeSegment _segmentPrefab;
@@ -107,7 +108,7 @@ namespace Entities
 
             IsActive = false;
             _headSnakeSegment.StopMove();
-            _headSnakeSegment.transform.position = Vector3.zero;
+            _headSnakeSegment.transform.position = Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() *GetMultiplier();
             _currentBonusSpeed = 0;
 
             _inputDirections.Clear();
@@ -134,10 +135,11 @@ namespace Entities
 
             for (int i = 0; i < Constants.SEGMENT_COUNT; i++)
             {
-                SnakeSegment segment = Instantiate(_segmentPrefab);
+                SnakeSegment segment = Instantiate(_segmentPrefab, _trailSegmentsRoot, true);
                 segment.transform.position = new Vector3(Segments[^1].LastTarget.x, Segments[^1].LastTarget.y, 0);
                 Segments.Add(segment);
                 segment.Collision.EnableCollision();
+                segment.gameObject.name += $"{Segments.Count}";
             }
 
             if (IsActive)
@@ -150,15 +152,18 @@ namespace Entities
         {
             Debugging.Instance.Log($"Init Grow {Constants.SEGMENT_COUNT} * {_data.InitialSize}", Debugging.Type.Snake);
 
+            _headSnakeSegment.SetTarget(_headSnakeSegment.transform.position);
             for (int i = 0; i < Constants.SEGMENT_COUNT * _data.InitialSize; i++)
             {
-                SnakeSegment segment = Instantiate(_segmentPrefab);
+                SnakeSegment segment = Instantiate(_segmentPrefab, _trailSegmentsRoot, true);
+
                 var positionX = i * GetMultiplier();
                 segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x - positionX,
                     _headSnakeSegment.transform.position.y, 0);
                 segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x - positionX,
                     _headSnakeSegment.transform.position.y, 0));
                 Segments.Add(segment);
+                segment.gameObject.name += $"{Segments.Count}";
             }
         }
 

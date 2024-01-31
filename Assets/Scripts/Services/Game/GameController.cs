@@ -152,15 +152,12 @@ namespace Services
             _isPause = isPause;
             if (isPause)
             {
-                /*_gameState = GameState.Pause;
-                _snake.StopMove();*/
                 Time.timeScale = 0;
                 InvokePauseGame(true);
             }
             else
             {
-                /*_gameState = GameState.Play;
-                _snake.StartMove();*/
+
                 Time.timeScale = 1;
                 InvokePauseGame(false);
             }
