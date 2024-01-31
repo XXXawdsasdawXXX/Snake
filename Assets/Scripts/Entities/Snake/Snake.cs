@@ -78,6 +78,7 @@ namespace Entities
 
         public void StartMove()
         {
+            _inputDirections.Clear();
             IsActive = true;
             foreach (var snakeSegment in Segments)
             {
@@ -107,8 +108,9 @@ namespace Entities
             Debugging.Instance.Log("Reset", Debugging.Type.Snake);
 
             IsActive = false;
+            
             _headSnakeSegment.StopMove();
-            _headSnakeSegment.transform.position = Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() *GetMultiplier();
+            _headSnakeSegment.transform.position = Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() * GetMultiplier();
             _currentBonusSpeed = 0;
 
             _inputDirections.Clear();
@@ -132,7 +134,6 @@ namespace Entities
         public void Grow()
         {
             Debugging.Instance.Log("Grow", Debugging.Type.Snake);
-
             for (int i = 0; i < Constants.SEGMENT_COUNT; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab, _trailSegmentsRoot, true);
@@ -185,7 +186,6 @@ namespace Entities
                     return true;
                 }
             }
-
             return false;
         }
 
@@ -246,7 +246,8 @@ namespace Entities
 
         private bool IsCanSetDirection(Vector2Int inputDirection)
         {
-            return inputDirection != _moveDirection && _moveDirection != inputDirection * -1;
+            return inputDirection != _moveDirection && _moveDirection != inputDirection * -1 &&
+                   inputDirection != Vector2Int.zero;
         }
 
         private float GetMultiplier()

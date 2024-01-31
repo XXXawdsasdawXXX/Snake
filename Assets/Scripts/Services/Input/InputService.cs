@@ -93,6 +93,7 @@ namespace Services
 
         private void ResetGameEvent()
         {
+            _direction = Vector2Int.zero;
             _currentDirectionListener?.Reset();
         }
 
@@ -100,7 +101,7 @@ namespace Services
         {
             _isPlaying = !isPause;
           /*//
-           
+    
             _currentDirectionListener?.Reset();
             Debugging.Instance.Log($"On pause -> is playing {_isPlaying} ", Debugging.Type.Input);*/
         }
