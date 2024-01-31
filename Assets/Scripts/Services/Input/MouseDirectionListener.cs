@@ -1,5 +1,4 @@
 ﻿using System;
-using JetBrains.Annotations;
 using UnityEngine;
 using Utils;
 
@@ -7,7 +6,7 @@ namespace Services
 {
     public class MouseDirectionListener : IInputDirectionListener
     {
-        private const float SWIPE_DISTANCE = 50;
+        private const float SWIPE_DISTANCE = 65;
 
         private Vector2Int _direction;
         private Vector2 _tapPosition;
@@ -36,9 +35,9 @@ namespace Services
             {
                 if (!_isSwiping)
                 {
-                        _isSwiping = true;
-                        _tapPosition = Input.mousePosition;
-                        Debugging.Instance.Log($"Is swipe true ", Debugging.Type.Input);
+                    _isSwiping = true;
+                    _tapPosition = Input.mousePosition;
+                    Debugging.Instance.Log($"Is swipe true ", Debugging.Type.Input);
                 }
 
                 CheckSwipe();

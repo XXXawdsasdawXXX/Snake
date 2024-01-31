@@ -19,7 +19,7 @@ public class RoundedCornerLine : MonoBehaviour
     [SerializeField] private int _segmentsPerNinetyDegrees = 4;
  
     private LineRenderer _lineRenderer;
-    private readonly List<Vector3> _lineRendererPoints = new List<Vector3>();
+    private  List<Vector3> _lineRendererPoints = new List<Vector3>();
  
     private enum BuildLineMode
     {
@@ -43,7 +43,7 @@ public class RoundedCornerLine : MonoBehaviour
  
         var localToWorld = transform.localToWorldMatrix;
         var prevPoint = _points[0];
- 
+        var allLinePoints = new List<Vector3>();
         if (mode == BuildLineMode.LineRenderer)
         {
             if (_lineRenderer == null)
@@ -52,7 +52,7 @@ public class RoundedCornerLine : MonoBehaviour
             }
  
             _lineRendererPoints.Clear();
-            _lineRendererPoints.Add(prevPoint);
+            allLinePoints.Add(prevPoint);
         }
  
         for (int i = 0; i < _points.Count - 1; i++)
@@ -90,7 +90,7 @@ public class RoundedCornerLine : MonoBehaviour
                     toCurvePoint = new Vector2(-toPrev.y, toPrev.x).normalized * _cornerRadius;
                 }
  
-                _lineRendererPoints.Add(pivot + toCurvePoint);
+                allLinePoints.Add(pivot + toCurvePoint);
  
                 // The smaller the angle for the corner, the bigger the turn radius.
                 var turnAngleDegrees = Mathf.Sign(cornerAngleDegrees) * 180 - cornerAngleDegrees;
@@ -103,7 +103,7 @@ public class RoundedCornerLine : MonoBehaviour
                 {
                     toCurvePoint = rotation.MultiplyPoint(toCurvePoint);
  
-                    _lineRendererPoints.Add(pivot + toCurvePoint);
+                    allLinePoints.Add(pivot + toCurvePoint);
                 }
             }
             else
@@ -119,8 +119,9 @@ public class RoundedCornerLine : MonoBehaviour
  
         if (mode == BuildLineMode.LineRenderer)
         {
-            _lineRendererPoints.Add(_points[_points.Count - 1]);
- 
+            allLinePoints.Add(_points[_points.Count - 1]);
+            _lineRendererPoints = allLinePoints;
+            
             _lineRenderer.positionCount = _lineRendererPoints.Count;
             _lineRenderer.SetPositions(_lineRendererPoints.ToArray());
         }

@@ -100,7 +100,6 @@ namespace Services
 
         private IEnumerator StartGame()
         {
-            
             yield return new WaitForSeconds(0.25f);
             
             if (_isPause || _isPlaying)
