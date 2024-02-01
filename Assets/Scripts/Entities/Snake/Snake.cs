@@ -155,11 +155,13 @@ namespace Entities
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab, _trailSegmentsRoot, true);
 
-                var positionX = i * GetMultiplier();
-                segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x - positionX,
-                    _headSnakeSegment.transform.position.y, 0);
-                segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x - positionX,
-                    _headSnakeSegment.transform.position.y, 0));
+                var positionY = i * GetMultiplier();
+                //это дерьмо меняется взависимости от Constants.DEFAULT_DIRECTION
+                segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x,
+                    _headSnakeSegment.transform.position.y + positionY, 0);
+                segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x,
+                    _headSnakeSegment.transform.position.y  + positionY, 0));
+                //
                 Segments.Add(segment);
                 segment.gameObject.name += $"{Segments.Count}";
             }
