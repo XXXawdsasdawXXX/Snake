@@ -1,11 +1,11 @@
-﻿using System;
-using Configs;
+﻿using Configs;
 using UnityEngine;
 
 namespace Entities
 {
     public class SnakeSpeed : MonoBehaviour
     {
+        [SerializeField] private Snake _snake;
         [SerializeField] private SnakeConfig _snakeConfig;
         [SerializeField] private float _speedIncrease = 0.1f;
 
@@ -21,9 +21,9 @@ namespace Entities
 
         private void Update()
         {
-            if (_targetBonusSpeed > _currentBonusSpeed)
+            if (_snake.IsActive && _targetBonusSpeed > _currentBonusSpeed)
             {
-                _currentBonusSpeed = Mathf.Lerp(_currentBonusSpeed, _targetBonusSpeed, _speedIncrease);
+                _currentBonusSpeed = Mathf.Lerp(_currentBonusSpeed, _targetBonusSpeed, _speedIncrease * Time.deltaTime);
             }
         }
 

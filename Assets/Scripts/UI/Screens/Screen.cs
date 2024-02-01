@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UI.Components;
 
-namespace UI.Components
+namespace UI.Screens
 {
     public class Screen: UIElement
     {

@@ -613,6 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac3a09e25064352af8f1027b4d49d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _snake: {fileID: 5455316295330283626}
   _snakeConfig: {fileID: 11400000, guid: f2e0df60239f2044a8dcee902828172b, type: 2}
   _speedIncrease: 0.1
 --- !u!1 &6391623433522634047

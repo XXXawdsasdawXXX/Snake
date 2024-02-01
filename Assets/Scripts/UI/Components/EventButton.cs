@@ -2,7 +2,6 @@
 using Services.Audio;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils;
 
 namespace UI.Components
 {

@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils;
 
-namespace UI.Components
+namespace UI.Screens
 {
     public class TutorialScreen : Screen
     {

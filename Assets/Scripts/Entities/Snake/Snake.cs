@@ -201,6 +201,7 @@ namespace Entities
 
             transform.position = position;
         }
+        
 
         private void Move(float period)
         {

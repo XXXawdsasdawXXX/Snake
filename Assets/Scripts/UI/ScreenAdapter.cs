@@ -3,7 +3,7 @@ using System.Collections;
 using Services;
 using Services.Audio;
 using UnityEngine;
-using Screen = UI.Components.Screen;
+using Screen = UI.Screens.Screen;
 
 
 namespace UI

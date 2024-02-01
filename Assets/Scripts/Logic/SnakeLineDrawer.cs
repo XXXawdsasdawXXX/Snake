@@ -28,8 +28,6 @@ namespace Logic
             if (_snake.IsActive)
             {
                 RefreshLinePoints();
-                /*_line.positionCount = _linePoints.Count;
-                 _line.SetPositions(_linePoints.ToArray());*/
                 _roundedCorner.SetPoints(_linePoints.AsListVector2());
             }
         }
@@ -93,9 +91,9 @@ namespace Logic
 
         private int GetLenght(SnakeSegment[] snakeSegments)
         {
-            for (int i = snakeSegments.Length + 1; i > 0; i--)
+            for (int i = snakeSegments.Length; i > 0; i--)
             {
-                if ((i - 1) % Constants.SEGMENT_COUNT == 0)
+                if (i % Constants.SEGMENT_COUNT == 0)
                 {
                     return i;
                 }

@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider2D: {fileID: 3095462503393242856}
-  _enableDelay: 1.5
+  _enableDelay: 0.5
 --- !u!1 &7552749238892429541
 GameObject:
   m_ObjectHideFlags: 0
