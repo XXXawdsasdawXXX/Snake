@@ -8558,10 +8558,6 @@ PrefabInstance:
       propertyPath: _food
       value: 
       objectReference: {fileID: 114800233}
-    - target: {fileID: 5054060163855056436, guid: 0cb3b310f59d18e42a672cf078c4bf48, type: 3}
-      propertyPath: _reactionDistance
-      value: 2.7
-      objectReference: {fileID: 0}
     - target: {fileID: 5455316295330283624, guid: 0cb3b310f59d18e42a672cf078c4bf48, type: 3}
       propertyPath: m_RootOrder
       value: 2

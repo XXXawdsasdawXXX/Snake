@@ -477,6 +477,7 @@ MonoBehaviour:
   _reactionDistance: 5
   _eyesMoveOffset: 0.1
   _defaultPosition: {x: 0, y: -0.34}
+  _snake: {fileID: 5455316295330283626}
   _food: {fileID: 0}
   _pupilsRoot: {fileID: 8224664476075990269}
 --- !u!1 &5455316295330283627
@@ -747,7 +748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f196fa8a79841faa88eb73bdf7e5fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reactionDistance: 3
+  _reactionDistance: 2.7
   _food: {fileID: 0}
   _headAnimation: {fileID: 1306216089457762563}
 --- !u!1 &7685939536829232627

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using DG.Tweening;
+using UnityEngine;
 using Utils;
 
 namespace Entities
@@ -9,17 +11,23 @@ namespace Entities
         [SerializeField] private float _eyesMoveOffset;
         [SerializeField] private Vector2 _defaultPosition;
 
-        [Header("Components")]
+        [Header("Components")] 
+        [SerializeField] private Snake _snake;
         [SerializeField] private Food _food;
         [SerializeField] private Transform _pupilsRoot;
-        
-        private Vector3 _centerPosition;
-      
-        
 
+        private Tween _tween;
+        private Vector3 _centerPosition;
+        
         private void Awake()
         {
             _centerPosition = _pupilsRoot.transform.localPosition;
+            _snake.ResetEvent += Reset;
+        }
+        
+        private void OnDestroy()
+        {
+            _snake.ResetEvent -= Reset;
         }
 
         public override bool IsReady()
@@ -49,7 +57,8 @@ namespace Entities
 
         private void Reset()
         {
-            _pupilsRoot.transform.localPosition = _defaultPosition;
+            _tween.Complete();
+            _tween =  _pupilsRoot.transform.DOLocalMove(_defaultPosition, 0.3f).SetLink(gameObject, LinkBehaviour.KillOnDestroy) ;
         }
     }
 }
