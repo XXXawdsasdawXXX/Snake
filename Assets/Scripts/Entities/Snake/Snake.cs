@@ -22,6 +22,7 @@ namespace Entities
         [SerializeField] private SnakeConfig _snakeConfig;
         [SerializeField] private SnakeSegment _headSnakeSegment;
         [SerializeField] private SnakeHeadAnimation _snakeHeadAnimation;
+        [SerializeField] private SnakeSpeed _snakeSpeed; 
 
         private SnakeSegment _segmentPrefab;
         private SnakeStaticData _data;
@@ -29,7 +30,6 @@ namespace Entities
         private readonly Queue<Vector2Int> _inputDirections = new();
         private Vector2Int _moveDirection;
 
-        private float _currentBonusSpeed;
         private float _nextUpdate;
 
         public event Action<Vector2Int> SetNewMoveDirectionEvent;
@@ -66,7 +66,7 @@ namespace Entities
 
             TrySetDirection();
 
-            var period = 1f / (_data.Speed + _currentBonusSpeed) * GetMultiplier();
+            var period = 1f / (_snakeSpeed.GetSpeed()) * GetMultiplier();
 
             Move(period);
 
@@ -114,9 +114,8 @@ namespace Entities
             _snakeHeadAnimation.ResetAnimation();
 
             _headSnakeSegment.StopMove();
-            _headSnakeSegment.transform.position =
-                Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() * GetMultiplier();
-            _currentBonusSpeed = 0;
+            _headSnakeSegment.transform.position = Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() * GetMultiplier();
+            _snakeSpeed.ResetBonusSpeed();
 
             _inputDirections.Clear();
             _moveDirection = Constants.DEFAULT_DIRECTION;
@@ -166,12 +165,9 @@ namespace Entities
             }
         }
 
-        public void AddSpeedMultiplier()
+        private void AddSpeedMultiplier()
         {
-            if (_data.Speed + _currentBonusSpeed < _data.MaxSpeed)
-            {
-                _currentBonusSpeed += _data.BonusSpeedStep;
-            }
+        _snakeSpeed.AddBonusSpeed();
         }
 
         public bool Occupies(int x, int y)
@@ -239,7 +235,7 @@ namespace Entities
 
         private void AddInputDirection(Vector2Int direction)
         {
-            if (_inputDirections.Count < 5)
+            if (_inputDirections.Count < 3)
             {
                 _inputDirections.Enqueue(_input.GetDirection());
             }

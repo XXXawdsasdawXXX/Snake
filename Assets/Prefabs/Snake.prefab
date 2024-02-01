@@ -161,7 +161,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _snake: {fileID: 5455316295330283626}
   _snakeConfig: {fileID: 11400000, guid: f2e0df60239f2044a8dcee902828172b, type: 2}
-  _snakeHeadAnimation: {fileID: 1306216089457762563}
 --- !u!1 &982980539605225496
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +462,7 @@ GameObject:
   - component: {fileID: 1215591155599469217}
   - component: {fileID: 2096506318}
   - component: {fileID: 6123168659727239786}
+  - component: {fileID: 3045480349331367209}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Obstacle
@@ -526,6 +526,7 @@ MonoBehaviour:
   _snakeConfig: {fileID: 11400000, guid: f2e0df60239f2044a8dcee902828172b, type: 2}
   _headSnakeSegment: {fileID: 5455316295330283621}
   _snakeHeadAnimation: {fileID: 1306216089457762563}
+  _snakeSpeed: {fileID: 3045480349331367209}
 --- !u!114 &5455316295330283621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,6 +599,20 @@ MonoBehaviour:
   _lookDistance: 5
   headAnimation: {fileID: 1306216089457762563}
   _pupilsRotator: {fileID: 1215591155599469217}
+--- !u!114 &3045480349331367209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5455316295330283627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac3a09e25064352af8f1027b4d49d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _snakeConfig: {fileID: 11400000, guid: f2e0df60239f2044a8dcee902828172b, type: 2}
+  _speedIncrease: 0.1
 --- !u!1 &6391623433522634047
 GameObject:
   m_ObjectHideFlags: 0

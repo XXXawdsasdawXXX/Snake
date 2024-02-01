@@ -5753,7 +5753,7 @@ MonoBehaviour:
     Active: 0
     Color: {r: 0.43289468, g: 0.37486652, b: 0.9811321, a: 1}
   - Type: 3
-    Active: 1
+    Active: 0
     Color: {r: 0.37647066, g: 0.98039216, b: 0.7957634, a: 1}
   - Type: 4
     Active: 0
@@ -8558,6 +8558,10 @@ PrefabInstance:
       propertyPath: _food
       value: 
       objectReference: {fileID: 114800233}
+    - target: {fileID: 3045480349331367209, guid: 0cb3b310f59d18e42a672cf078c4bf48, type: 3}
+      propertyPath: _speedIncrease
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5455316295330283624, guid: 0cb3b310f59d18e42a672cf078c4bf48, type: 3}
       propertyPath: m_RootOrder
       value: 2
