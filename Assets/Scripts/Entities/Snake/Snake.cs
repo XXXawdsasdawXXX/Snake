@@ -15,10 +15,13 @@ namespace Entities
         public bool IsActive { get; private set; }
 
         [SerializeField] private InputService _input;
+        [SerializeField] private Score _score;
+        [SerializeField] private Transform _trailSegmentsRoot;
+
+        [Header("SnakeComponents")] 
         [SerializeField] private SnakeConfig _snakeConfig;
         [SerializeField] private SnakeSegment _headSnakeSegment;
-        [SerializeField] private Transform _trailSegmentsRoot;
-        [SerializeField] private Score _score;
+        [SerializeField] private SnakeHeadAnimation _snakeHeadAnimation;
 
         private SnakeSegment _segmentPrefab;
         private SnakeStaticData _data;
@@ -78,7 +81,6 @@ namespace Entities
 
         public void StartMove()
         {
-            _inputDirections.Clear();
             IsActive = true;
             foreach (var snakeSegment in Segments)
             {
@@ -99,6 +101,7 @@ namespace Entities
         {
             if (IsActive)
             {
+                _snakeHeadAnimation.PlayDead();
                 ObstacleCollisionEvent?.Invoke();
             }
         }
@@ -108,9 +111,11 @@ namespace Entities
             Debugging.Instance.Log("Reset", Debugging.Type.Snake);
 
             IsActive = false;
-            
+            _snakeHeadAnimation.ResetAnimation();
+
             _headSnakeSegment.StopMove();
-            _headSnakeSegment.transform.position = Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() * GetMultiplier();
+            _headSnakeSegment.transform.position =
+                Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() * GetMultiplier();
             _currentBonusSpeed = 0;
 
             _inputDirections.Clear();
@@ -133,26 +138,19 @@ namespace Entities
 
         public void Grow()
         {
-            Debugging.Instance.Log("Grow", Debugging.Type.Snake);
             for (int i = 0; i < Constants.SEGMENT_COUNT; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab, _trailSegmentsRoot, true);
                 segment.transform.position = new Vector3(Segments[^1].LastTarget.x, Segments[^1].LastTarget.y, 0);
                 Segments.Add(segment);
                 segment.Collision.EnableCollision();
-                segment.gameObject.name += $"{Segments.Count}";
             }
 
-            if (IsActive)
-            {
-                GrowEvent?.Invoke();
-            }
+            GrowEvent?.Invoke();
         }
 
         private void InitGrow()
         {
-            Debugging.Instance.Log($"Init Grow {Constants.SEGMENT_COUNT} * {_data.InitialSize}", Debugging.Type.Snake);
-
             _headSnakeSegment.SetTarget(_headSnakeSegment.transform.position);
             for (int i = 0; i < Constants.SEGMENT_COUNT * _data.InitialSize; i++)
             {
@@ -186,6 +184,7 @@ namespace Entities
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -221,10 +220,12 @@ namespace Entities
         {
             if (_headSnakeSegment.Target.x % 1 == 0 && _headSnakeSegment.Target.y % 1 == 0)
             {
+                Debugging.Instance.Log($"try setn direction { _inputDirections.Count}",Debugging.Type.Snake);
                 for (int i = 0; i < _inputDirections.Count; i++)
                 {
                     var inputDirection = _inputDirections.Dequeue();
 
+                    Debugging.Instance.Log($"try setn direction {inputDirection} vs {_moveDirection}",Debugging.Type.Snake);
                     if (IsCanSetDirection(inputDirection))
                     {
                         _moveDirection = inputDirection;
