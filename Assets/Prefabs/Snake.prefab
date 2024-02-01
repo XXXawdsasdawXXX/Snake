@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8248154474073858744}
   - component: {fileID: 2892182865944135355}
   - component: {fileID: 8587444959467286377}
+  - component: {fileID: 557744893715705245}
   m_Layer: 0
   m_Name: HeadRoot
   m_TagString: Obstacle
@@ -161,6 +162,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _snake: {fileID: 5455316295330283626}
   _snakeConfig: {fileID: 11400000, guid: f2e0df60239f2044a8dcee902828172b, type: 2}
+--- !u!114 &557744893715705245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803432283562029214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb63a4a2bcd4a8c99c027c48587eb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _snake: {fileID: 5455316295330283626}
+  _headRoot: {fileID: 8248154474073858744}
 --- !u!1 &982980539605225496
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8224664476075990269}
+  - component: {fileID: 6917749776997360659}
   m_Layer: 0
   m_Name: Pupils
   m_TagString: Untagged
@@ -446,6 +462,23 @@ Transform:
   m_Father: {fileID: 8248154474073858744}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6917749776997360659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4186012166664874265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 452d48c6d8034e7a87857fffda29446d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reactionDistance: 5
+  _eyesMoveOffset: 0.1
+  _defaultPosition: {x: 0, y: -0.34}
+  _food: {fileID: 0}
+  _pupilsRoot: {fileID: 8224664476075990269}
 --- !u!1 &5455316295330283627
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,8 +491,6 @@ GameObject:
   - component: {fileID: 5455316295330283622}
   - component: {fileID: 5455316295330283626}
   - component: {fileID: 5455316295330283621}
-  - component: {fileID: 1597435494252946203}
-  - component: {fileID: 1215591155599469217}
   - component: {fileID: 2096506318}
   - component: {fileID: 6123168659727239786}
   - component: {fileID: 3045480349331367209}
@@ -540,35 +571,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _segmentCollision: {fileID: 2096506318}
---- !u!114 &1597435494252946203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5455316295330283627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb63a4a2bcd4a8c99c027c48587eb55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _snake: {fileID: 5455316295330283626}
-  _headRoot: {fileID: 8248154474073858744}
---- !u!114 &1215591155599469217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5455316295330283627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 452d48c6d8034e7a87857fffda29446d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _eyesMoveOffset: 0.1
-  _defaultPosition: {x: 0, y: -0.34}
-  _pupilsRoot: {fileID: 8224664476075990269}
 --- !u!114 &2096506318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,10 +597,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb1354744d94bd0af28806cc5bbcd34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _food: {fileID: 0}
-  _lookDistance: 5
-  headAnimation: {fileID: 1306216089457762563}
-  _pupilsRotator: {fileID: 1215591155599469217}
+  _emotionObjects:
+  - {fileID: 5054060163855056436}
+  - {fileID: 6917749776997360659}
 --- !u!114 &3045480349331367209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,6 +626,7 @@ GameObject:
   - component: {fileID: 8593108906177144055}
   - component: {fileID: 3988170420223830663}
   - component: {fileID: 1306216089457762563}
+  - component: {fileID: 5054060163855056436}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -733,6 +735,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 3988170420223830663}
+--- !u!114 &5054060163855056436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6391623433522634047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f196fa8a79841faa88eb73bdf7e5fc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reactionDistance: 3
+  _food: {fileID: 0}
+  _headAnimation: {fileID: 1306216089457762563}
 --- !u!1 &7685939536829232627
 GameObject:
   m_ObjectHideFlags: 0
