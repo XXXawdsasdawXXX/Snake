@@ -20,7 +20,7 @@ namespace Entities
             else if (other.gameObject.CompareTag(Constants.Tag.Obstacle.ToString()))
             {
                 _snake.InvokeCollisionEvent();
-                _snake.StopMove();
+        
                 AudioManager.Instance.PlayAudioEvent(AudioEventType.Death);
             }
             else if (other.gameObject.CompareTag(Constants.Tag.Wall.ToString()))

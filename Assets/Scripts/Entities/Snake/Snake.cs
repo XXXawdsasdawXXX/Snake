@@ -22,7 +22,7 @@ namespace Entities
         [SerializeField] private SnakeConfig _snakeConfig;
         [SerializeField] private SnakeSegment _headSnakeSegment;
         [SerializeField] private SnakeHeadAnimation _snakeHeadAnimation;
-        [SerializeField] private SnakeSpeed _snakeSpeed; 
+        [SerializeField] private SnakeSpeed _snakeSpeed;
 
         private SnakeSegment _segmentPrefab;
         private SnakeStaticData _data;
@@ -101,10 +101,17 @@ namespace Entities
         {
             if (IsActive)
             {
+             
+                for (var i = 0; i < Segments.Count; i++)
+                {
+                    Segments[i].MoveBack();
+                }
+
                 _snakeHeadAnimation.PlayDead();
                 ObstacleCollisionEvent?.Invoke();
             }
         }
+
 
         public void ResetState()
         {
@@ -114,7 +121,8 @@ namespace Entities
             _snakeHeadAnimation.ResetAnimation();
 
             _headSnakeSegment.StopMove();
-            _headSnakeSegment.transform.position = Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() * GetMultiplier();
+            _headSnakeSegment.transform.position =
+                Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() * GetMultiplier();
             _snakeSpeed.ResetBonusSpeed();
 
             _inputDirections.Clear();
@@ -160,7 +168,7 @@ namespace Entities
                 segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x,
                     _headSnakeSegment.transform.position.y + positionY, 0);
                 segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x,
-                    _headSnakeSegment.transform.position.y  + positionY, 0));
+                    _headSnakeSegment.transform.position.y + positionY, 0));
                 //
                 Segments.Add(segment);
                 segment.gameObject.name += $"{Segments.Count}";
@@ -169,7 +177,7 @@ namespace Entities
 
         private void AddSpeedMultiplier()
         {
-        _snakeSpeed.AddBonusSpeed();
+            _snakeSpeed.AddBonusSpeed();
         }
 
         public bool Occupies(int x, int y)
@@ -201,7 +209,7 @@ namespace Entities
 
             transform.position = position;
         }
-        
+
 
         private void Move(float period)
         {
@@ -219,12 +227,13 @@ namespace Entities
         {
             if (_headSnakeSegment.Target.x % 1 == 0 && _headSnakeSegment.Target.y % 1 == 0)
             {
-                Debugging.Instance.Log($"try setn direction { _inputDirections.Count}",Debugging.Type.Snake);
+                Debugging.Instance.Log($"try setn direction {_inputDirections.Count}", Debugging.Type.Snake);
                 for (int i = 0; i < _inputDirections.Count; i++)
                 {
                     var inputDirection = _inputDirections.Dequeue();
 
-                    Debugging.Instance.Log($"try setn direction {inputDirection} vs {_moveDirection}",Debugging.Type.Snake);
+                    Debugging.Instance.Log($"try setn direction {inputDirection} vs {_moveDirection}",
+                        Debugging.Type.Snake);
                     if (IsCanSetDirection(inputDirection))
                     {
                         _moveDirection = inputDirection;

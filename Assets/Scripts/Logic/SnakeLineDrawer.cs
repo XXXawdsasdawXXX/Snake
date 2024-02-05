@@ -10,7 +10,6 @@ namespace Logic
     {
         [SerializeField] private LineRenderer _line;
         [SerializeField] private RoundedCornerLine _roundedCorner;
-        [SerializeField] private Transform _trail;
         [SerializeField] private Snake _snake;
 
         [SerializeField] private int curveResolution = 2;
@@ -25,11 +24,9 @@ namespace Logic
 
         private void Update()
         {
-            if (_snake.IsActive)
-            {
-                RefreshLinePoints();
-                _roundedCorner.SetPoints(_linePoints.AsListVector2());
-            }
+            //if (!_snake.IsActive) return;
+            RefreshLinePoints();
+            _roundedCorner.SetPoints(_linePoints.AsListVector2());
         }
 
         private void OnDestroy()
@@ -82,11 +79,7 @@ namespace Logic
             {
                 _linePoints.Add(snakeSegments[^1].transform.position);
             }
-
-            if (_trail != null)
-            {
-                _trail.transform.position = snakeSegments[^1].transform.position;
-            }
+            
         }
 
         private int GetLenght(SnakeSegment[] snakeSegments)
