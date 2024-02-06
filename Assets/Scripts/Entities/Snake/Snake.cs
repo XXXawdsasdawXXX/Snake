@@ -23,6 +23,7 @@ namespace Entities
         [SerializeField] private SnakeSegment _headSnakeSegment;
         [SerializeField] private SnakeHeadAnimation _snakeHeadAnimation;
         [SerializeField] private SnakeSpeed _snakeSpeed;
+        [SerializeField] private GameObject _pupils;
 
         private SnakeSegment _segmentPrefab;
         private SnakeStaticData _data;
@@ -108,6 +109,7 @@ namespace Entities
                 }
 
                 _snakeHeadAnimation.PlayDead();
+                _pupils.SetActive(false);
                 ObstacleCollisionEvent?.Invoke();
             }
         }
@@ -119,6 +121,7 @@ namespace Entities
 
             IsActive = false;
             _snakeHeadAnimation.ResetAnimation();
+            _pupils.SetActive(true);
 
             _headSnakeSegment.StopMove();
             _headSnakeSegment.transform.position =

@@ -1,0 +1,1609 @@
+fileFormatVersion: 2
+guid: b7ee00cb822dfdb418ce8e21a4eba2b9
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SnakeCrashSheet_0
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 6753
+        width: 437
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c10ed6e25210b4248a6d76caa04adbb1
+      internalID: -2013564813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_1
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 6753
+        width: 438
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 763e61a9b2b045349b0c96c38c2633b5
+      internalID: -1564191843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_2
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 6754
+        width: 434
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89daaa07f1edd2b47b148d80db6f52b5
+      internalID: -1566793631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_3
+      rect:
+        serializedVersion: 2
+        x: 1574
+        y: 6757
+        width: 437
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27fc1cff11f48394cae25a0034ca24e9
+      internalID: 546431060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_4
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 6757
+        width: 438
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af69530378237104d90a475d4d05046c
+      internalID: -53702808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_5
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 6246
+        width: 459
+        height: 276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4e4f308fa9d98c4b9a7fffc94974fd6
+      internalID: -1077406602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_6
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 6242
+        width: 455
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 080273c2abde1f64989368d22c174664
+      internalID: -841897347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_7
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 6239
+        width: 456
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67f22e4f578e7c147bd063d6139f653c
+      internalID: 1183310569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_8
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 6235
+        width: 458
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e971c62ade419a419ae9b9f47e271c8
+      internalID: 1426827013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_9
+      rect:
+        serializedVersion: 2
+        x: 2075
+        y: 6235
+        width: 459
+        height: 298
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3a41daa4fcb65549888200a0bf4532c
+      internalID: -10215637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_10
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 5728
+        width: 459
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a3f55b392d0078479e734934e9955d9
+      internalID: 656050706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_11
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 5728
+        width: 455
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b76e04922dfe8d408aa1bfddfd7c1e9
+      internalID: -2024988214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_12
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 5731
+        width: 456
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a288251df5fd34040acd82c53ce19154
+      internalID: 1055251558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_13
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 5731
+        width: 455
+        height: 298
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3f4271b4154e6b47b1b117622138a87
+      internalID: 2090572257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_14
+      rect:
+        serializedVersion: 2
+        x: 2075
+        y: 5731
+        width: 459
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c174ccc601fb214eb128633afccd645
+      internalID: -410459833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_15
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 5220
+        width: 459
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 207862643af205d40b5a46fb901dc5b9
+      internalID: -1786136360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_16
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 5217
+        width: 455
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aec8c3e91c91a284f942279759a9d6c1
+      internalID: 1484606829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_17
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 5217
+        width: 456
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd69e2b044f3c8143becc4486d2eac95
+      internalID: -1102361292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_18
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 5217
+        width: 455
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a14f511c8325f74ab9d9d8548cfb566
+      internalID: 1714909103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_19
+      rect:
+        serializedVersion: 2
+        x: 2075
+        y: 5217
+        width: 459
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6411e9a4a5d8e24ba0bc36da8382926
+      internalID: -1383581891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_20
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 4706
+        width: 459
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e80513379ed9c4b42b29e3ea26059f7f
+      internalID: -1977574897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_21
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 4706
+        width: 455
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c88c47c644e41d3468732480a8cd56b3
+      internalID: -1582020244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_22
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 4706
+        width: 456
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1d7ebe2791f3bf448e1d553731f8fc7
+      internalID: -663843513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_23
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 4706
+        width: 455
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5be669ff74d0644a8355fbd15b04bf5
+      internalID: 1589029939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_24
+      rect:
+        serializedVersion: 2
+        x: 2075
+        y: 4706
+        width: 459
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f972148a746c390489f8491d8991a8db
+      internalID: -1845861580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_25
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 4193
+        width: 459
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eab276f72f7db5d4fa4ee20165fbae48
+      internalID: -358078487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_26
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 4193
+        width: 455
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bb6cda54dc4c824798f2250f7e9c66e
+      internalID: 1095985893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_27
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 4195
+        width: 456
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c23cf630056dfc4496c78b31d80881b
+      internalID: 1815895265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_28
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 4195
+        width: 455
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22b2671d5f3bd70499c2154b17ff1a25
+      internalID: 131361059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_29
+      rect:
+        serializedVersion: 2
+        x: 2075
+        y: 4193
+        width: 459
+        height: 317
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfd47430b1961bf4e92c468b54cfede3
+      internalID: 1489075847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_30
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 3680
+        width: 459
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4196b1525457614dbb40c0a21e0fada
+      internalID: -528754330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_31
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 3680
+        width: 440
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40210317255a13243bca8101ffc20bb2
+      internalID: -990546298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_32
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 3680
+        width: 442
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea08f2cc5ad9d51418f251d5afd40331
+      internalID: 1346033956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_33
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 3680
+        width: 439
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f07730a1c6cf3cc45b93e11d3fe536ee
+      internalID: 2069270189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_34
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 3680
+        width: 438
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c62122fca9e7813459597b0032306be4
+      internalID: 732808796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_35
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 3169
+        width: 437
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7687b4df2c88b1b46a4d0ac2fdacd661
+      internalID: -1166951304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_36
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 3169
+        width: 438
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d068ce49f91b15e4cbaa78f8081d24f2
+      internalID: -2101257958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_37
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 3169
+        width: 438
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6180a22a7111e2848ae3b74ab6e07db7
+      internalID: 349811794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_38
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 3169
+        width: 438
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: deabf80a78b260c448eee774026d75c2
+      internalID: -1184897878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_39
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 3169
+        width: 438
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73c0016987bda5642a6a7ce8db57ae69
+      internalID: 1828648460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_40
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 2658
+        width: 437
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9101bc399e95d4946b9b21e33c661e39
+      internalID: 286735041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_41
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 2658
+        width: 438
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bc46becb1f70214392862f3ec98b526
+      internalID: 413994765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_42
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 2658
+        width: 438
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3483c5ca8c5c3a4b88afd84828ba907
+      internalID: -1345110556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_43
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 2658
+        width: 438
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae00a8efbfd2a9e47af915bf48cc3d27
+      internalID: -922676866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_44
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 2658
+        width: 438
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51bb0e060d8a59c4c8bb13f6fcad8ec0
+      internalID: 1904947714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_45
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 2144
+        width: 437
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b13039455522e7e469415674970f79a6
+      internalID: 921336317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_46
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 2144
+        width: 438
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d66a34f6a0aeb9a44be741fb2671eab7
+      internalID: -680889579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_47
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 2144
+        width: 438
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53e795325c6eeae4f8102ae04d97b21d
+      internalID: -1647951685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_48
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 2144
+        width: 438
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ec3613f5f6b87f4dac97ae9799b783d
+      internalID: 816401286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_49
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 2144
+        width: 438
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 596bc89a45807844798a6c4624f6565c
+      internalID: -1941455908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_50
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 1633
+        width: 437
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc057ebf90f00842be43704993bce08
+      internalID: 914124825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_51
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 1633
+        width: 438
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28a9de284811dae42a16902ab0fb56e3
+      internalID: 2125884383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_52
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 1633
+        width: 438
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 003e3708a63961a49841d0ebf8186c55
+      internalID: 2007169504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_53
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 1633
+        width: 438
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f38e8b3d4f99d6a4583c80f4b5717a81
+      internalID: -1145472675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_54
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 1633
+        width: 438
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 291c2c372dd248d4e9c98463395d1e78
+      internalID: 1611249565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_55
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 1122
+        width: 437
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98bd5ca3afd8665468936694e3c97873
+      internalID: 1863876927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_56
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 1122
+        width: 438
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fa4ad155011f5e4f8898fa142604a02
+      internalID: 938374977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_57
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 1122
+        width: 438
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bc9afd1d2b4cd84387894d6ce8ff086
+      internalID: -1607500517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_58
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 1122
+        width: 438
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eab1a732546b374a99b2f5549658fbe
+      internalID: -1824912511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_59
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 1122
+        width: 438
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ac8e599d6105ae45843ff62e0bdf0f8
+      internalID: -40990374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_60
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 611
+        width: 437
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2150b970f86fde94ca5b3c64ce8f4045
+      internalID: 1015864261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_61
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 611
+        width: 438
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e798215a83f57264d85f9544509b2108
+      internalID: -440475574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_62
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 611
+        width: 438
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51004dbe488693146848385f1de11d23
+      internalID: 2031477114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_63
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 611
+        width: 439
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5928b1d746cbb314f89f661719969efa
+      internalID: -697746057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_64
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 607
+        width: 438
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f094eced97ba6e40ae598946e88d3f8
+      internalID: -349533911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_65
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 93
+        width: 441
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcc7f37710913d64eb08e84f4367aa1e
+      internalID: 1938651082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SnakeCrashSheet_66
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 93
+        width: 445
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28d889cc26c868c4ca90f6a0194b2fbf
+      internalID: -1527658699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      SnakeCrashSheet_0: -2013564813
+      SnakeCrashSheet_1: -1564191843
+      SnakeCrashSheet_10: 656050706
+      SnakeCrashSheet_11: -2024988214
+      SnakeCrashSheet_12: 1055251558
+      SnakeCrashSheet_13: 2090572257
+      SnakeCrashSheet_14: -410459833
+      SnakeCrashSheet_15: -1786136360
+      SnakeCrashSheet_16: 1484606829
+      SnakeCrashSheet_17: -1102361292
+      SnakeCrashSheet_18: 1714909103
+      SnakeCrashSheet_19: -1383581891
+      SnakeCrashSheet_2: -1566793631
+      SnakeCrashSheet_20: -1977574897
+      SnakeCrashSheet_21: -1582020244
+      SnakeCrashSheet_22: -663843513
+      SnakeCrashSheet_23: 1589029939
+      SnakeCrashSheet_24: -1845861580
+      SnakeCrashSheet_25: -358078487
+      SnakeCrashSheet_26: 1095985893
+      SnakeCrashSheet_27: 1815895265
+      SnakeCrashSheet_28: 131361059
+      SnakeCrashSheet_29: 1489075847
+      SnakeCrashSheet_3: 546431060
+      SnakeCrashSheet_30: -528754330
+      SnakeCrashSheet_31: -990546298
+      SnakeCrashSheet_32: 1346033956
+      SnakeCrashSheet_33: 2069270189
+      SnakeCrashSheet_34: 732808796
+      SnakeCrashSheet_35: -1166951304
+      SnakeCrashSheet_36: -2101257958
+      SnakeCrashSheet_37: 349811794
+      SnakeCrashSheet_38: -1184897878
+      SnakeCrashSheet_39: 1828648460
+      SnakeCrashSheet_4: -53702808
+      SnakeCrashSheet_40: 286735041
+      SnakeCrashSheet_41: 413994765
+      SnakeCrashSheet_42: -1345110556
+      SnakeCrashSheet_43: -922676866
+      SnakeCrashSheet_44: 1904947714
+      SnakeCrashSheet_45: 921336317
+      SnakeCrashSheet_46: -680889579
+      SnakeCrashSheet_47: -1647951685
+      SnakeCrashSheet_48: 816401286
+      SnakeCrashSheet_49: -1941455908
+      SnakeCrashSheet_5: -1077406602
+      SnakeCrashSheet_50: 914124825
+      SnakeCrashSheet_51: 2125884383
+      SnakeCrashSheet_52: 2007169504
+      SnakeCrashSheet_53: -1145472675
+      SnakeCrashSheet_54: 1611249565
+      SnakeCrashSheet_55: 1863876927
+      SnakeCrashSheet_56: 938374977
+      SnakeCrashSheet_57: -1607500517
+      SnakeCrashSheet_58: -1824912511
+      SnakeCrashSheet_59: -40990374
+      SnakeCrashSheet_6: -841897347
+      SnakeCrashSheet_60: 1015864261
+      SnakeCrashSheet_61: -440475574
+      SnakeCrashSheet_62: 2031477114
+      SnakeCrashSheet_63: -697746057
+      SnakeCrashSheet_64: -349533911
+      SnakeCrashSheet_65: 1938651082
+      SnakeCrashSheet_66: -1527658699
+      SnakeCrashSheet_7: 1183310569
+      SnakeCrashSheet_8: 1426827013
+      SnakeCrashSheet_9: -10215637
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
