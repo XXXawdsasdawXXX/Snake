@@ -13,15 +13,13 @@ namespace Entities
         public bool IsMoving { get; private set; }
         public Vector3 LastTarget { get; private set; }
         public Vector3 Target { get; private set; }
-        public Vector3 LastPoint => _way[0];
-
-
+        
         private Vector2Int _moveDirection { get; set; }
         private bool _isSetTargets => LastTarget != Vector3.zero && Target != Vector3.zero;
 
         private Tween _moveTween;
 
-        private List<Vector3> _way = new List<Vector3>();
+        private readonly List<Vector3> _way = new();
 
         public void StartMove(Vector3 target, float duration, Action onEndMove = null)
         {
@@ -54,8 +52,6 @@ namespace Entities
                 sequence.Append(transform.DOMove(_way[i], 0.05f).SetEase(Ease.Linear)
                     .SetLink(gameObject, LinkBehaviour.KillOnDestroy));
             }
-
-            //sequence.AppendCallback(StopMove);
         }
 
         public void SetTarget(Vector3 target)

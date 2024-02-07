@@ -102,7 +102,6 @@ namespace Entities
         {
             if (IsActive)
             {
-             
                 for (var i = 0; i < Segments.Count; i++)
                 {
                     Segments[i].MoveBack();
@@ -111,6 +110,7 @@ namespace Entities
                 _snakeHeadAnimation.PlayDead();
                 _pupils.SetActive(false);
                 ObstacleCollisionEvent?.Invoke();
+                IsActive = false;
             }
         }
 
