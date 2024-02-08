@@ -104,7 +104,7 @@ namespace Services
                     _gameState = GameState.Play;
                     _snake.StartMove();
                 }
-                else if(_screenAdapter.IsEmpty())
+                else/* if(_screenAdapter.IsEmpty())*/
                 {
                     StartCoroutine(StartGame());
                 }

@@ -23,6 +23,8 @@ namespace Services
             _isMouse = Screen.width < Screen.height;
             _keyDirectionListener = new KeyDirectionListener();
             _mouseDirectionListener = new MouseDirectionListener();
+
+            _currentDirectionListener = _isMouse ? _mouseDirectionListener : _keyDirectionListener;
             SubscribeToEvents(true);
         }
 
@@ -52,6 +54,7 @@ namespace Services
                 _currentDirectionListener?.SetDirection();
 
                 var dir = GetDirection();
+                    Debugging.Instance.Log($"try set new direction {dir} ", Debugging.Type.Input);
                 if (_direction != dir)
                 {
                     Debugging.Instance.Log($"Set new direction {dir} ", Debugging.Type.Input);
@@ -69,7 +72,7 @@ namespace Services
 
         public Vector2Int GetDirection()
         {
-            return _currentDirectionListener != null && _isPlaying
+            return _currentDirectionListener != null /*&& _isPlaying*/
                 ? _currentDirectionListener.GetDirection()
                 : Vector2Int.zero;
         }

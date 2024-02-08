@@ -11,7 +11,7 @@ namespace Entities
 {
     public class Snake : MonoBehaviour
     {
-        public List<SnakeSegment> Segments /*{ get; }*/ = new();
+        public List<SnakeSegment> Segments { get; } = new();
         public bool IsActive { get; private set; }
 
         [SerializeField] private InputService _input;
@@ -23,8 +23,7 @@ namespace Entities
         [SerializeField] private SnakeSegment _headSnakeSegment;
         [SerializeField] private SnakeHeadAnimation _snakeHeadAnimation;
         [SerializeField] private SnakeSpeed _snakeSpeed;
-        [SerializeField] private GameObject _pupils;
-
+        
         private SnakeSegment _segmentPrefab;
         private SnakeStaticData _data;
 
@@ -108,7 +107,6 @@ namespace Entities
                 }
 
                 _snakeHeadAnimation.PlayDead();
-                _pupils.SetActive(false);
                 ObstacleCollisionEvent?.Invoke();
                 IsActive = false;
             }
@@ -121,7 +119,6 @@ namespace Entities
 
             IsActive = false;
             _snakeHeadAnimation.ResetAnimation();
-            _pupils.SetActive(true);
 
             _headSnakeSegment.StopMove();
             _headSnakeSegment.transform.position = Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() * GetMultiplier();
@@ -151,12 +148,13 @@ namespace Entities
             {
                 return;
             }
+
             for (int i = 0; i < Constants.SEGMENT_COUNT; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab, _trailSegmentsRoot, true);
                 segment.transform.position = new Vector3(Segments[^1].LastTarget.x, Segments[^1].LastTarget.y, 0);
+                segment.Collision.EnableCollision();
                 Segments.Add(segment);
-                segment.Collision.EnableCollision(); 
                 segment.gameObject.name += $"{Segments.Count}";
             }
 
@@ -169,7 +167,7 @@ namespace Entities
             for (int i = 0; i < Constants.SEGMENT_COUNT * _data.InitialSize; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab, _trailSegmentsRoot, true);
-                
+
                 //это дерьмо меняется взависимости от Constants.DEFAULT_DIRECTION
                 var positionY = i * GetMultiplier();
                 segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x,
@@ -177,6 +175,7 @@ namespace Entities
                 segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x,
                     _headSnakeSegment.transform.position.y + positionY, 0));
                 //
+                
                 Segments.Add(segment);
                 segment.gameObject.name += $"{Segments.Count}";
             }
@@ -202,7 +201,6 @@ namespace Entities
         }
 
 
-
         private void Move(float period)
         {
             var x = _headSnakeSegment.Target.x + (_moveDirection.x * GetMultiplier());
@@ -219,13 +217,10 @@ namespace Entities
         {
             if (_headSnakeSegment.Target.x % 1 == 0 && _headSnakeSegment.Target.y % 1 == 0)
             {
-                Debugging.Instance.Log($"try setn direction {_inputDirections.Count}", Debugging.Type.Snake);
                 for (int i = 0; i < _inputDirections.Count; i++)
                 {
                     var inputDirection = _inputDirections.Dequeue();
 
-                    Debugging.Instance.Log($"try setn direction {inputDirection} vs {_moveDirection}",
-                        Debugging.Type.Snake);
                     if (IsCanSetDirection(inputDirection))
                     {
                         _moveDirection = inputDirection;

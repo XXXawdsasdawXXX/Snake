@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Utils;
 
 namespace Services
 {
@@ -7,7 +8,7 @@ namespace Services
     {
         private Vector2Int _direction;
         private IInputDirectionListener _inputDirectionListenerImplementation;
-        public event Action<Vector2Int> SetNewDirectionEvent;
+
 
         public void SetDirection(Vector2Int direction)
         {
@@ -29,12 +30,12 @@ namespace Services
             if (x != 0)
             {
                 _direction = new Vector2Int(Convert.ToInt32(x), 0);
-                SetNewDirectionEvent?.Invoke(_direction);
-            }
-            else if (y != 0)
+                Debugging.Instance.Log($"Set key direction {_direction}",Debugging.Type.Input);
+            } 
+            if (y != 0)
             {
                 _direction = new Vector2Int(0, Convert.ToInt32(y));
-                SetNewDirectionEvent?.Invoke(_direction);
+                Debugging.Instance.Log($"Set key direction {_direction}",Debugging.Type.Input);
             }
         }
 
