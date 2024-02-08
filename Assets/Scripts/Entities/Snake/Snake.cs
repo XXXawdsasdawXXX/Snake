@@ -124,8 +124,7 @@ namespace Entities
             _pupils.SetActive(true);
 
             _headSnakeSegment.StopMove();
-            _headSnakeSegment.transform.position =
-                Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() * GetMultiplier();
+            _headSnakeSegment.transform.position = Vector3.zero - Constants.DEFAULT_DIRECTION.AsVector3() * GetMultiplier();
             _snakeSpeed.ResetBonusSpeed();
 
             _inputDirections.Clear();
@@ -148,12 +147,17 @@ namespace Entities
 
         public void Grow()
         {
+            if (!IsActive)
+            {
+                return;
+            }
             for (int i = 0; i < Constants.SEGMENT_COUNT; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab, _trailSegmentsRoot, true);
                 segment.transform.position = new Vector3(Segments[^1].LastTarget.x, Segments[^1].LastTarget.y, 0);
                 Segments.Add(segment);
-                segment.Collision.EnableCollision();
+                segment.Collision.EnableCollision(); 
+                segment.gameObject.name += $"{Segments.Count}";
             }
 
             GrowEvent?.Invoke();
@@ -165,9 +169,9 @@ namespace Entities
             for (int i = 0; i < Constants.SEGMENT_COUNT * _data.InitialSize; i++)
             {
                 SnakeSegment segment = Instantiate(_segmentPrefab, _trailSegmentsRoot, true);
-
-                var positionY = i * GetMultiplier();
+                
                 //это дерьмо меняется взависимости от Constants.DEFAULT_DIRECTION
+                var positionY = i * GetMultiplier();
                 segment.transform.position = new Vector3(_headSnakeSegment.transform.position.x,
                     _headSnakeSegment.transform.position.y + positionY, 0);
                 segment.SetTarget(new Vector3(_headSnakeSegment.transform.position.x,
@@ -197,21 +201,6 @@ namespace Entities
             return false;
         }
 
-        public void Traverse(Transform wall)
-        {
-            Vector3 position = transform.position;
-
-            if (_moveDirection.x != 0f)
-            {
-                position.x = Mathf.RoundToInt(-wall.position.x + _moveDirection.x);
-            }
-            else if (_moveDirection.y != 0f)
-            {
-                position.y = Mathf.RoundToInt(-wall.position.y + _moveDirection.y);
-            }
-
-            transform.position = position;
-        }
 
 
         private void Move(float period)

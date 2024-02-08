@@ -1,5 +1,7 @@
 ﻿using Logic;
+using Logic.Health;
 using Services;
+using UI.Components;
 using UI.Components.Screens;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,10 +10,14 @@ namespace UI
 {
     public class TopPanelAdapter : MonoBehaviour
     {
+        [Header("services")]
         [SerializeField] private GameController _gameController;
-        [SerializeField] private ProgressBar _progressBar;
         [SerializeField] private Score _score;
+        [SerializeField] private Health _health;
+        [Header("ui components")]
+        [SerializeField] private ProgressBar _progressBar;
         [SerializeField] private Button _pauseButton;
+        [SerializeField] private HealthBar _healthBar;
 
         private void Awake()
         {
@@ -31,6 +37,7 @@ namespace UI
                 _gameController.ResetGameEvent += OnResetGame;
                 _gameController.PauseEvent += OnPauseGame;
                 _score.ChangeEvent += OnScoreChange;
+                _health.ChangeValueEvent += HealthOnChangeValueEvent;
             }
             else
             {
@@ -38,7 +45,13 @@ namespace UI
                 _gameController.ResetGameEvent -= OnResetGame;
                 _gameController.PauseEvent -= OnPauseGame;
                 _score.ChangeEvent -= OnScoreChange;
+                _health.ChangeValueEvent -= HealthOnChangeValueEvent;
             }
+        }
+
+        private void HealthOnChangeValueEvent(int value)
+        {
+            _healthBar.SetValue(value);
         }
 
         private void OnPauseGame(bool isPause)

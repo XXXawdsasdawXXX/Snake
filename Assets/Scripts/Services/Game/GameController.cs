@@ -2,6 +2,8 @@
 using DG.Tweening;
 using Entities;
 using Logic;
+using Logic.Health;
+using UI;
 using UI.Components;
 using UnityEngine;
 using Utils;
@@ -10,10 +12,13 @@ namespace Services
 {
     public partial class GameController : MonoBehaviour
     {
+        [SerializeField] private SnakeDeathFlashing _snakeFlashing;
         [SerializeField] private Snake _snake;
         [SerializeField] private Score _score;
         [SerializeField] private InputService _input;
         [SerializeField] private JSService _jsService;
+        [SerializeField] private Health _health;
+        [SerializeField] private ScreenAdapter _screenAdapter;
 
         [SerializeField] private GameState _gameState;
         public GameState GameState => _gameState;
@@ -37,18 +42,27 @@ namespace Services
             if (flag)
             {
                 UIEvents.ClickButtonEvent += OnClickButton;
-
+                _health.ChangeValueEvent += CheckLose;
                 _input.SetNewDirectionEvent += TryStartGame;
-                _snake.ObstacleCollisionEvent += LoseGame;
                 _score.SetMaxScoreEvent += WonGame;
+                _snakeFlashing.LastFlashingEvent += ResetGame;
             }
             else
             {
                 UIEvents.ClickButtonEvent -= OnClickButton;
 
+                _health.ChangeValueEvent += CheckLose;
                 _input.SetNewDirectionEvent -= TryStartGame;
-                _snake.ObstacleCollisionEvent -= LoseGame;
                 _score.SetMaxScoreEvent -= WonGame;
+                _snakeFlashing.LastFlashingEvent -= ResetGame;
+            }
+        }
+
+        private void CheckLose(int healthValue)
+        {
+            if (healthValue == 0)
+            {
+                LoseGame();
             }
         }
 
@@ -62,11 +76,11 @@ namespace Services
                 case EventButtonType.Close:
                     CloseGame();
                     break;
+                /*case EventButtonType.Play:
+                    ResetGame();
+                    break;*/
                 case EventButtonType.Pause:
                     PauseGame(!_isPause);
-                    break;
-                case EventButtonType.Play:
-                    ResetGame();
                     break;
             }
         }
@@ -83,7 +97,6 @@ namespace Services
 
         private void TryStartGame(Vector2Int direction)
         {
-            
             if (_gameState == GameState.AwaitInput && direction != Vector2Int.zero)
             {
                 if (_isPlaying)
@@ -91,7 +104,7 @@ namespace Services
                     _gameState = GameState.Play;
                     _snake.StartMove();
                 }
-                else
+                else if(_screenAdapter.IsEmpty())
                 {
                     StartCoroutine(StartGame());
                 }
@@ -101,13 +114,14 @@ namespace Services
         private IEnumerator StartGame()
         {
             yield return new WaitForSeconds(0.25f);
-            
+
             if (_isPause || _isPlaying)
             {
                 yield break;
             }
+
             Debugging.Instance.Log($"Start game", Debugging.Type.GameController);
-            
+
             _isPlaying = true;
             _gameState = GameState.Play;
             _snake.StartMove();
@@ -157,7 +171,6 @@ namespace Services
             }
             else
             {
-
                 Time.timeScale = 1;
                 InvokePauseGame(false);
             }

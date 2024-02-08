@@ -16,7 +16,8 @@ namespace Utils
             Input,
             UI,
             JS,
-            GameController
+            GameController,
+            Health
         }
 
         [Serializable]

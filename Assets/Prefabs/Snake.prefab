@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 2096506318}
   - component: {fileID: 6123168659727239786}
   - component: {fileID: 3045480349331367209}
+  - component: {fileID: 2096506317}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Obstacle
@@ -617,6 +618,24 @@ MonoBehaviour:
   _snake: {fileID: 5455316295330283626}
   _snakeConfig: {fileID: 11400000, guid: f2e0df60239f2044a8dcee902828172b, type: 2}
   _speedIncrease: 0.1
+--- !u!114 &2096506317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5455316295330283627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87bd946479d2458ea96b4230c4526280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flashingCount: 3
+  _delay: 1
+  _flashingObjects:
+  - {fileID: 6391623433522634047}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &6391623433522634047
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,25 +10,27 @@ namespace Entities
     {
         [SerializeField] private SnakeSegmentCollision _segmentCollision;
         public SnakeSegmentCollision Collision => _segmentCollision;
-        public bool IsMoving { get; private set; }
-        public Vector3 LastTarget { get; private set; }
-        public Vector3 Target { get; private set; }
         
+        public bool IsMoving /*{ get; private set; }*/;
+        public Vector3 LastTarget /*{ get; private set; }*/;
+        public Vector3 Target /*{ get; private set; }*/;
+
+        public float Distance => Vector3.Distance(transform.position, Target);
         private Vector2Int _moveDirection { get; set; }
-        private bool _isSetTargets => LastTarget != Vector3.zero && Target != Vector3.zero;
 
         private Tween _moveTween;
 
-        private readonly List<Vector3> _way = new();
+        [SerializeField] private /*readonly */List<Vector3> _way = new();
 
+        
         public void StartMove(Vector3 target, float duration, Action onEndMove = null)
         {
             AddPoint(target);
 
             LastTarget = Target;
             Target = target;
-
-            if (_isSetTargets && !IsMoving)
+            
+            if (LastTarget != Vector3.zero && Target != Vector3.zero && !IsMoving && Vector3.Distance(transform.position, Target) <0.3f)
             {
                 IsMoving = true;
             }
@@ -62,8 +64,8 @@ namespace Entities
 
         public void StopMove()
         {
-            Target = Vector3.zero;
-            LastTarget = Vector3.zero;
+            /*Target = Vector3.zero;
+            LastTarget = Vector3.zero;*/
             _moveTween?.Kill();
         }
 
@@ -76,7 +78,12 @@ namespace Entities
 
         private void AddPoint(Vector3 target)
         {
-            if (_way.Count > Constants.SEGMENT_COUNT)
+            if (_way.Count == 0 && target == Vector3.zero)
+            {
+                return;
+            }
+            
+            if (_way.Count >= Constants.SEGMENT_COUNT)
             {
                 _way.RemoveAt(0);
             }

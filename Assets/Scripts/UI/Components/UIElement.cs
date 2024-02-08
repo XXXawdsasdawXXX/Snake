@@ -7,6 +7,10 @@ namespace UI.Components
     {
         [SerializeField] protected RectTransform body;
 
+        public bool IsActive()
+        {
+            return body != null && body.gameObject.activeSelf;
+        }
         public virtual void Show(Action onShown = null)
         {
             body.gameObject.SetActive(true);

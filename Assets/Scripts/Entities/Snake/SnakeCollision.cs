@@ -25,16 +25,11 @@ namespace Entities
             }
             else if (other.gameObject.CompareTag(Constants.Tag.Wall.ToString()))
             {
-                if (_snakeConfig.StaticData.MoveThroughWalls)
-                {
-                    _snake.Traverse(other.transform);
-                }
-                else
-                {
+              
                     _snake.InvokeCollisionEvent();
                     _snake.StopMove();
                     AudioManager.Instance.PlayAudioEvent(AudioEventType.Death);
-                }
+              
             }
         }
     }

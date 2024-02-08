@@ -15,6 +15,7 @@ namespace Logic
         public event Action UpdateSavePointEvent;
         public event Action SetMaxScoreEvent;
         public event Action<int> ChangeEvent;
+        
 
         public void Init(int[] saveScorePoints)
         {
