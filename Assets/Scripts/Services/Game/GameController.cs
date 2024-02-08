@@ -76,9 +76,9 @@ namespace Services
                 case EventButtonType.Close:
                     CloseGame();
                     break;
-                /*case EventButtonType.Play:
+                case EventButtonType.Play:
                     ResetGame();
-                    break;*/
+                    break;
                 case EventButtonType.Pause:
                     PauseGame(!_isPause);
                     break;

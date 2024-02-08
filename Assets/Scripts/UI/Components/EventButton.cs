@@ -29,6 +29,5 @@ namespace UI.Components
         Play,
         Close,
         Pause,
-        AwaitInput
     }
 }

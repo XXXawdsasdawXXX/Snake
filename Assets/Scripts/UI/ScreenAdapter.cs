@@ -48,7 +48,6 @@ namespace UI
                 _gameController.EndGameEvent += OnEndGame;
                 _gameController.PauseEvent += OnPauseGame;
                 _gameController.StartGameEvent += HideTutorial;
-                _snake.ObstacleCollisionEvent += OnObstacleCollision;
                 
                 UIEvents.ClickButtonEvent += ClickButtonEvent;
             }
@@ -57,18 +56,12 @@ namespace UI
                 _gameController.EndGameEvent -= OnEndGame;
                 _gameController.PauseEvent -= OnPauseGame;
                 _gameController.StartGameEvent -= HideTutorial;
-                _snake.ObstacleCollisionEvent -= OnObstacleCollision;
                 
                 UIEvents.ClickButtonEvent -= ClickButtonEvent;
             }
         }
 
-        private void OnObstacleCollision()
-        {
-            /*_openedScreen?.Hide();
-            _openedScreen = _screenAwaitInput;
-            _openedScreen.Show();*/
-        }
+ 
 
         private void ClickButtonEvent(EventButtonType obj)
         {
@@ -82,9 +75,6 @@ namespace UI
                 case EventButtonType.Close:
                     break;
                 case EventButtonType.Pause:
-                    break;
-                case EventButtonType.AwaitInput:
-                    _screenAwaitInput.Hide();
                     break;
             }
         }

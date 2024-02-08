@@ -1,6 +1,7 @@
 ﻿using System;
 using Entities;
 using Services;
+using UI.Components;
 using UnityEngine;
 
 namespace Logic.Health
@@ -27,19 +28,24 @@ namespace Logic.Health
             {
                 _snake.ObstacleCollisionEvent += OnObstacleCollision;
                 _gameController.InitSessionEvent += OnInitSession;
-                _gameController.EndGameEvent += EndGameEvent;
+                UIEvents.ClickButtonEvent += ClickButtonEvent;
             }
             else
             {
                 _snake.ObstacleCollisionEvent -= OnObstacleCollision;
                 _gameController.InitSessionEvent -= OnInitSession;
-                _gameController.EndGameEvent -= EndGameEvent;
+        
             }
         }
 
-        private void EndGameEvent(bool obj)
+        private void ClickButtonEvent(EventButtonType obj)
         {
-            _health.ResetHealth();
+            switch (obj)
+            {
+                case EventButtonType.Play:
+                    _health.ResetHealth();
+                    break;
+            }
         }
 
         private void OnInitSession(SessionData obj)

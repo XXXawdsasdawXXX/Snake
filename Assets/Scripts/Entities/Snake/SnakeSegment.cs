@@ -11,11 +11,10 @@ namespace Entities
         [SerializeField] private SnakeSegmentCollision _segmentCollision;
         public SnakeSegmentCollision Collision => _segmentCollision;
         
-        public bool IsMoving /*{ get; private set; }*/;
-        public Vector3 LastTarget /*{ get; private set; }*/;
-        public Vector3 Target /*{ get; private set; }*/;
+        public bool IsMoving { get; private set; }
+        public Vector3 LastTarget { get; private set; }
+        public Vector3 Target { get; private set; }
 
-        public float Distance => Vector3.Distance(transform.position, Target);
         private Vector2Int _moveDirection { get; set; }
 
         private Tween _moveTween;
@@ -30,7 +29,7 @@ namespace Entities
             LastTarget = Target;
             Target = target;
             
-            if (LastTarget != Vector3.zero && Target != Vector3.zero && !IsMoving && Vector3.Distance(transform.position, Target) <0.3f)
+            if (!IsMoving && _way.Count > 2)
             {
                 IsMoving = true;
             }
@@ -64,8 +63,6 @@ namespace Entities
 
         public void StopMove()
         {
-            /*Target = Vector3.zero;
-            LastTarget = Vector3.zero;*/
             _moveTween?.Kill();
         }
 
