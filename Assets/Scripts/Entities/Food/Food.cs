@@ -13,6 +13,8 @@ namespace Entities
         [SerializeField] private GameController _gameController;
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
+        public bool IsActive => _spriteRenderer != null && _spriteRenderer.enabled;
+
         private void Awake()
         {
             _gameController.ResetGameEvent += DisableSprite;

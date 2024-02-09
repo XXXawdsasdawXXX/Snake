@@ -9,7 +9,7 @@ namespace Entities
 
         public override bool IsReady()
         {
-            return IsNear(_food.transform.position);
+            return _food.IsActive && IsNear(_food.transform.position);
         }
 
         public override void StartReaction()

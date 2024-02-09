@@ -18,17 +18,16 @@ namespace Entities
         private static readonly int Show = Animator.StringToHash("Show");
         private static readonly int Hide = Animator.StringToHash("Hide");
 
+        private Coroutine _coroutine;
         
-        private void Start()
+        private void Awake()
         {
-            StopReaction();
-            _snake.ResetEvent += InvokeEndAnimation;
+            _snake.ResetEvent += Reset;
         }
-
-
+        
         private void OnDestroy()
         {
-            _snake.ResetEvent -= InvokeEndAnimation;
+            _snake.ResetEvent -= Reset;
         }
 
         public override bool IsReady()
@@ -46,12 +45,19 @@ namespace Entities
         public override void StopReaction()
         {
             _cooldownIsUp = false;
-            StartCoroutine(CooldownRoutine());
+
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
+            _coroutine = StartCoroutine(CooldownRoutine());
         }
 
-        public void HideTongue()
+        public void Reset()
         {
             _tongueAnimator.SetTrigger(Hide);
+            IsShowTongue = false;
+           StopReaction();
         }
         
         private IEnumerator CooldownRoutine()
