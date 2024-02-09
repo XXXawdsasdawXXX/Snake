@@ -2259,7 +2259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2529b0ae8c564a17b822f34ef5fe0a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _snakeFlashing: {fileID: 2096506317}
+  _snakeAnimation: {fileID: 2096506317}
   _snake: {fileID: 2096506309}
   _score: {fileID: 422000063}
   _input: {fileID: 1403511721}
@@ -5996,7 +5996,7 @@ MonoBehaviour:
     Active: 0
     Color: {r: 0.43289468, g: 0.37486652, b: 0.9811321, a: 1}
   - Type: 3
-    Active: 1
+    Active: 0
     Color: {r: 0.37647066, g: 0.98039216, b: 0.7957634, a: 1}
   - Type: 4
     Active: 0
@@ -9176,14 +9176,6 @@ PrefabInstance:
       propertyPath: _food
       value: 
       objectReference: {fileID: 114800233}
-    - target: {fileID: 29438956364652402, guid: 0cb3b310f59d18e42a672cf078c4bf48, type: 3}
-      propertyPath: _maxCooldown
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 29438956364652402, guid: 0cb3b310f59d18e42a672cf078c4bf48, type: 3}
-      propertyPath: _minCooldown
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 5054060163855056436, guid: 0cb3b310f59d18e42a672cf078c4bf48, type: 3}
       propertyPath: _food
       value: 

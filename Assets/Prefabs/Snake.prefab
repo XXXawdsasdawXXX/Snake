@@ -466,7 +466,7 @@ MonoBehaviour:
   _reactionDistance: 4
   _snake: {fileID: 5455316295330283626}
   _minCooldown: 5
-  _maxCooldown: 7
+  _maxCooldown: 10
   _food: {fileID: 0}
   _tongueAnimator: {fileID: 6471328228028684702}
 --- !u!1 &5455316295330283627
@@ -621,8 +621,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _snake: {fileID: 5455316295330283626}
-  _flashingCount: 3
-  _delay: 0.3
+  _flashingCount: 0
+  _flashingDelay: 1
   _flashingObjects:
   - {fileID: 6391623433522634047}
   - {fileID: 0}

@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace Entities
 {
-    public class SnakeDeathFlashing : MonoBehaviour
+    public class SnakeDeathAnimation : MonoBehaviour
     {
         [SerializeField] private Snake _snake;
         [Space]
         [SerializeField] private int _flashingCount =3;
-        [SerializeField] private float _delay =1;
+        [SerializeField] private float _flashingDelay =1;
         [SerializeField] private GameObject[] _flashingObjects;
 
         private Coroutine _coroutine;
 
-        public event Action LastFlashingEvent;
+        public event Action EndDeathAnimationEvent;
 
 
         private void OnEnable()
@@ -41,9 +41,16 @@ namespace Entities
         
         private IEnumerator FlashRoutine()
         {
+            if (_flashingCount == 0)
+            {
+                yield return new WaitForSeconds(2);
+                EndDeathAnimationEvent?.Invoke();
+                yield break;
+            }
+            
             for (int i = 0; i < _flashingCount; i++)
             {
-                yield return new WaitForSeconds(_delay);
+                yield return new WaitForSeconds(_flashingDelay);
                 foreach (var obj in _flashingObjects)
                 {
                     int layer = LayerMask.NameToLayer("NotVisible");
@@ -52,9 +59,9 @@ namespace Entities
 
                 if (i == _flashingCount - 1)
                 {
-                    LastFlashingEvent?.Invoke();
+                    EndDeathAnimationEvent?.Invoke();
                 }
-                yield return new WaitForSeconds(_delay);
+                yield return new WaitForSeconds(_flashingDelay);
                 foreach (var obj in _flashingObjects)
                 {
                     int layer = LayerMask.NameToLayer("Default");

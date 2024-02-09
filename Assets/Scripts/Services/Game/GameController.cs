@@ -12,7 +12,7 @@ namespace Services
 {
     public partial class GameController : MonoBehaviour
     {
-        [SerializeField] private SnakeDeathFlashing _snakeFlashing;
+        [SerializeField] private SnakeDeathAnimation _snakeAnimation;
         [SerializeField] private Snake _snake;
         [SerializeField] private Score _score;
         [SerializeField] private InputService _input;
@@ -44,8 +44,8 @@ namespace Services
                 UIEvents.ClickButtonEvent += OnClickButton;
                 _health.ChangeValueEvent += CheckLose;
                 _input.SetNewDirectionEvent += TryStartGame;
-                _score.SetMaxScoreEvent += WonGame;
-                _snakeFlashing.LastFlashingEvent += ResetGame;
+                _score.AchieveMaxScoreEvent += WonGame;
+                _snakeAnimation.EndDeathAnimationEvent += ResetGame;
             }
             else
             {
@@ -53,8 +53,8 @@ namespace Services
 
                 _health.ChangeValueEvent += CheckLose;
                 _input.SetNewDirectionEvent -= TryStartGame;
-                _score.SetMaxScoreEvent -= WonGame;
-                _snakeFlashing.LastFlashingEvent -= ResetGame;
+                _score.AchieveMaxScoreEvent -= WonGame;
+                _snakeAnimation.EndDeathAnimationEvent -= ResetGame;
             }
         }
 

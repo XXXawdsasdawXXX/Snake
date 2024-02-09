@@ -13,7 +13,7 @@ namespace Logic
 
         public event Action SetEvenFiveEvent;
         public event Action UpdateSavePointEvent;
-        public event Action SetMaxScoreEvent;
+        public event Action AchieveMaxScoreEvent;
         public event Action<int> ChangeEvent;
         
 
@@ -41,7 +41,7 @@ namespace Logic
                     
                     if (_nextScorePointNumber == _saveScorePoints.Length - 1)
                     {
-                        SetMaxScoreEvent?.Invoke();
+                        AchieveMaxScoreEvent?.Invoke();
                     }
                 }
             }
