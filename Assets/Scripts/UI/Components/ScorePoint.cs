@@ -9,8 +9,9 @@ namespace UI.Components
         [SerializeField] private EditableText _scoreEditableText;
         [SerializeField] private Image _backgroundImage;
         [Space]
-        [SerializeField] private Color32 _defaultColor;
-        [SerializeField] private Color32 _passedColor;
+        [SerializeField] private Sprite _defaultSprite;
+        [SerializeField] private Sprite _passedSprite;
+        [SerializeField] private GameObject _starObject;
         
         public void Init(int scoreCount)
         {
@@ -20,12 +21,14 @@ namespace UI.Components
 
         public void Reset()
         {
-            _backgroundImage.color = _defaultColor;
+            _backgroundImage.sprite = _defaultSprite;
+            _starObject.SetActive(false);
         }
 
         public void SetAsPassed()
         {
-            _backgroundImage.color = _passedColor;
+            _backgroundImage.sprite = _passedSprite;
+            _starObject.SetActive(true);
         }
 
         public void SetPosition(Vector3 position)

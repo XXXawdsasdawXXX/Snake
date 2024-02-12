@@ -34,7 +34,7 @@ namespace UI.Components.Screens
             {
                 float percent = _savePoints[i] == 0 ? 0 : (float)_savePoints[i] / (float)_savePoints[^1];
                 var x = _weight / 100 * (percent * 100) - _weight / 2;
-                var position = new Vector3(x, 0, 0);
+                var position = new Vector3(x, _scorePoints[i].transform.position.y, 0);
                 _scorePoints[i].SetPosition(position);
             }
         }

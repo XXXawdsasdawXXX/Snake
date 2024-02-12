@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: a945191616c84a14c81f54cf4b06424b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Rubik
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8470e31dc98b30e41bee39899d35c707, type: 3}
+  - {fileID: 12800000, guid: 7f2d276bd07e4694fb1c9a7cce9b4c36, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

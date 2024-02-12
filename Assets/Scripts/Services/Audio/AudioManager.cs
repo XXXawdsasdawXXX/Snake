@@ -1,6 +1,7 @@
 ﻿using System;
 using Configs;
 using UnityEngine;
+using Utils;
 
 namespace Services.Audio
 {
@@ -28,7 +29,14 @@ namespace Services.Audio
             if (_audioConfig.TryGetAudioClip(eventType, out var clip))
             {
                 _audioSource.PlayOneShot(clip);
+                Debugging.Instance.Log($"Play audio {eventType}",Debugging.Type.Audio);
             }
+            else
+            {
+                
+                Debugging.Instance.Log($"Can`t find {eventType} audio event",Debugging.Type.Audio);
+            }
+                
         }
         
         public void PlayAudioEvent(Vector2Int direction)

@@ -1,25 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using Utils;
 
 namespace UI.Components
 {
     public class FillBar : MonoBehaviour
     {
-        [SerializeField] private RectTransform _fill;
-
-        [SerializeField] private float _minX;
-        [SerializeField] private float _maxX;
-
-        private bool _full;
+        [SerializeField] private Image _fill;
         
         public void UpdateValue(int current, int max)
         {
-            if (_full)
-            {
-                return;
-            }
-            
-            _fill.anchoredPosition =
-                new Vector2(Mathf.Lerp(_minX, _maxX, (float)current / max), _fill.anchoredPosition.y);
+            Debugging.Instance.Log($"Fill amount {current} / {max} = {current/max}");
+            _fill.fillAmount = (float)current / (float)max;
         }
       
     }

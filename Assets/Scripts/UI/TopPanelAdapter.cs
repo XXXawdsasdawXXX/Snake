@@ -16,9 +16,9 @@ namespace UI
         [SerializeField] private Health _health;
         [Header("ui components")]
         [SerializeField] private ProgressBar _progressBar;
-        [SerializeField] private Button _pauseButton;
         [SerializeField] private HealthBar _healthBar;
-
+        [SerializeField] private EditableText _scoreCountText;
+        
         private void Awake()
         {
             SubscribeToEvents(true);
@@ -35,7 +35,6 @@ namespace UI
             {
                 _gameController.InitSessionEvent += OnInitSession;
                 _gameController.ResetGameEvent += OnResetGame;
-                _gameController.PauseEvent += OnPauseGame;
                 _score.ChangeEvent += OnScoreChange;
                 _health.ChangeValueEvent += HealthOnChangeValueEvent;
             }
@@ -43,7 +42,6 @@ namespace UI
             {
                 _gameController.InitSessionEvent -= OnInitSession;
                 _gameController.ResetGameEvent -= OnResetGame;
-                _gameController.PauseEvent -= OnPauseGame;
                 _score.ChangeEvent -= OnScoreChange;
                 _health.ChangeValueEvent -= HealthOnChangeValueEvent;
             }
@@ -54,18 +52,16 @@ namespace UI
             _healthBar.SetValue(value);
         }
 
-        private void OnPauseGame(bool isPause)
-        { 
-            _pauseButton.interactable = !isPause;
-        }
 
         private void OnResetGame()
         {
             _progressBar.Reset();
+            _scoreCountText.SetText(0.ToString());
         }
         
         private void OnScoreChange(int current)
         {
+            _scoreCountText.SetText(current.ToString());
             _progressBar.SetScoreValue(current);
         }
 
