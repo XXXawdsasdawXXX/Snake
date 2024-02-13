@@ -4,6 +4,7 @@ using Entities;
 using Services;
 using Services.Audio;
 using UI.Components;
+using UI.Screens;
 using UnityEngine;
 using Screen = UI.Screens.Screen;
 
@@ -20,7 +21,7 @@ namespace UI
         [SerializeField] private Screen _screenLose;
         [SerializeField] private Screen _screenPause;
         [SerializeField] private Screen _tutorialScreen;
-        [SerializeField] private Screen _screenAwaitInput;
+        [SerializeField] private InitScreen _initScreen;
         [Space] 
         [SerializeField] private Screen _openedScreen;
 
@@ -38,13 +39,14 @@ namespace UI
 
         public bool IsEmpty()
         {
-            return _openedScreen == null || !_openedScreen.IsActive();
+            return _openedScreen is not InitScreen || !_openedScreen.IsActive();
         }
 
         private void SubscribeToEvents(bool flag)
         {
             if (flag)
             {
+                _gameController.InitSessionEvent += OnInitSession;
                 _gameController.EndGameEvent += OnEndGame;
                 _gameController.PauseEvent += OnPauseGame;
                 _gameController.StartGameEvent += HideTutorial;
@@ -53,6 +55,7 @@ namespace UI
             }
             else
             {
+                _gameController.InitSessionEvent -= OnInitSession;
                 _gameController.EndGameEvent -= OnEndGame;
                 _gameController.PauseEvent -= OnPauseGame;
                 _gameController.StartGameEvent -= HideTutorial;
@@ -61,7 +64,12 @@ namespace UI
             }
         }
 
- 
+        private void OnInitSession(SessionData obj)
+        {
+            _initScreen.SetSessionPrice(obj.ScorePoints[^1].ToString());
+            ShowScreen(_initScreen);
+        }
+
 
         private void ClickButtonEvent(EventButtonType obj)
         {
@@ -90,9 +98,7 @@ namespace UI
             TryStopCoroutine();
             if (isPause)
             {
-                _openedScreen?.Hide();
-                _openedScreen = _screenPause;
-                _openedScreen.Show();
+                ShowScreen(_screenPause);
             }
             else
             {
@@ -118,8 +124,7 @@ namespace UI
         private IEnumerator ShowScreenWithDelay(Screen screen, Action onShow = null)
         {
             yield return new WaitForSeconds(_delayBeforeShow);
-            _openedScreen = screen;
-            _openedScreen.Show();
+            ShowScreen(screen);
             onShow?.Invoke();
         }
 
@@ -129,6 +134,13 @@ namespace UI
             {
                 StopCoroutine(_coroutine);
             }
+        }
+
+        private void ShowScreen(Screen screen)
+        {
+            _openedScreen?.Hide();
+            _openedScreen = screen;
+            _openedScreen.Show();
         }
     }
 }
