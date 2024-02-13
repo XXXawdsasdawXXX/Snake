@@ -14,14 +14,15 @@ namespace UI
     public class ScreenAdapter : MonoBehaviour
     {
         [SerializeField] private GameController _gameController;
-        [SerializeField] private Snake _snake;
         [SerializeField] private float _delayBeforeShow = 1;
         [Header("Screens")] 
-        [SerializeField] private Screen _screenWin;
+        [SerializeField] private RewardScreen _screenWin;
+        [SerializeField] private RewardScreen _screenNotBad;
         [SerializeField] private Screen _screenLose;
         [SerializeField] private Screen _screenPause;
         [SerializeField] private Screen _tutorialScreen;
         [SerializeField] private InitScreen _initScreen;
+        [SerializeField] private BlackScreen _blackScreen;
         [Space] 
         [SerializeField] private Screen _openedScreen;
 
@@ -50,6 +51,7 @@ namespace UI
                 _gameController.EndGameEvent += OnEndGame;
                 _gameController.PauseEvent += OnPauseGame;
                 _gameController.StartGameEvent += HideTutorial;
+                _gameController.CloseGameEvent += CloseGameEvent;
                 
                 UIEvents.ClickButtonEvent += ClickButtonEvent;
             }
@@ -64,9 +66,14 @@ namespace UI
             }
         }
 
+        private void CloseGameEvent()
+        {
+            ShowScreen(_blackScreen);
+        }
+
         private void OnInitSession(SessionData obj)
         {
-            _initScreen.SetSessionPrice(obj.ScorePoints[^1].ToString());
+            _initScreen.SetSessionPrice(obj.saveScorePoints[^1].ToString());
             ShowScreen(_initScreen);
         }
 

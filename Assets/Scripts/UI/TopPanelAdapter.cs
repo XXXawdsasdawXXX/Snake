@@ -67,7 +67,7 @@ namespace UI
 
         private void OnInitSession(SessionData sessionData)
         {
-            _progressBar.Init(sessionData.ScorePoints);
+            _progressBar.Init(sessionData.saveScorePoints);
         }
     }
 }

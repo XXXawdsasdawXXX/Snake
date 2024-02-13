@@ -5,6 +5,7 @@ namespace Services
     [Serializable]
     public class SessionData
     {
-        public int[] ScorePoints = new int[3];
+        public bool isMuted;
+        public int[] saveScorePoints = new int[3];
     }
 }

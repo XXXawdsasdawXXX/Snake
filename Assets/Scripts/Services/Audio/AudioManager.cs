@@ -11,6 +11,8 @@ namespace Services.Audio
         
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioConfig _audioConfig;
+
+        private bool _isMuted;
         
         public void Awake()
         {
@@ -26,6 +28,11 @@ namespace Services.Audio
 
         public void PlayAudioEvent(AudioEventType eventType)
         {
+            if (_isMuted)
+            {
+                return;
+            }
+            
             if (_audioConfig.TryGetAudioClip(eventType, out var clip))
             {
                 _audioSource.PlayOneShot(clip);
@@ -33,10 +40,8 @@ namespace Services.Audio
             }
             else
             {
-                
                 Debugging.Instance.Log($"Can`t find {eventType} audio event",Debugging.Type.Audio);
             }
-                
         }
         
         public void PlayAudioEvent(Vector2Int direction)

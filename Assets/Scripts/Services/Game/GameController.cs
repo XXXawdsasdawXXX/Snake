@@ -58,6 +58,12 @@ namespace Services
             }
         }
 
+        private void OnCloseGameEvent()
+        {
+            _isPlaying = false;
+            _gameState = GameState.EndGame;
+        }
+
         private void CheckLose(int healthValue)
         {
             if (healthValue == 0)

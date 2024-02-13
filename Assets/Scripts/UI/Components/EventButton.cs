@@ -15,10 +15,7 @@ namespace UI.Components
             _button.onClick.AddListener(() =>
             {
                 UIEvents.ClickButtonEvent?.Invoke(_buttonType);
-                if (_buttonType != EventButtonType.None)
-                {
-                    AudioManager.Instance.PlayAudioEvent(AudioEventType.ClickButton);
-                }
+                AudioManager.Instance.PlayAudioEvent(AudioEventType.ClickButton);
             });
         }
     }

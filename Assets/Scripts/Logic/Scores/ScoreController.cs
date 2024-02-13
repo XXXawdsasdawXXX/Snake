@@ -40,7 +40,7 @@ namespace Logic
 
         private void InitSessionEvent(SessionData sessionData)
         {
-            _score.Init(sessionData.ScorePoints);
+            _score.Init(sessionData.saveScorePoints);
         }
 
         private void StartGameEvent()

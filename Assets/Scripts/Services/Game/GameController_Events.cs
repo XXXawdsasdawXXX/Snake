@@ -20,7 +20,12 @@ namespace Services
         private void InvokePauseGame(bool isPause) => PauseEvent?.Invoke(isPause);
         public  Action<bool> PauseEvent;
 
-        private void InvokeCloseGame(int wonBonus) => JSApi.SessionEnd(wonBonus);
-        
+        private void InvokeCloseGame(int wonBonus)
+        {
+            CloseGameEvent?.Invoke();
+            JSApi.SessionEnd(wonBonus);
+        }
+        public Action CloseGameEvent;
+
     }
 }
