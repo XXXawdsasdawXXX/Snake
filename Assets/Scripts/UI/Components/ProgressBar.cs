@@ -45,7 +45,7 @@ namespace UI.Components.Screens
             if (current >= _savePoints[_pointIndex])
             {
                 _scorePoints[_pointIndex].SetAsPassed();
-                if (_pointIndex > 1)
+                if (_pointIndex >= 1)
                 {
                     AudioManager.Instance.PlayAudioEvent(AudioEventType.ScorePointUp);
                 }

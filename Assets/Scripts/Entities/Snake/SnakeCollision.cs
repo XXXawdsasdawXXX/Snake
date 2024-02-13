@@ -12,6 +12,10 @@ namespace Entities
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (!_snake.IsActive)
+            {
+                return;
+            }
             if (other.gameObject.CompareTag(Constants.Tag.Food.ToString()))
             {
                 _snake.Grow();
