@@ -12,6 +12,7 @@ namespace Entities
         [SerializeField] private ObstaclesController _obstaclesController;
         [SerializeField] private GameController _gameController;
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Score _score;
 
         public bool IsActive => _spriteRenderer != null && _spriteRenderer.enabled;
 
@@ -20,6 +21,7 @@ namespace Entities
             _gameController.ResetGameEvent += DisableSprite;
             _gameController.StartGameEvent += RandomizePosition;
             _gameController.StartGameEvent += EnableSprite;
+            _score.AchieveMaxScoreEvent += DisableSprite;
         }
 
         private void OnDestroy()
@@ -27,6 +29,7 @@ namespace Entities
             _gameController.ResetGameEvent -= DisableSprite;
             _gameController.StartGameEvent -= RandomizePosition;
             _gameController.StartGameEvent -= EnableSprite;
+            _score.AchieveMaxScoreEvent -= DisableSprite;
         }
 
         private void RandomizePosition()
