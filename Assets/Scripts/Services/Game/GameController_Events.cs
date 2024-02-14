@@ -11,8 +11,8 @@ namespace Services
         private void InvokeStartGameEvent() => StartGameEvent?.Invoke();
         public  Action StartGameEvent;
 
-        private void InvokeEndGameEvent(bool isWon) => EndGameEvent?.Invoke(isWon);
-        public  Action<bool> EndGameEvent;
+        private void InvokeEndGameEvent(int rewardValue, bool isMaxReward) => EndGameEvent?.Invoke(rewardValue,isMaxReward);
+        public  Action<int, bool> EndGameEvent;
 
         private void InvokeInitSession(SessionData sessionData) => InitSessionEvent?.Invoke(sessionData);
         public  Action<SessionData> InitSessionEvent;

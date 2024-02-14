@@ -108,7 +108,7 @@ namespace Services
             Debugging.Instance.Log($"On pause -> is playing {_isPlaying} ", Debugging.Type.Input);*/
         }
 
-        private void OnEndGame(bool isWon)
+        private void OnEndGame(int reward,bool isWon)
         {
             _isPlaying = false;
             Debugging.Instance.Log($"On end game -> is playing {_isPlaying} ", Debugging.Type.Input);

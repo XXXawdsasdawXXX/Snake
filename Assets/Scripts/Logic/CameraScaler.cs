@@ -22,13 +22,13 @@ namespace Logic
                 return;
             }
 
-            SetResolution();
+            SetSize();
 
             SetPosition();
 
         }
         
-        private void SetResolution()
+        private void SetSize()
         {
             float referenceAspect = _referenceResolution.x / _referenceResolution.y;
             float currentAspect = (float)Screen.width / (float)Screen.height;
@@ -40,7 +40,7 @@ namespace Logic
         {
             Vector3 cameraPosition = _referencePosition;
             var sizeDifferent = _referenceSize - _camera.orthographicSize;
-            cameraPosition.y -= sizeDifferent;
+            cameraPosition.y += sizeDifferent;
             cameraPosition.z = -10;
             _camera.transform.position = cameraPosition;
         }

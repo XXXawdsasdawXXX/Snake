@@ -6,6 +6,7 @@ using Services.Audio;
 using UI.Components;
 using UI.Screens;
 using UnityEngine;
+using Utils;
 using Screen = UI.Screens.Screen;
 
 
@@ -40,7 +41,7 @@ namespace UI
 
         public bool IsEmpty()
         {
-            return _openedScreen is not InitScreen || !_openedScreen.IsActive();
+            return _openedScreen is not InitScreen or BlackScreen || !_openedScreen.IsActive();
         }
 
         private void SubscribeToEvents(bool flag)
@@ -74,6 +75,8 @@ namespace UI
         private void OnInitSession(SessionData obj)
         {
             _initScreen.SetSessionPrice(obj.saveScorePoints[^1].ToString());
+            _blackScreen.Hide();
+            Debugging.Instance.Log("On init session", Debugging.Type.UI);
             ShowScreen(_initScreen);
         }
 
@@ -113,12 +116,19 @@ namespace UI
             }
         }
 
-        private void OnEndGame(bool isWin)
+        private void OnEndGame(int reward,bool isWin)
         {
             TryStopCoroutine();
             if (isWin)
             {
+                _screenWin.SetReward(reward.ToString());
                 _coroutine = StartCoroutine(ShowScreenWithDelay(_screenWin, 
+                    onShow: () => AudioManager.Instance.PlayAudioEvent(AudioEventType.Win)));
+            }
+            else if(reward > 0 )
+            {
+                _screenNotBad.SetReward(reward.ToString());
+                _coroutine = StartCoroutine(ShowScreenWithDelay(_screenNotBad, 
                     onShow: () => AudioManager.Instance.PlayAudioEvent(AudioEventType.Win)));
             }
             else

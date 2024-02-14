@@ -120,7 +120,7 @@ namespace Logic
             ResetCooldown();
         }
 
-        private void DisableController(bool isWon)
+        private void DisableController(int _, bool __)
         {
             _isActive = false;
         }

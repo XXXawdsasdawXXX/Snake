@@ -1,4 +1,6 @@
-﻿using Services;
+﻿using System.Collections;
+using Services;
+using UI.Components;
 using UnityEngine;
 
 namespace Utils
@@ -13,13 +15,30 @@ namespace Utils
         {
             if (_isInitSessionOnStart)
             {
+            UIEvents.ClickButtonEvent += ClickButtonEvent;
                 StartTestSession();
+            }
+        }
+
+        private void ClickButtonEvent(EventButtonType buttonType)
+        {
+            if (buttonType == EventButtonType.Close)
+            {
+                
+                StartCoroutine(ReloadWithDelay());
             }
         }
 
         public void StartTestSession()
         {
             _jsService.TestSessionData(_testSessionData);
+        }
+
+        private IEnumerator ReloadWithDelay()
+        {
+            Debugging.Instance.Log("ReloadWithDelay",Debugging.Type.JS);
+            yield return new WaitForSeconds(1);
+                _jsService.TestSessionData(_testSessionData);
         }
     }
 }

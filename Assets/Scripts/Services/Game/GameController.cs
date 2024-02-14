@@ -57,16 +57,12 @@ namespace Services
                 _snakeAnimation.EndDeathAnimationEvent -= ResetGame;
             }
         }
-
-        private void OnCloseGameEvent()
-        {
-            _isPlaying = false;
-            _gameState = GameState.EndGame;
-        }
+        
 
         private void CheckLose(int healthValue)
         {
-            if (healthValue == 0)
+            Debugging.Instance.Log($"Check lose {_score.GetCurrentStepNumber()}", Debugging.Type.GameController);
+            if ((healthValue == 0 || _score.GetCurrentStepNumber() > 0) && _gameState == GameState.Play)
             {
                 LoseGame();
             }
@@ -93,7 +89,6 @@ namespace Services
 
         private void OnInitSession(SessionData sessionData)
         {
-            _jsService.InitSessionEvent -= OnInitSession;
             Debugging.Instance.Log($"On init", Debugging.Type.GameController);
             InvokeInitSession(sessionData);
             ResetGame();
@@ -148,7 +143,7 @@ namespace Services
             Debugging.Instance.Log($"Won game", Debugging.Type.GameController);
             _gameState = GameState.EndGame;
             _snake.StopMove();
-            InvokeEndGameEvent(isWon: true);
+            InvokeEndGameEvent(_score.GetMaxReward(),true);
             _isPlaying = false;
         }
 
@@ -156,8 +151,14 @@ namespace Services
         {
             Debugging.Instance.Log($"Lose game", Debugging.Type.GameController);
             _gameState = GameState.EndGame;
-            InvokeEndGameEvent(isWon: false);
+            InvokeEndGameEvent(_score.GetCurrentReward(),false);
             _isPlaying = false;
+        }
+
+        private void CloseGame()
+        {
+            Debugging.Instance.Log($"Close game", Debugging.Type.GameController);
+            InvokeCloseGame(_score.GetCurrentReward());
         }
 
         private void PauseGame(bool isPause)
@@ -180,12 +181,6 @@ namespace Services
                 Time.timeScale = 1;
                 InvokePauseGame(false);
             }
-        }
-
-        private void CloseGame()
-        {
-            Debugging.Instance.Log($"Close game", Debugging.Type.GameController);
-            InvokeCloseGame(_score.CurrentScore);
         }
     }
 }

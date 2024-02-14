@@ -19,7 +19,11 @@ namespace Logic
 
         public void Init(int[] saveScorePoints)
         {
-            _saveScorePoints = saveScorePoints;
+            _saveScorePoints = new int[saveScorePoints.Length + 1];
+            for (int i = 0; i < saveScorePoints.Length  ; i++)
+            {
+                _saveScorePoints[i + 1] = saveScorePoints[i];
+            }
         }
 
         public void Add()
@@ -31,15 +35,15 @@ namespace Logic
                 SetEvenFiveEvent?.Invoke();
             }
 
-            if (_nextScorePointNumber + 1 < _saveScorePoints.Length )
+            if (_nextScorePointNumber < _saveScorePoints.Length )
             {
-                if (_currentScore == _saveScorePoints[_nextScorePointNumber + 1])
+                if (_currentScore == _saveScorePoints[_nextScorePointNumber])
                 {
                     _nextScorePointNumber++;
               
                     UpdateSavePointEvent?.Invoke();
                     
-                    if (_nextScorePointNumber == _saveScorePoints.Length - 1)
+                    if (_nextScorePointNumber == _saveScorePoints.Length)
                     {
                         AchieveMaxScoreEvent?.Invoke();
                     }
@@ -47,10 +51,25 @@ namespace Logic
             }
         }
 
+
+        public int GetCurrentStepNumber()
+        {
+            return _nextScorePointNumber - 1;
+        }
+
+        public int GetCurrentReward()
+        {
+            return _saveScorePoints[_nextScorePointNumber - 1];
+        }
         public void Reset()
         {
             _currentScore = 0;
             _nextScorePointNumber = 1;
+        }
+
+        public int GetMaxReward()
+        {
+            return _saveScorePoints[^1];
         }
     }
 }
