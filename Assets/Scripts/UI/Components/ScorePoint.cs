@@ -33,7 +33,8 @@ namespace UI.Components
 
         public void SetPosition(Vector3 position)
         {
-            _rectTransform.anchoredPosition = position;
+            var pos = new Vector3(position.x, _rectTransform.anchoredPosition.y, 0);
+            _rectTransform.anchoredPosition = pos;
         }
     }
 }

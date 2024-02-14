@@ -41,7 +41,7 @@ namespace UI
 
         public bool IsEmpty()
         {
-            return _openedScreen is not InitScreen or BlackScreen || !_openedScreen.IsActive();
+            return _openedScreen is TutorialScreen || !_openedScreen.IsActive();
         }
 
         private void SubscribeToEvents(bool flag)

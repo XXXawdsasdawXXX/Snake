@@ -30,7 +30,7 @@ namespace UI.Components.Screens
             _fillBar.UpdateValue(0, _savePoints[^1]);
 
 
-            for (int i = 0; i < _savePoints.Length; i++)
+            for (int i = 1; i < _savePoints.Length - 1; i++)
             {
                 float percent = _savePoints[i] == 0 ? 0 : (float)_savePoints[i] / (float)_savePoints[^1];
                 var x = _weight / 100 * (percent * 100) - _weight / 2;
