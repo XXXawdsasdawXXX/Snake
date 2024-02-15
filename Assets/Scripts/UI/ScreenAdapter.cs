@@ -20,7 +20,6 @@ namespace UI
         [SerializeField] private RewardScreen _screenWin;
         [SerializeField] private RewardScreen _screenNotBad;
         [SerializeField] private Screen _screenLose;
-        [SerializeField] private Screen _screenPause;
         [SerializeField] private Screen _tutorialScreen;
         [SerializeField] private InitScreen _initScreen;
         [SerializeField] private BlackScreen _blackScreen;
@@ -50,7 +49,6 @@ namespace UI
             {
                 _gameController.InitSessionEvent += OnInitSession;
                 _gameController.EndGameEvent += OnEndGame;
-                _gameController.PauseEvent += OnPauseGame;
                 _gameController.StartGameEvent += HideTutorial;
                 _gameController.CloseGameEvent += CloseGameEvent;
                 
@@ -60,7 +58,6 @@ namespace UI
             {
                 _gameController.InitSessionEvent -= OnInitSession;
                 _gameController.EndGameEvent -= OnEndGame;
-                _gameController.PauseEvent -= OnPauseGame;
                 _gameController.StartGameEvent -= HideTutorial;
                 
                 UIEvents.ClickButtonEvent -= ClickButtonEvent;
@@ -103,18 +100,6 @@ namespace UI
             _gameController.StartGameEvent -= HideTutorial;
         }
         
-        private void OnPauseGame(bool isPause)
-        {
-            TryStopCoroutine();
-            if (isPause)
-            {
-                ShowScreen(_screenPause);
-            }
-            else
-            {
-                _openedScreen?.Hide();
-            }
-        }
 
         private void OnEndGame(int reward,bool isWin)
         {
