@@ -8378,6 +8378,7 @@ MonoBehaviour:
   body: {fileID: 198849511}
   _sessionPriceText: {fileID: 853086085}
   _sessionPriceShadowText: {fileID: 1758656502}
+  _inputService: {fileID: 1403511721}
   _startButton: {fileID: 1593130506}
 --- !u!1 &1667049408
 GameObject:
