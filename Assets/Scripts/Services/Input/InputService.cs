@@ -6,7 +6,7 @@ namespace Services
 {
     public class InputService : MonoBehaviour
     {
-         [SerializeField] private GameController _gameController;
+        [SerializeField] private GameController _gameController;
 
         private IInputDirectionListener _mouseDirectionListener;
         private IInputDirectionListener _keyDirectionListener;
@@ -17,6 +17,7 @@ namespace Services
 
         private Vector2Int _direction;
         public event Action<Vector2Int> SetNewDirectionEvent;
+        public event Action EnterKeyDownEvent;
 
         private void Awake()
         {
@@ -30,6 +31,11 @@ namespace Services
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                EnterKeyDownEvent?.Invoke();
+            }
+            
             if (Input.anyKeyDown && _isMouse)
             {
                 _isMouse = false;
@@ -50,16 +56,16 @@ namespace Services
                 {
                     _isPlaying = true;
                 }
-                
+
                 _currentDirectionListener?.SetDirection();
 
                 var dir = GetDirection();
-                    Debugging.Instance.Log($"try set new direction {dir} ", Debugging.Type.Input);
+                Debugging.Instance.Log($"try set new direction {dir} ", Debugging.Type.Input);
                 if (_direction != dir)
                 {
                     Debugging.Instance.Log($"Set new direction {dir} ", Debugging.Type.Input);
                     _direction = dir;
-              
+
                     SetNewDirectionEvent?.Invoke(_direction);
                 }
             }
@@ -72,9 +78,7 @@ namespace Services
 
         public Vector2Int GetDirection()
         {
-            return _currentDirectionListener != null /*&& _isPlaying*/
-                ? _currentDirectionListener.GetDirection()
-                : Vector2Int.zero;
+            return _currentDirectionListener?.GetDirection() ?? Vector2Int.zero;
         }
 
         private void SubscribeToEvents(bool flag)
@@ -102,13 +106,9 @@ namespace Services
         private void OnPauseGame(bool isPause)
         {
             _isPlaying = !isPause;
-          /*//
-    
-            _currentDirectionListener?.Reset();
-            Debugging.Instance.Log($"On pause -> is playing {_isPlaying} ", Debugging.Type.Input);*/
         }
 
-        private void OnEndGame(int reward,bool isWon)
+        private void OnEndGame(int reward, bool isWon)
         {
             _isPlaying = false;
             Debugging.Instance.Log($"On end game -> is playing {_isPlaying} ", Debugging.Type.Input);

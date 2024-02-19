@@ -71,7 +71,7 @@ namespace UI
 
         private void OnInitSession(SessionData obj)
         {
-            _initScreen.SetSessionPrice(obj.saveScorePoints[^1].ToString());
+            _initScreen.SetSessionPriceInfo(obj.saveScorePoints[^1].ToString());
             _blackScreen.Hide();
             Debugging.Instance.Log("On init session", Debugging.Type.UI);
             ShowScreen(_initScreen);
@@ -82,14 +82,9 @@ namespace UI
         {
             switch (obj)
             {
-                case EventButtonType.None:
-                    break;
                 case EventButtonType.Play:
+                    Debugging.Instance.Log("dadsadasd");
                     _openedScreen?.Hide();
-                    break;
-                case EventButtonType.Close:
-                    break;
-                case EventButtonType.Pause:
                     break;
             }
         }
