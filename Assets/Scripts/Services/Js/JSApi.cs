@@ -12,7 +12,7 @@ namespace Services
         }
         
         [Obsolete("Obsolete")]
-        public static void SessionEnd(int  wonBonuses)
+        public static void SessionEnd(int wonBonuses)
         {
             Application.ExternalEval("var sessionEnd = new CustomEvent(\"sessionEnd\",{bubbles: truedetail:{wonBonuses:" +
                                      $"{wonBonuses}" +
