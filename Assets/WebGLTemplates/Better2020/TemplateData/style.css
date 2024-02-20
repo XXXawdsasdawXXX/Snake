@@ -30,7 +30,7 @@ body {
     height: 100%;
     background: url("BoarderCell.png");
     background-size: auto calc(13%);
-    z-index: 1;
+    z-index: 0;
 }
 #gradient {
     position: absolute;
@@ -38,8 +38,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0));
-    z-index: 2;
+    background: linear-gradient(to bottom, #212121df,#2121211a);
+    z-index: 1;
 }
 
 #background{
@@ -52,6 +52,7 @@ body {
     align-items: center;
     background: url("LoadingBG.jpg") no-repeat center center / 100% 100%;
     background-size: auto calc(100% + 7%);
+    z-index: 2;
 }
 
 
@@ -63,6 +64,7 @@ body {
     bottom: 42.5%;
     width: 10dvw;
     height:6dvh;
+    z-index: 3;
 }
 
 #bar-angle-right {
@@ -74,6 +76,7 @@ body {
     width: 10dvw;
     height:6dvh;
     transform: scaleX(-1);
+    z-index: 3;
 }
 
 #loading-bar {
@@ -85,20 +88,22 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index:43;
 }
 
 #progress-bar-empty {
     bottom: 20%;
     width: 50dvw;
     height: 3dvh;
-    background: url("EmptyLoadingBar.png") no-repeat center center / 100% 100%;
+    background: url("EmptyLoadingBar.png") no-repeat center center / 98% 98%;
     border-radius: 40px;
     overflow: hidden;
 }
-
 #progress-bar-full {
-    width: 0%;
-    height: 100%;
+    width: 95%;
+    height: 90%;
+    top:10%;
+    border-radius: 40px;
     background: url("FullLoadingBar.png") no-repeat center bottom / cover;
 }
 
