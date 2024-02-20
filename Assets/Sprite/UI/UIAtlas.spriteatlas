@@ -23,7 +23,7 @@ SpriteAtlas:
     platformSettings:
     - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
-      m_MaxTextureSize: 4096
+      m_MaxTextureSize: 2048
       m_ResizeAlgorithm: 0
       m_TextureFormat: -1
       m_TextureCompression: 1
@@ -100,7 +100,7 @@ SpriteAtlas:
   - Hearth_Gray
   - SavePoint_Small_Gray
   - Hearth_Pink
-  - Group 1321314841
+  - Header_Init
   - Background_Lose
   - Star
   - Logo

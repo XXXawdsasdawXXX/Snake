@@ -59,7 +59,8 @@ namespace Logic
 
         public int GetCurrentReward()
         {
-            return _saveScorePoints[_nextScorePointNumber - 1];
+
+            return _saveScorePoints[_nextScorePointNumber > 0 ? _nextScorePointNumber - 1:0];
         }
         public void Reset()
         {
