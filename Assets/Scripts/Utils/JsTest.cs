@@ -14,8 +14,8 @@ namespace Utils
         private void Start()
         {
             if (_isInitSessionOnStart)
-            {
-            UIEvents.ClickButtonEvent += ClickButtonEvent;
+            { 
+                UIEvents.ClickButtonEvent += ClickButtonEvent;
                 StartTestSession();
             }
         }
@@ -24,7 +24,6 @@ namespace Utils
         {
             if (buttonType == EventButtonType.Close)
             {
-                
                 StartCoroutine(ReloadWithDelay());
             }
         }
@@ -38,7 +37,7 @@ namespace Utils
         {
             Debugging.Instance.Log("ReloadWithDelay",Debugging.Type.JS);
             yield return new WaitForSeconds(1);
-                _jsService.TestSessionData(_testSessionData);
+            _jsService.TestSessionData(_testSessionData);
         }
     }
 }
