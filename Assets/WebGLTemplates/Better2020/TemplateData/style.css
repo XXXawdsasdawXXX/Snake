@@ -25,6 +25,11 @@ body {
     height: 100%;
 }
 
+#unity-canvas {
+    width: 100%;
+    height: 100%;
+
+}
 
 #gradient {
     position: absolute;
@@ -45,7 +50,7 @@ body {
     justify-content: center;
     align-items: center;
     background: url("LoadingBG.jpg") no-repeat center center / 100% 100%;
-    background-size: auto calc(100% + 5%);
+    background-size: auto calc(100% + 9%);
     z-index: 2;
 }
 
@@ -127,10 +132,7 @@ body {
     #progress-bar-empty { width: 50dvw;}
     #bar-angle-right { margin-left: 45%; }
     #bar-angle-left{ margin-right:45%; }
-    #background{
-        background-size: auto calc(100% + 35%);
-
-    }
+    #background{ background-size: auto calc(100% + 70%);}
 }
 
 /* For viewport aspect ratio < 9:14 широкий */
@@ -139,14 +141,10 @@ body {
     #bar-angle-right { margin-left: 6%; }
     #bar-angle-left{ margin-right:6%; }
     #unity-canvas {
-        width: 100%;
-        height: 100%;
         background: url("BoarderCell.png");
         background-size: auto calc(13%);
         z-index: 0;
     }
-
-
 }
 
 /* CSS */
